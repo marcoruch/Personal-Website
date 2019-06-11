@@ -1,6 +1,4 @@
-# myreactwebsite
-
-<h1>Persönliche Website</h1>
+# Persönliche Website
 
 Diese Website wurde mit <a href="https://github.com/facebook/react">React.js</a> programmiert.
 Die daten wurden auf Google Firebase (NoSQL) gespeichert.
