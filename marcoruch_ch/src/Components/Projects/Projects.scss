@@ -1,0 +1,51 @@
+.projects {
+    margin-top: 200px;
+    .header {
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom:100px;
+            color:#b4a892!important;
+        }
+    }
+
+    .projects-holder {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    
+        padding: 0px 200px;
+    
+        .more-projects{
+
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+
+            .btn {
+                border: none;
+                box-shadow: none;
+                font-family: inherit;
+                background-color: transparent;  display: block;
+               
+        color:#b49792!important;
+                font-size: 30px;
+                transition: .25s;
+                width:100%;
+                text-align: center;
+                &:hover  { 
+                    cursor: pointer;
+                    transform: scale(1.1)
+                }
+                
+            }
+        }
+    }
+    
+}
+

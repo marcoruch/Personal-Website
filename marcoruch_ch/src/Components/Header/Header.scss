@@ -1,0 +1,44 @@
+.App-header {
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    width: 100%;
+    h2 {
+        margin: 0;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+
+     
+        
+        li {
+            cursor: pointer;
+            width: 200px;
+
+            a {
+                color: white;
+                text-decoration: none;
+            }
+
+      
+
+        }
+
+
+   
+  
+
+    }
+
+ 
+
+
+
+}
+

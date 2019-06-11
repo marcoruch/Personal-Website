@@ -1,0 +1,33 @@
+.contact-formular-holder {
+    margin-left:25%;
+    margin-right:25%;
+    width:50%;
+    height: 80vh;
+    margin-top: 10vh;
+}
+
+#form-holder form input {
+    margin:10px;
+}
+
+
+.ui.form .field>label {
+    color:#ffffff;
+}
+
+
+.ui.default.dropdown:not(.button)>.text, .ui.dropdown:not(.button)>.default.text
+{
+    color: #2f4f4f !important;
+}
+
+
+
+ .ui.form input::placeholder {
+    color: #2f4f4f !important;
+ }
+
+
+ .ui.form button {
+     margin-top:10px;
+ }

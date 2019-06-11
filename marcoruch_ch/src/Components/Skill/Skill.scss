@@ -1,0 +1,36 @@
+.skill-panel {
+    padding:10px;
+    border-radius:3px;
+animation: fadeIn 2s forwards;
+    position: relative;
+  height: 300px;
+    flex: 1 0 25%; /* explanation below */
+    .skill-title {
+      font-size: 1.5em;
+      color: black;
+      margin-bottom:10px;
+      color:#b4a892 !important;
+  }
+  .skill-info {
+    color:#d7d7d7 !important;
+      color: black;
+      font-size:1.2em;
+      flex-wrap: wrap;
+      margin-bottom:10px;
+  }
+  
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
+@media screen and (max-width:800px){
+    .skill-info{
+      display:none;
+    }
+  }
+

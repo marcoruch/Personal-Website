@@ -1,0 +1,26 @@
+.create-blog {
+    display:flex;
+    flex-direction: row;
+    margin-top:50px;
+    margin-bottoM:200px;
+    .ui-divider {
+        
+        margin-bottom:50px;
+    }
+
+    .section-header {
+        text-align: left;
+        font-size: 2vw;
+    }
+
+    .content-element-holder {
+        display:flex;
+        flex-direction: row;
+        
+    }
+
+    .ui.divided.grid:not([class*="vertically divided"])>.column:not(.row), .ui.divided.grid:not([class*="vertically divided"])>.row>.column {
+        box-shadow: none;
+    }
+}
+

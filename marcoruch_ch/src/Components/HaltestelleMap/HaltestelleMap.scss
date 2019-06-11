@@ -1,0 +1,21 @@
+.haltestelle-map {
+    
+    display: flex;
+flex-direction: row;
+justify-content: center;
+align-content: center;
+align-items: center;
+    img {
+        width: 500px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    #viewport {
+        user-select: none;
+        position: absolute;
+        border:1px solid wheat;
+     
+    }
+}
