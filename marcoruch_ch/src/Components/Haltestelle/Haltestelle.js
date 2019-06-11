@@ -9,10 +9,10 @@ const Haltestelle = () => {
     return (
         <div className="haltestelle">
             <div className="header">
-                <h1>Spiel: Haltestelle</h1>
+                <h1>Spiel: Nächste Haltestelle berechnen</h1>
                 <p>
-                    Geben sie in der Haltestellen Kart eine Starthaltestelle ein sowie beliebig viele andere Haltestellen.
-                    Klicken Sie danach auf "Näheste Haltestelle berechnen".
+                    Geben sie in der Karte eine Starthaltestelle ein sowie beliebig viele andere Haltestellen.
+                    Klicken Sie danach auf "Berechnen".
                     </p>
             </div>
             <div className="game">
