@@ -4,79 +4,86 @@
     height: 700px;
     max-width: 500px;
     margin: 2.5%;
-margin-bottom: 100px;
+    margin-bottom: 100px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
- 
-    flex: 1 0 25%; /* explanation below */
+    min-width: 350px;
+    flex: 1 0 25%;
+    /* explanation below */
 
     .content {
-   
+
         min-height: 300px;
+
         .body {
             animation: flip-back 1s forwards;
             padding: 15px;
         }
 
-        .meta {
-          
-        }
+        .meta {}
 
         img {
             width: 100%
         }
 
-     
 
-   
-        
+
+
+
 
     }
 
     .description {
-        padding:30px;
+        padding: 30px;
         width: 400px;
 
-     animation: flip 1s forwards;
+        animation: flip 1s forwards;
     }
 
     .bottom {
         position: absolute;
         text-align: center;
-        bottom:0px;
+        bottom: 0px;
         height: 50px;
-        width:100%;
-        
+        width: 100%;
+
 
         .btn {
             border: none;
             box-shadow: none;
             font-family: inherit;
-            background-color: transparent;  display: block;
-         
-        color:#b4a892!important;
+            background-color: transparent;
+            display: block;
+
+            color: #b4a892 !important;
             font-size: 20px;
             transition: .25s;
-            width:180px;
-            &:hover  { 
+            width: 180px;
+
+            &:hover {
                 cursor: pointer;
                 transform: translate(10px, 0);
             }
-            
+
         }
     }
 }
 
 
 .more-projects {
-        position: relative;
-        background-color: #fff;
-        height: 700px;
-        max-width: 500px;
-        margin: 2.5%;
+    position: relative;
+    background-color: #fff;
+    height: 700px;
+    max-width: 500px;
+    margin: 2.5%;
     margin-bottom: 100px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-     
-        flex: 1 0 25%; /* explanation below */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    min-width: 350px;
+    flex: 1 0 25%;
+    /* explanation below */
+
+    >a {
+        font-size: 2em !important;
+    }
 }
 
 
@@ -86,9 +93,7 @@ margin-bottom: 100px;
         transform: rotateY(180deg);
     }
 
-    to {
-        
-    }
+    to {}
 }
 
 
@@ -98,7 +103,24 @@ margin-bottom: 100px;
         transform: rotateY(180deg);
     }
 
-    to {
-        
+    to {}
+}
+
+@media screen and (max-width:800px) {
+
+    .more-projects {
+        padding-top: 80px;
+        padding-bottom: 80px;
+        height: auto;
+    }
+    .project {
+        padding-bottom: 80px;
+        height: auto;
+
+        .description {       
+             font-size: 80% !important;
+            width:100%;
+            min-height: 435px;
+        }
     }
 }

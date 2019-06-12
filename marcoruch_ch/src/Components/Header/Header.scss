@@ -42,3 +42,16 @@
 
 }
 
+
+
+
+@media screen and (max-width:800px) {
+
+    #root > div > header > ul  {
+        display:flex;
+            }
+
+            #root > div > header > ul > li {
+                width:auto;
+            }
+}

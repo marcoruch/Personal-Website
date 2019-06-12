@@ -1,33 +1,74 @@
 .contact-formular-holder {
-    margin-left:25%;
-    margin-right:25%;
-    width:50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
     height: 80vh;
     margin-top: 10vh;
+    margin-bottom: 200px;
+
+    .header {
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+
+            color: #b4a892 !important;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1em;
+            margin-bottom: 100px;
+            color: #b4a892 !important
+        }
+    }
+
+    .ui.form .field>label {
+        color: #d7d7d7 !important;
+    }
+
+    #form-holder form input {
+        margin: 10px;
+    }
+
+    .ui.default.dropdown:not(.button)>.text,
+    .ui.dropdown:not(.button)>.default.text {
+        color: #2f4f4f !important;
+    }
+
+
+
+    .ui.form input::placeholder {
+        color: #2f4f4f !important;
+    }
+
+
+    .ui.form button {
+        margin-top: 10px;
+    }
 }
 
-#form-holder form input {
-    margin:10px;
+
+@media screen and (max-width:800px) {
+    .contact-formular-holder {
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+        .header {
+
+            h1 {
+                text-align: center;
+                font-size: 3em;
+
+                color: #b4a892 !important;
+            }
+
+            h2 {
+                text-align: center;
+                font-size: 1em;
+                margin-bottom: 100px;
+                color: #b4a892 !important
+            }
+        }
+    }
 }
-
-
-.ui.form .field>label {
-    color:#ffffff;
-}
-
-
-.ui.default.dropdown:not(.button)>.text, .ui.dropdown:not(.button)>.default.text
-{
-    color: #2f4f4f !important;
-}
-
-
-
- .ui.form input::placeholder {
-    color: #2f4f4f !important;
- }
-
-
- .ui.form button {
-     margin-top:10px;
- }

@@ -117,7 +117,7 @@ function GetOverviewBlog({ match }) {
 
 function GetBlogPost({ match }) {
   return <React.Fragment>
-    <SubHeader PageTitle="Blog" SubPageTitle={match.params.id}></SubHeader>
+
     <BlogPost id={match.params.id}></BlogPost>
   </React.Fragment>;
 }
@@ -128,10 +128,8 @@ function GetBlog({ match }) {
     <div>
       <Route path={`${match.path}/:id`} component={GetBlogPost} />
       <Route exact path={match.path} render={() =>
-        <React.Fragment>
-          <SubHeader PageTitle="Blog"></SubHeader>
+      
           <BlogCardHolder amount={5} match={match}></BlogCardHolder>
-        </React.Fragment>
       } />
     </div>
   );

@@ -10,7 +10,7 @@ import './Skills.scss';
 function Skills() {
 
     const [skills, setSkills] = useState(null);
-    const [currentSkill, setCurrentSkill] = useState(null);
+    const [currentSkill, setCurrentSkill] = useState("All");
 
     async function fetchSkills() {
         const fetchedSkills = [];
@@ -46,7 +46,7 @@ function Skills() {
             {skills.map((skill) =>
                 <div className={currentSkill && currentSkill.lang === skill.lang ? "skill-small active" : "skill-small"  } onClick={() => handleSkillChosen(skill.lang)}>{skill.lang}</div>
             )}
-             <div className="skill-small" onClick={() => handleSkillChosen("All")}>Alle anzeigen</div>
+             <div className={currentSkill && currentSkill === "All" ? "skill-small active" : "skill-small"  } onClick={() => handleSkillChosen("All")}>Alle anzeigen</div>
             </div>
             {currentSkill === null || currentSkill === "All" ? <div className="ui  grid">
                 {skills.map((skill) =>

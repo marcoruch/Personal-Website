@@ -3,7 +3,7 @@
     border-radius:3px;
 animation: fadeIn 2s forwards;
     position: relative;
-  height: 300px;
+  min-height: 300px;
     flex: 1 0 25%; /* explanation below */
     .skill-title {
       font-size: 1.5em;
@@ -30,7 +30,7 @@ animation: fadeIn 2s forwards;
 }
 @media screen and (max-width:800px){
     .skill-info{
-      display:none;
+      font-size: 80% !important;
     }
   }
 

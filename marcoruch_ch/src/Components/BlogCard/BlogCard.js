@@ -4,49 +4,39 @@ import { Loader } from 'semantic-ui-react';
 import firebase from './../Firebase/Firebase';
 import "./BlogCard.scss";
 
-function BlogCard(props) {
+function BlogCard({ uid }) {
 
 
-    const [blogs, setBlogs] = useState(null);
+    const [blog, setBlog] = useState(null);
 
-    async function fetchBlogs() {
-        let fetchedBlogs = [];
-        
-        await firebase.firestore().collection('blogUsers').doc('userUids').get().then(function (doc) {
-           console.log(doc.data());
-            if (doc.exists) {
-                doc.data().uids.forEach(uid => {
-                    fetchedBlogs.push(uid);
-                });
-            }
-
-        });
-        setBlogs(fetchedBlogs);
+    async function fetchBlog() {
+        let fetchedBlog = [];
+        const snap = await firebase.firestore().collection(uid).get()
+        snap.docs.map(doc => fetchedBlog.push(doc.data()));
+        setBlog(fetchedBlog);
     }
 
     useEffect(() => {
-        fetchBlogs();
+        fetchBlog();
     }, []);
 
 
-
-    return !blogs
-        ? <div className="skillsloader"><Loader active inline='centered' /></div>
-        : (blogs.map((uid) =>
-            <div className="blogcard">
-                <div className="content">
-                    <div className="header">{uid}</div>
+    return !blog
+        ? <div className="blogLoader"><Loader active inline='centered' /></div>
+        : (<div className="blogcard">
+                <div className="header">
+                    <h1>Anzahl Blogeinträge: {blog.length}</h1>
                 </div>
                 <div className="content">
                     <div className="summary">
-                        <p>{uid}</p>
+                       {blog.map(blogItem =>  <div className="blog-small"> {blogItem.title}</div>)}
                     </div>
+
+                    
                 </div>
-                <div className="extra content">
-                    <Link className="ui button" to={props.url}>{uid}</Link>
-                </div>
+                
+                <Link className="ui button user-profile" to={uid}>{uid}</Link>
             </div>
-        )
         );
 }
 

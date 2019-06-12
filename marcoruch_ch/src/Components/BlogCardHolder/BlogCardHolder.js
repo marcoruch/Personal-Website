@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BlogCard from './../BlogCard/BlogCard';
+import { Loader } from 'semantic-ui-react';
+import firebase from './../Firebase/Firebase';
 import './BlogCardHolder.scss';
 import {
   Button,
@@ -15,36 +17,41 @@ import {
 function BlogCardHolder(props) {
 
 
-  const [amountBlogs, setAmountBlogs] = useState(props.amount);
-  const [blogs, setBlogs] = useState([
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "zxy", text: "zzz", summary: "helloooO from blog 2" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },
-    { id: "abc", text: "abb", summary: "helloooO" },]);
 
-  function handleSetAmountBlogs(amount) {
-    setAmountBlogs(amount);
+  const [blogs, setBlogs] = useState(null);
+
+  async function fetchBlogs() {
+    let fetchedBlogs = [];
+
+    await firebase.firestore().collection('blogUsers').doc('userUids').get().then(function (doc) {
+  
+      if (doc.exists) {
+        doc.data().uids.forEach(uid => {
+          fetchedBlogs.push(uid);
+        });
+      }
+
+    });
+    
+    setBlogs(fetchedBlogs);
   }
 
-  return (
-    <div className="blog-card-holder">
-  <div class="ui grid">
-          {blogs.slice(0, 10).map(blog =>
-           <div class="three wide column"> <BlogCard blog={blog} url={`${props.match.url}/${blog.id}`} /></div>
-          )} 
-           </div>
-    </div>
-  );
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+
+  return !blogs
+    ? <div className="skillsloader"><Loader active inline='centered' /></div>
+    : (
+      <div className="blog-card-holder">
+        <div className="header">  Blogs </div>
+
+        <div className="blogs-holder">
+          {blogs.map((uid) => <BlogCard uid={uid} />)}
+          </div>
+      </div>
+    );
 }
 
 

@@ -20,7 +20,7 @@ function AboutMe() {
       [
         { key:0, X: '10%', Y: '20%', link: "projects", text:"Projekte" },
         { key:1, X: '30%', Y: '45%',link: "skills"  , text:"Fähigkeiten" },
-        { key:1, X: '80%', Y: '20%', link: "blog", text:"Blog"  },
+        { key:1, X: '73%', Y: '20%', link: "blog", text:"Blog"  },
         { key:1, X: '66%', Y: '35%', link: "contact" , text:"Kontakt"  },
       ]);
 

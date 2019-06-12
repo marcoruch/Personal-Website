@@ -13,7 +13,12 @@
         align-items: center;
 
         #hero-image-section {
-        margin-bottom:50px;
+            margin-bottom: 50px;
+
+            img {
+                max-width: 30%;
+                width:300px;
+            }
         }
 
         #hero-text-section {
@@ -22,26 +27,31 @@
             justify-content: center;
             align-content: center;
             align-items: center;
+
+
             >h1 {
-                color:#b4a892!important;
+                text-align: center;
+                color: #b4a892 !important;
                 font-weight: bold;
                 font-size: 80px;
-                margin-bottom:0px;
+                margin-bottom: 0px;
             }
 
             >h2 {
+                text-align: center;
                 font-size: 40px;
-                color:#d7d7d7;
-                margin-top:0px;
+                color: #d7d7d7;
+                margin-top: 0px;
             }
         }
 
         .hero-bubble {
-            width:100px;
-            height:100px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             animation: bubble-up 5s alternate ease-in-out infinite;
             transition: all .3s;
+
             ::after {
                 content: '1';
                 width: 100px;
@@ -49,24 +59,28 @@
                 border-radius: 50%;
                 background-color: '#696162';
             }
+
             display:flex;
             align-content: center;
             align-items: center;
             justify-content: center;
             font-size:100%;
-            color:#b9b9b8!important;
+            color:#b9b9b8 !important;
             font-weight: bold;
 
-            font-family:'Josefin Sans', sans-serif;
-                        &:hover{
-                -webkit-animation-play-state:paused;
-                -moz-animation-play-state:paused;
-                -o-animation-play-state:paused;
-                animation-play-state:paused;
+            font-family:'Josefin Sans',
+            sans-serif;
+
+            &:hover {
+                -webkit-animation-play-state: paused;
+                -moz-animation-play-state: paused;
+                -o-animation-play-state: paused;
+                animation-play-state: paused;
                 cursor: pointer;
-                width:110px;
-                height:110px;     
-            color:#090809;         }
+                width: 110px;
+                height: 110px;
+                color: #090809;
+            }
         }
     }
 
@@ -79,15 +93,13 @@
 
 
 @keyframes bubble-up {
-    0%{
+    0% {}
 
-    }
-
-    50%{
+    50% {
         transform: translateY(random(50) + px)
     }
 
-    100%{
-
-    }
+    100% {}
 }
+
+
