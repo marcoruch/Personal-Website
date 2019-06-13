@@ -29,6 +29,8 @@ function HaltestelleResult() {
     }
 
     const handleCalculateHaltestelle = () => {
+
+        console.log(haltestellen);
         if (haltestellen.length <=2 ) {
             Swal.fire('Ups...', `Geben Sie mindestens zwei Haltestellen an.`, 'error')
             setNearestHaltestelle(null);

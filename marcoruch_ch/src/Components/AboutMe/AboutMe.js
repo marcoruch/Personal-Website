@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { Responsive, Icon, Image } from 'semantic-ui-react'
 import Wave from 'react-wavify';
-import ProgrammerLogo from './../../Content/img/programmer.jpg'
-import { Link } from "react-router-dom";
+import ProgrammerLogo from './../../Content/img/programmer.jpg';
 
+import { Link } from "react-router-dom";
 import './AboutMe.scss';
 
 
@@ -16,25 +16,29 @@ function AboutMe() {
       { icon: "github", url: "www.google.ch" },
     ]);
 
-    const [bubbles, setBubbles] = useState(
-      [
-        { key:0, X: '10%', Y: '20%', link: "projects", text:"Projekte" },
-        { key:1, X: '30%', Y: '45%',link: "skills"  , text:"Fähigkeiten" },
-        { key:1, X: '73%', Y: '20%', link: "blog", text:"Blog"  },
-        { key:1, X: '66%', Y: '35%', link: "contact" , text:"Kontakt"  },
-      ]);
+  const [bubbles, setBubbles] = useState(
+    [
+      { key: 0, X: '10%', Y: '20%', link: "projects", text: "Projekte" },
+      { key: 1, X: '30%', Y: '45%', link: "skills", text: "Fähigkeiten" },
+      { key: 1, X: '73%', Y: '20%', link: "blog", text: "Blog" },
+      { key: 1, X: '66%', Y: '35%', link: "contact", text: "Kontakt" },
+    ]);
 
-    function bubbleStyle(bubble) {
-      return {
-        position: 'absolute',
-        backgroundColor: '#696162',
-        top: bubble.Y,
-        left:bubble.X,
-      }
+  function bubbleStyle(bubble) {
+    return {
+      position: 'absolute',
+      backgroundColor: '#696162',
+      top: bubble.Y,
+      left: bubble.X,
     }
+  }
+
 
   return (
     <React.Fragment>
+      <div id="pixi-header">
+        
+      </div>
       <div id="hero">
         <Responsive maxWidth={768}>
           <div id="hero-top">
@@ -87,7 +91,7 @@ function AboutMe() {
         <Responsive minWidth={1200}>
           <div id="hero-top">
             <div id="hero-image-section">
-              <Image
+            <Image
                 src={ProgrammerLogo}
                 as='a'
                 size='medium'
@@ -97,7 +101,7 @@ function AboutMe() {
             <div id="hero-text-section"> <h1>Marco Ruch</h1>
               <h2>Quality over Quantity</h2>
               {icons.map(item => <Icon key={item.icon} name={item.icon} size='big' href={item.url} />)}
-              {bubbles.map(bubble => <Link  to={`/${bubble.link}`} key={bubble.key}  className={"hero-bubble"} style={bubbleStyle(bubble)} >{bubble.text}</Link>)}
+              {bubbles.map(bubble => <Link to={`/${bubble.link}`} key={bubble.key} className={"hero-bubble"} style={bubbleStyle(bubble)} >{bubble.text}</Link>)}
             </div>
           </div>
         </Responsive>

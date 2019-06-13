@@ -12,7 +12,7 @@ function BlogCard({ uid }) {
     async function fetchBlog() {
         let fetchedBlog = [];
         const snap = await firebase.firestore().collection(uid).get()
-        snap.docs.map(doc => fetchedBlog.push(doc.data()));
+        snap.docs.map(doc => fetchedBlog.push({...doc.data(),id: doc.id}));
         setBlog(fetchedBlog);
     }
 
@@ -29,7 +29,7 @@ function BlogCard({ uid }) {
                 </div>
                 <div className="content">
                     <div className="summary">
-                       {blog.map(blogItem =>  <div className="blog-small"> {blogItem.title}</div>)}
+                       {blog.map(blogItem =>  <Link to={`blogs/${uid}/${blogItem.id}`} className="blog-small"> {blogItem.title}</Link>)}
                     </div>
 
                     
