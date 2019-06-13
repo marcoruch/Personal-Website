@@ -21,3 +21,23 @@ Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> 
     Kontaktformular
   </li>
 </ul>
+
+
+<h2>Lerninhalte React</h2>
+<ul>
+  <li>
+    Router
+  </li>
+  <li>
+    Hooks
+  </li>
+   <li>
+    State
+  </li>
+   <li>
+    Context API
+  </li>
+    <li>
+    Functional-/ & Class Components
+  </li>
+</ul>
