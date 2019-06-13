@@ -3,7 +3,7 @@
 Diese Website wurde mit <a href="https://github.com/facebook/react">React.js</a> programmiert.
 Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> gespeichert.
 
-<h2>Inhalt</h2>
+<h2>Inhalt der Website</h2>
 <ul>
   <li>
     Startseite
@@ -39,5 +39,27 @@ Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> 
   </li>
     <li>
     Functional-/ & Class Components
+  </li>
+</ul>
+
+
+
+<h2>Lerninhalte Firebase</h2>
+<ul>
+  <li>
+    NoSQL Database Structures
+  </li>
+  
+   <li>
+    Collections
+  </li>
+   <li>
+    Documents
+  </li>
+   <li>
+    User Auth & Multiuser System
+  </li>
+   <li>
+    Firestore Filestorage
   </li>
 </ul>
