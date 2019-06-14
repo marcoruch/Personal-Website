@@ -1,4 +1,5 @@
 .App-header {
+    height:100px;
     background-color: #121212;
     display: flex;
     flex-direction: column;
@@ -20,8 +21,10 @@
         li {
             cursor: pointer;
             width: 200px;
+            max-width: 12vw !important;
 
             a {
+                font-size: 50% !important;
                 color: white;
                 text-decoration: none;
             }
@@ -36,9 +39,57 @@
 
     }
 
- 
+    .large {
+        width:100%;
+    }
 
+    .medium { 
+        width:100%;
+        display:none;
 
+        ul {
+            
+            position: absolute;
+            top:0;
+            left:0;
+        }
+
+        #hamburger-holder {
+            width:55px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-right: 20px;
+            margin-right: 20px;
+            cursor: pointer;
+            margin-left:auto !important;
+
+            &:hover .hamburger:nth-child(1) {
+                transform: rotate(45deg) translateY(15px);
+                margin: 0;
+            }
+
+            &:hover .hamburger:nth-child(2) {
+                width: 0;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            &:hover .hamburger:nth-child(3) {
+                transform: rotate(-45deg) translateY(-15px);
+                margin: 0;
+            }
+        }
+
+           
+
+        .hamburger {
+            width: 35px;
+            height: 5px;
+            background-color: #57B6FF;
+            margin: 6px 0;
+            transition: all .5s ease-in-out;
+        }
+    }
 
 }
 
@@ -46,12 +97,25 @@
 
 
 @media screen and (max-width:800px) {
+.App-header {
+        .large {
+            display:none;
+        }
+        .medium {
+            display: block !important;
 
-    #root > div > header > ul  {
-        display:flex;
+            ul {
+                li {
+                    width: 200px;
+                    max-width: 12vw !important;
+        
+                    a {
+                        font-size: 50% !important;
+                        color: white;
+                        text-decoration: none;
+                    }
+                }
             }
-
-            #root > div > header > ul > li {
-                width:auto;
-            }
+        }
+    }
 }
