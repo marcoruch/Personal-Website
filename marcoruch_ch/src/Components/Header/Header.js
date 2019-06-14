@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LoginNav from "./../LoginNav/LoginNav";
+import Backdrop from "./../Backdrop/Backdrop";
 import UserControlPanelNav from './../UserControlPanelNav/UserControlPanelNav';
 import { Link } from "react-router-dom";
 import './Header.scss';
@@ -16,11 +17,20 @@ function Header() {
         width:'400px',
         color: 'white',
         float:'right',
-        marginLeft: 'auto'
+        marginLeft: 'auto',   
+         display: "flex" ,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center'
     }
 
     const hamburgerMenuStyle = {
-        display: hamburger ? "block" : "none",
+        display: hamburger ? "flex" : "none",
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center'
     }
 
     
@@ -32,6 +42,10 @@ function Header() {
             setUser(null);
         }
     });
+
+    const handleBackDropClicked = () =>{
+        setHamburger(!hamburger);
+    }
 
     return (
         <header className="App-header">
@@ -65,24 +79,33 @@ function Header() {
                 <div class="hamburger"></div>
                 <div class="hamburger"></div>
             </div>
+            { hamburger ? <Backdrop click={handleBackDropClicked}></Backdrop>  : <React.Fragment></React.Fragment>}
             <ul style={hamburgerMenuStyle}>
+            <div  id="hamburger-in-nav-holder" onClick={()=>setHamburger(!hamburger)}>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+            <li>
+                
+                </li>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/" onClick={() => setHamburger(!hamburger)}>Home</Link>
                 </li>
             <li>
-                 <Link to="/projects">Projects</Link>
+                 <Link to="/projects" onClick={() => setHamburger(!hamburger)}>Projects</Link>
                 </li>
                 <li>
-                    <Link to="/skills">Skills</Link>
+                    <Link to="/skills" onClick={() => setHamburger(!hamburger)}>Skills</Link>
                 </li>
                 <li>
-                    <Link to="/games">Games</Link>
+                    <Link to="/games" onClick={() => setHamburger(!hamburger)}>Games</Link>
                 </li>
                 <li>
-                    <Link to="/blog">Blog</Link>
+                    <Link to="/blog" onClick={() => setHamburger(!hamburger)}>Blog</Link>
                 </li>
                 <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/contact" onClick={() => setHamburger(!hamburger)}>Contact</Link>
                 </li>
                 <li >
                     {user ? <UserControlPanelNav /> : <LoginNav />}

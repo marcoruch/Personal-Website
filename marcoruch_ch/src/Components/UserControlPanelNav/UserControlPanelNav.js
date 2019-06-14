@@ -25,7 +25,7 @@ function UserControlPanelNav() {
     return (
       <div>{
         user == null ? <div></div>
-      : <React.Fragment> <div   onClick={handleModalToggle}>Welcome, {user.email}</div>
+      : <React.Fragment> <div style={{fontSize:'50%'}}  onClick={handleModalToggle}>Welcome, {user.email}</div>
         {showModal
         ? <UserControlPanelModal ></UserControlPanelModal>
         : <React.Fragment></React.Fragment>}

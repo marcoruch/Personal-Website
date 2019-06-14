@@ -19,10 +19,16 @@
      
         
         li {
+            
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-content: center;
+         align-items: flex-start;
             cursor: pointer;
             width: 200px;
             max-width: 12vw !important;
-
+            
             a {
                 font-size: 50% !important;
                 color: white;
@@ -48,10 +54,61 @@
         display:none;
 
         ul {
-            
-            position: absolute;
+            z-index:9000;
+            width:50vw;
+            height:100vh;
+            margin-top:0;
+            position: fixed;
             top:0;
-            left:0;
+            right:0;
+            background-color:white;
+            height:100%;
+            li {
+                > div {
+                    > div {
+                        font-size:20px !important;    
+                    }
+                }
+                height: 60px;
+                a{
+                    font-size:20px !important;
+                    color:black !important;
+                }
+            }
+
+            #hamburger-in-nav-holder {
+                width:55px;
+                position: absolute;
+                top:35px;
+                right:0px;
+                cursor: pointer;
+                margin-left:auto !important;
+            padding-bottom: 20px;
+            padding-right: 20px;
+            margin-right: 20px;
+    
+                   &:not(:hover){
+                    .hamburger:nth-child(1) {
+                        transform: rotate(45deg) translateY(15px);
+                        margin: 0;
+                        
+                    }
+        
+                    .hamburger:nth-child(2) {
+                        width: 0;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    
+                    }
+        
+                    .hamburger:nth-child(3) {
+                        transform: rotate(-45deg) translateY(-15px);
+                        margin: 0; 
+                        
+                    }
+                   }
+                       
+            }
         }
 
         #hamburger-holder {
@@ -85,7 +142,7 @@
         .hamburger {
             width: 35px;
             height: 5px;
-            background-color: #57B6FF;
+            background-color: #B4A892;
             margin: 6px 0;
             transition: all .5s ease-in-out;
         }
@@ -105,12 +162,14 @@
             display: block !important;
 
             ul {
+
+                
                 li {
                     width: 200px;
                     max-width: 12vw !important;
         
                     a {
-                        font-size: 50% !important;
+                        
                         color: white;
                         text-decoration: none;
                     }

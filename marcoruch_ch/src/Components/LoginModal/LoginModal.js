@@ -88,8 +88,14 @@ function LoginModal() {
             console.log(errorCode,errorMessage);
         })
         .then(function(user){
-            Swal.fire('Hallo!', `Erfolgreich angemeldet.`, 'success');
-            setShouldHide(true);
+            console.log(user);
+            if (user !== null && typeof user !== "undefined"){
+
+                Swal.fire('Hallo!', `Erfolgreich angemeldet.`, 'success');
+                setShouldHide(true);
+            } else {
+                Swal.fire('Fehler!', `E-Mail oder Passwort falsch.`, 'error');
+            }
         });
     }
 

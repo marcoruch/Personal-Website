@@ -51,6 +51,7 @@ function UserControlPanelModal() {
             setUser(null);
         }, function (error) {
             // An error happened.
+            console.log(error);
         });
     }
 
