@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import BlogTag from './../BlogTag/BlogTag'
+import React from "react";
+import BlogTag from '../BlogTag/BlogTag'
 import './BlogTags.scss'
 import {
     Grid,
     Input,
-    Icon,
-    Search
 } from 'semantic-ui-react';
 
 

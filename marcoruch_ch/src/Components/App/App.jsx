@@ -1,14 +1,15 @@
+    
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Header from './../Header/Header';
-import Footer from './../Footer/Footer';
-import BlogPost from './../BlogPost/BlogPost';
-import CreateBlog from './../CreateBlog/CreateBlog';
-import SubHeader from './../SubHeader/SubHeader';
-import AboutMe from './../AboutMe/AboutMe';
-import Projects from './../Projects/Projects';
-import Skills from './../Skills/Skills';
-import Contact from './../Contact/Contact';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import BlogPost from '../BlogPost/BlogPost';
+import CreateBlog from '../CreateBlog/CreateBlog';
+import SubHeader from '../SubHeader/SubHeader';
+import AboutMe from '../AboutMe/AboutMe';
+import Projects from '../Projects/Projects';
+import Skills from '../Skills/Skills';
+import Contact from '../Contact/Contact';
 import BlogCardHolder from "../BlogCardHolder/BlogCardHolder";
 import OverviewBlog from "../OverviewBlog/OverviewBlog";
 import EditBlog from "../EditBlog/EditBlog";
