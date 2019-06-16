@@ -14,6 +14,7 @@ import BlogCardHolder from "../BlogCardHolder/BlogCardHolder";
 import OverviewBlog from "../OverviewBlog/OverviewBlog";
 import EditBlog from "../EditBlog/EditBlog";
 import Haltestelle from "../Haltestelle/Haltestelle";
+import Muehle from "../Muehle/Muehle";
 import Games from "../Games/Games";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/contact" component={GetContact} />
         <Route path="/games" component={GetGames} />
         <Route path="/haltestelle" component={GetHaltestelle} />
+        <Route path="/muehle" component={GetMuehle} />
         <Footer />
               </div>
     </Router>
