@@ -1,0 +1,99 @@
+.muehle {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    h1 {
+        text-align: center;
+        font-size: 3em;
+        margin-bottom: 25px;
+        color: #b4a892 !important;
+    }
+    p {
+        text-align: center;
+        font-size: 1em;
+        color: #b4a892 !important;
+    }
+}
+
+.game {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    .dot {
+        background-color: #d7d7d7;
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        position: relative;
+        /* 1st row  */
+        &:nth-child(1) {
+            top: -12.5px;
+            left: -12.5px;
+            position: absolute;
+        }
+        &:nth-child(2) {
+            top: -12.5px;
+            right: calc(50% - 12.5px);
+            position: absolute;
+        }
+        &:nth-child(3) {
+            top: -12.5px;
+            right: -12.5px;
+            position: absolute;
+        }
+        /* 2nd row  */
+        &:nth-child(4) {
+            top: calc(50% - 12.5px);
+            left: -12.5px;
+            position: absolute;
+        }
+        &:nth-child(5) {
+            top: calc(50% - 12.5px);
+            right: -12.5px;
+            position: absolute;
+        }
+        /* 3th row  */
+        &:nth-child(6) {
+            top: calc(100% - 12.5px);
+            left: -12.5px;
+            position: absolute;
+        }
+        &:nth-child(7) {
+            top: calc(100% - 12.5px);
+            right: calc(50% - 12.5px);
+            position: absolute;
+        }
+        &:nth-child(8) {
+            top: calc(100% - 12.5px);
+            right: -12.5px;
+            position: absolute;
+        }
+    }
+}
+
+.outer-field {
+    width: 80vh;
+    height: 80vh;
+    border: 1px;
+    border: 1px solid grey;
+    position: relative;
+    .middle-field {
+        position: relative;
+        border: 1px solid grey;
+        top: 10vh;
+        left: 10vh;
+        width: 60vh;
+        height: 60vh;
+        position: relative;
+        .center-field {
+            border: 1px solid grey;
+            top: 10vh;
+            left: 10vh;
+            width: 40vh;
+            height: 40vh;
+            position: relative;
+        }
+    }
+}

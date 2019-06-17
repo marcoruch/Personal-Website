@@ -84,6 +84,12 @@ function GetHaltestelle() {
   </React.Fragment>;
 }
 
+function GetMuehle() {
+  return <React.Fragment>
+    <Muehle></Muehle>
+  </React.Fragment>
+}
+
 function GetGames() {
 
   return <React.Fragment>
