@@ -11,7 +11,6 @@ function Games() {
 
 
     const [games, setGames] = useState(null);
-    const [currentSkill, setCurrentSkill] = useState(null);
 
     async function fetchGames() {
         const fetchedGames = [];

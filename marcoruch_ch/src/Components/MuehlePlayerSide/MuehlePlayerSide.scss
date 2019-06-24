@@ -1,0 +1,14 @@
+.playerside {
+    height:30vh;
+    width:10vw;
+    background-color:#FED992;
+
+    .stones {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}

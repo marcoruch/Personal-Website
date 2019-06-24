@@ -35,7 +35,7 @@ function Header() {
 
     
     firebase.auth().onAuthStateChanged((user) => {
-        console.log(user);
+        
         if (user) {
             setUser(user);
         } else {

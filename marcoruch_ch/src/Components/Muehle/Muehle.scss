@@ -1,5 +1,5 @@
-.muehle {
-    height: 100vh;
+.gameLoader {
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,23 +7,129 @@
     align-items: center;
     margin-bottom: 100px;
     margin-top: 100px;
-    h1 {
-        text-align: center;
-        font-size: 3em;
-        margin-bottom: 25px;
-        color: #b4a892 !important;
-    }
-    p {
-        text-align: center;
-        font-size: 1em;
-        color: #b4a892 !important;
+    flex-wrap: wrap;
+    color: #b4a892 !important;
+}
+
+.gameChooser {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    color: #b4a892 !important;
+
+    .game-item {
+        
+        padding:  10px 5px  10px 25px  !important;
+        border: 1px solid grey;
+        border-radius:3px;
+        box-shadow: 0 8px 17px 2px rgba(255,255,255,0.14), 0 3px 14px 2px rgba(255,255,255,0.12), 0 5px 5px -3px rgba(255,255,255,0.2);
+
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-content: center !important;
+        align-items: center !important;
+
+      
+        .content {
+
+            margin-left:25px !important;
+            .header {
+                    text-decoration: none !important;
+                    color:white !important;
+                    margin-bottom:5px !important; 
+                 
+            }
+
+            .description {
+                text-decoration: none !important;
+                color:grey !important;
+
+                a {
+                    b {
+                        cursor: default !important;
+                        text-decoration: none !important;
+                        color:grey !important;
+                    }
+                }
+            }
+        }
     }
 }
 
-.game {
+.gameSearcher {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    color: #b4a892 !important;
+    
+}
+
+
+    h1 {
+        text-align: center;
+        font-size: 3em;
+        color: #b4a892 !important;
+    }
+
+
+
+.muehle {
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    .header {
+        padding: 10px;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        margin-bottom: 50px;
+        width:100%;
+        flex-wrap: wrap;
+        /* explanation below */
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 25px;
+            color: #b4a892 !important;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1em;
+            color: #b4a892 !important;
+        }
+
+}
+}
+
+.muehle-game {
     border: 10px solid #53331E;
     background-color: #FED992;
     padding: 25px;
+
     .dot {
         background-color: #1E150F;
         height: 25px;
@@ -78,8 +184,8 @@
 }
 
 .outer-field {
-    width: 80vh;
-    height: 80vh;
+    width: 60vh;
+    height: 60vh;
     border: 1px;
     border: 3px solid #4E3B2F;
     position: relative;
@@ -88,15 +194,27 @@
         border: 3px solid #4E3B2F;
         top: 10vh;
         left: 10vh;
-        width: 60vh;
-        height: 60vh;
+        width: 40vh;
+        height: 40vh;
         position: relative;
+
+        .dot {
+            &:nth-child(4) {
+                &::after {
+                    content: "";
+                    margin-left:25px;
+                    margin-top:25px;
+                    border-color:black;
+                }
+            }
+        }
+        
         .center-field {
             border: 3px solid #4E3B2F;
             top: 10vh;
             left: 10vh;
-            width: 40vh;
-            height: 40vh;
+            width: 20vh;
+            height: 20vh;
             position: relative;
         }
     }
