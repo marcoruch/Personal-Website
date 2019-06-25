@@ -58,14 +58,16 @@ function Muehle() {
 
 
     async function fetchGames() {
-        const fetchedGames = [];
-        await firebase.firestore().collection('muehleGames').get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
+        firebase.firestore().collection('muehleGames').onSnapshot(function(querySnapshot) {
+            const fetchedGames = [];
+                    querySnapshot.forEach(function(doc) {
                     fetchedGames.push(doc.data());
-                });
-            })
-        setGames(fetchedGames);
+            });
+            console.log(fetchedGames);
+            setGames(fetchedGames);
+        }, function(error) {
+            console.log("couldn't fetch games", error);
+        });
     }
 
     const rejoinGame = async (gameId) => {
@@ -119,10 +121,8 @@ function Muehle() {
         
     }
 
+    
     const createGameRoom = async () => {
-
-
-
         if (games.filter(game => game.id === `${user}-`).length > 0) {
             console.log("Game already exists...");
             setSearchingGame(true);
@@ -146,6 +146,7 @@ function Muehle() {
         }).then(function () {
             console.log("Added new searching Game... wait for Opponent");
             setSearchingGame(true);
+            db.collection("muehleGames").doc(`${user}-`).onSnapshot((doc) => doc.exists ? setChosenGame(doc.data()) : console.log("Doesnt exist anymore"));
         }).catch(function () {
             console.log("Couldnt add Document?");
             setSearchingGame(false);
@@ -154,7 +155,7 @@ function Muehle() {
     }
 
     useEffect(() => {
-        fetchGames();
+         fetchGames();
     }, []);
 
     return (
@@ -165,7 +166,7 @@ function Muehle() {
                         <h1>Offene Spiele werden geladen...</h1>
                         <Loader active inline='centered' />
                     </div>
-                    : searchingGame
+                    : searchingGame && (chosenGame == null || chosenGame.playerSearching)
                         ? <div className="gameSearcher">
                             <Loader active inline='centered' />
                             <h1>Auf Gegner warten...</h1>
