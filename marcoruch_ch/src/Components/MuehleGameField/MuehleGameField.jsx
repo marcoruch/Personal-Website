@@ -29,8 +29,8 @@ function MuehleGameField(props) {
                     Klassisches Mühle Brettspiel. Ziehen sie per Drag-Drop die Spielsteine auf das Spielfeld - Viel Spass!
                              </p>
             </div>
-
-            <MuehlePlayerSide id={1} isPlaying={props.chosenGame.currentPlayer === 1}  playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
+         
+            <MuehlePlayerSide id={1} isPlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne}  playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
             <div className="muehle-game">
                 <div className="outer-field">
                     {dotsOuter.map(i =><MuehleDot  id={i}></MuehleDot> )}
@@ -43,8 +43,7 @@ function MuehleGameField(props) {
                     </div>
                 </div>
             </div>
-           
-            <MuehlePlayerSide id={2} isPlaying={props.chosenGame.currentPlayer === 2}  playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerTwoLeftStones}></MuehlePlayerSide>
+            <MuehlePlayerSide id={2} isPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo}  playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerTwoLeftStones}></MuehlePlayerSide>
 
         </div>
     )

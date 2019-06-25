@@ -26,27 +26,30 @@ function Muehle() {
 
     const getBasicGameField = () => {
         return [
-                    [1, 0, 0, 1, 0, 0, 1],
-                    [0, 1, 0, 1, 0, 1, 0],
-                    [0, 0, 1, 1, 1, 0, 0],
-                    [1, 1, 1, 0, 1, 1, 1],
-                    [0, 0, 1, 1, 1, 0, 0],
-                    [0, 1, 0, 1, 0, 1, 0],
-                    [1, 0, 0, 1, 0, 0, 1],
+                    [1, 0, 0, 2, 0, 0, 3],
+                    [0, 9, 0, 10, 0, 11, 0],
+                    [0, 0, 17, 18, 19, 0, 0],
+                    [4, 12, 20, 0, 21, 13, 5],
+                    [0, 0, 22, 23, 24, 0, 0],
+                    [0, 14, 0, 15, 0, 16, 0],
+                    [6, 0, 0, 7, 0, 0, 8],
                 ].map(function(dotArr, arrIndex){
-                        return {id: arrIndex, arrayRow: dotArr.map(function(isDot) 
+                        return {id: arrIndex, arrayRow: dotArr.map(function(dotNumber) 
                         {
                             index++;
-                            return { id: index, isDot: isDot === 1, isAvailable: isDot === 1 }
+                            return { id: index, isDot: dotNumber >= 1, associatedDotId: dotNumber, isAvailable: dotNumber >= 1 }
                         })};
                     });
     }
 
     firebase.auth().onAuthStateChanged((user) => {
+   
         if (user) {
             setUser(user.uid);
             if (!user.isAnonymous) {
-                setUserName(user.displayName);
+                setUserName(user.displayName ? user.displayName : user.email);
+            } else {
+                setUserName("Anonymer User");
             }
         } else {
             firebase.auth().signInAnonymously()
@@ -94,17 +97,19 @@ function Muehle() {
             })
         .then(async function() {
             console.log("Game successfully updated!");
-            await oldRefGame.get()
-            .then(function (doc) {
+            
+            await oldRefGame.get().then(async function (doc) {
                 currentGame = doc.data();
+                await firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).set(currentGame);
+                oldRefGame.delete();
             });
 
-            oldRefGame.delete();
 
+            firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).onSnapshot(function(doc) {
+                currentGame = doc.data();
+                setChosenGame(currentGame);
+            });
             
-            await firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).set(currentGame);
-
-            setChosenGame(currentGame);
         })
         .catch(function(error) {
             // The document probably doesn't exist.
@@ -170,6 +175,7 @@ function Muehle() {
                             ? <div className="gameChooser">
 
                                 <h1>Meine laufenden Spiele</h1>
+
                                 {games.filter(game => !game.playerSearching && (game.playerOne === user || game.playerTwo === user)).length > 0 ?
                                 <List>
                                     {games.filter(game => !game.playerSearching && (game.playerOne === user || game.playerTwo === user)).map(game =>
@@ -218,7 +224,7 @@ function Muehle() {
                                 <Form.Button onClick={() => createGameRoom()} >Neuen Spielraum erstellen</Form.Button>
 
                             </div>
-                            : <MuehleGameField user={user} chosenGame={chosenGame}></MuehleGameField>
+                            : <MuehleGameField user={user} userName={userName} chosenGame={chosenGame}></MuehleGameField>
             }
         </MuehlenProvider>
     )
