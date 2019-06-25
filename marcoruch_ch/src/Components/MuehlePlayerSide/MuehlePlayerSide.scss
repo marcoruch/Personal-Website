@@ -1,6 +1,5 @@
 .playerside {
-    height:30vh;
-    width:10vw;
+    width:20vw;
     background-color:#FED992;
     display:flex;
     flex-direction: row;
@@ -8,9 +7,13 @@
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
+    padding: 25px;
+    border-radius: 3px;
 
     h3 {
-        font-size:100%;
+        font-size:24px;
+        font-weight: bold;
+        margin-bottom: 20px;
     }
     .stones {
         display:flex;

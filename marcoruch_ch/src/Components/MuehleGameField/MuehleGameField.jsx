@@ -30,10 +30,11 @@ function MuehleGameField(props) {
                              </p>
             </div>
 
-            <MuehlePlayerSide id={1} available={props.chosenGame.playerOne === props.user} playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
+            <MuehlePlayerSide id={1} isPlaying={props.chosenGame.currentPlayer === 1}  playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
             <div className="muehle-game">
                 <div className="outer-field">
-                    {dotsOuter.map(i =><MuehleDot id={i}></MuehleDot> )}
+                    {dotsOuter.map(i =><MuehleDot  id={i}></MuehleDot> )}
+                  
                     <div className="middle-field">
                         {dotsMiddle.map(i =><MuehleDot id={i}></MuehleDot> )}
                         <div className="center-field">
@@ -42,7 +43,9 @@ function MuehleGameField(props) {
                     </div>
                 </div>
             </div>
-            <MuehlePlayerSide id={2} available={props.chosenGame.playerTwo === props.user} playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} playerLeftStones={props.chosenGame.playerTwoLeftStones}></MuehlePlayerSide>
+           
+            <MuehlePlayerSide id={2} isPlaying={props.chosenGame.currentPlayer === 2}  playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerTwoLeftStones}></MuehlePlayerSide>
+
         </div>
     )
 

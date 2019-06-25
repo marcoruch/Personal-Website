@@ -21,7 +21,7 @@ function MuehleStone(props) {
 
     const selectedStyle =
     {
-        border: '1px solid red',
+        WebkitFilter: 'blur(5px) saturate(2)',
         transform: 'scale(1.1)',
         backgroundColor: props.color,
     }

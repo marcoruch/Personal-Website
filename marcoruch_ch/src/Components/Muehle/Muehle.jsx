@@ -70,12 +70,13 @@ function Muehle() {
 
         let refGame = firebase.firestore().collection('muehleGames').doc(gameId);
 
-        await refGame.get()
-        .then(function (doc) {
-            currentGame = doc.data();
+         refGame.onSnapshot(function(doc) {
+            currentGame= doc.data(); 
+            console.log("Current data: ", currentGame);
+            setChosenGame(currentGame);
         });
         
-        setChosenGame(currentGame);
+        
     }
 
     const joinExistingGame = async (gameId) => {
@@ -163,13 +164,15 @@ function Muehle() {
                         ? <div className="gameSearcher">
                             <Loader active inline='centered' />
                             <h1>Auf Gegner warten...</h1>
+                            <Button onClick={() => setSearchingGame(false)}>Abbrechen</Button>
                         </div>
                         : chosenGame == null
                             ? <div className="gameChooser">
 
                                 <h1>Meine laufenden Spiele</h1>
+                                {games.filter(game => !game.playerSearching && (game.playerOne === user || game.playerTwo === user)).length > 0 ?
                                 <List>
-                                    {games.filter(game => !game.playerSearching && game.playerOne === user || game.playerTwo === user).map(game =>
+                                    {games.filter(game => !game.playerSearching && (game.playerOne === user || game.playerTwo === user)).map(game =>
                                         <List.Item className="game-item" key={game.id}>
                                             <Icon name='game' size='big' />
                                             <List.Content>
@@ -186,9 +189,12 @@ function Muehle() {
                                             </List.Content>
                                         </List.Item>)}
                                 </List>
-                                <br></br>
+                                : <div>Momentan sind keine laufenden Spiele von Ihnen vorhanden.</div>
+                                }<br></br>
 
+                                
                                 <h1>Wartende Gegner</h1>
+                                {games.filter(game => game.playerSearching &&  game.playerOne !== user).length > 0?
                                 <List>
                                     {games.filter(game => game.playerSearching &&  game.playerOne !== user).map(game =>
                                         <List.Item className="game-item" key={game.id}>
@@ -207,6 +213,7 @@ function Muehle() {
                                             </List.Content>
                                         </List.Item>)}
                                 </List>
+                                : <div>Momentan befinden sich keine Gegner in der Warteschleife...</div>}
                                 <br></br>
                                 <Form.Button onClick={() => createGameRoom()} >Neuen Spielraum erstellen</Form.Button>
 

@@ -6,6 +6,25 @@ import { MuehlenContext } from '../MuehleContext/MuehleContext'
 
 function MuehleDot(props) {
 
+
+    const normalStyle =
+    {
+        backgroundColor: props.color
+    }
+
+    const selectedStyle =
+    {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        transform: 'scale(1.25)',
+        cursor: 'pointer',
+        backgroundColor: '#1E150F',
+        WebkitFilter: 'blur(5px) saturate(2)',
+        zIndex:100,
+    }
+
+
     const [PlayerOneStones,
         setPlayerOneStones,
         PlayerTwoStones,
@@ -20,13 +39,11 @@ function MuehleDot(props) {
 
          const dotClicked = (id) => {
 
-
-            // case 1 - player setting stone
-
-            if (SelectedStone) {
-
-            } else if (SelectedDot == id) {
+            // case 1 - dot already selected
+            if (SelectedDot === id) {
                 setSelectedDot(null);
+
+            // case 2 - select dot
             } else {
                 setSelectedDot(id);
             }
@@ -35,8 +52,8 @@ function MuehleDot(props) {
 
 
     return (
-        <div className="dot" onClick={() => dotClicked(props.id)}  key={props.id}>
-
+        <div className={`dot ${props.id}`} onClick={() => dotClicked(props.id)}  key={props.id}>
+            <div  style={SelectedDot === props.id ? selectedStyle : normalStyle}></div>
         </div>
     )
 }
