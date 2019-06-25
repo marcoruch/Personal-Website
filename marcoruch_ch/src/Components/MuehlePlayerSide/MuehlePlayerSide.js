@@ -8,21 +8,37 @@ function MuehlePlayerSide(props) {
         PlayerOneStones,
         setPlayerOneStones,
         PlayerTwoStones,
-        setPlayerTwoStones] = useContext(MuehlenContext);
+        setPlayerTwoStones,
+        MuehleGameField,
+        setMuehleGameField,
+        SelectedStone,
+        setSelectedStone,
+        SelectedDot,
+        setSelectedDot] = useContext(MuehlenContext);
 
 
-    console.log(PlayerOneStones);
+    const normal = {
+        boxShadow:`0 8px 17px 2px rgba(255,255,255,0.14), 0 3px 14px 2px rgba(255,255,255,0.12), 0 5px 5px -3px rgba(255,255,255,0.2)`
+    }
+
+    const disabled = {
+        pointerEvents: 'none',
+        
+    }
+
+
+
     return (
-        <div className="playerside">
-            <h3>Spieler: {props.player}</h3>
+        <div className="playerside" style={props.available ? normal : disabled}>
+            <h3>Spieler: {props.playerName}</h3>
             <div className="stones">
 
-                {props.player === 1
-                    ? PlayerOneStones.map((item) => {
-                        return <MuehleStone key={item.key} color={item.color}></MuehleStone>
+                {props.id === 1
+                    ? PlayerOneStones.slice().splice(-(9 - props.playerLeftStones, 9 - props.playerLeftStones)).map((item) => {
+                        return <MuehleStone id={item.key} key={item.key} color={item.color}></MuehleStone>
                     })
-                    : PlayerTwoStones.map((item) => {
-                        return <MuehleStone key={item.key} color={item.color}></MuehleStone>
+                    : PlayerTwoStones.slice().splice(-(9 - props.playerLeftStones, 9 - props.playerLeftStones)).map((item) => {
+                        return <MuehleStone id={item.key} key={item.key} color={item.color}></MuehleStone>
                     })
                 }
 

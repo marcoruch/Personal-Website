@@ -2,12 +2,21 @@
     height:30vh;
     width:10vw;
     background-color:#FED992;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 
+    h3 {
+        font-size:100%;
+    }
     .stones {
         display:flex;
         flex-direction: row;
         justify-content: space-around;
-        align-content: space-around;
+        align-content: center;
         align-items: center;
         flex-wrap: wrap;
     }

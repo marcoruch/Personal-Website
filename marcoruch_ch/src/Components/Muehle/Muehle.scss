@@ -25,6 +25,7 @@
 
     .game-item {
         
+        margin-bottom:25px;
         padding:  10px 5px  10px 25px  !important;
         border: 1px solid grey;
         border-radius:3px;
@@ -137,6 +138,12 @@
         border-radius: 50%;
         position: relative;
         cursor: pointer;
+
+
+        &:hover {
+            transform: scale(3);
+        }
+
         /* 1st row  */
         &:nth-child(1) {
             top: -12.5px;

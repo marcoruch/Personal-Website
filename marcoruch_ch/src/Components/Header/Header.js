@@ -75,16 +75,16 @@ function Header() {
     </ul> </div>
     <div className="medium">
             <div  id="hamburger-holder" onClick={()=>setHamburger(!hamburger)}>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
+                <div className="hamburger"></div>
+                <div className="hamburger"></div>
+                <div className="hamburger"></div>
             </div>
             { hamburger ? <Backdrop click={handleBackDropClicked}></Backdrop>  : <React.Fragment></React.Fragment>}
             <ul style={hamburgerMenuStyle}>
             <div  id="hamburger-in-nav-holder" onClick={()=>setHamburger(!hamburger)}>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
+                <div className="hamburger"></div>
+                <div className="hamburger"></div>
+                <div className="hamburger"></div>
             </div>
             <li>
                 
