@@ -6,11 +6,6 @@ import Swal from 'sweetalert2'
 import firebase from './../Firebase/Firebase';
 import MuehleGameField from './../MuehleGameField/MuehleGameField'
 import "./Muehle.scss";
-
-
-
-var index=-1;
-
         
 
 
@@ -24,21 +19,7 @@ function Muehle() {
     const [searchingGame, setSearchingGame] = useState(false)
 
 
-    const getBasicGameField = () => {
-        return [
-            1, 0, 0, 2, 0, 0, 3,
-            0, 9, 0, 10, 0, 11, 0,
-            0, 0, 17, 18, 19, 0, 0,
-            4, 12, 20, 0, 21, 13, 5,
-            0, 0, 22, 23, 24, 0, 0,
-            0, 14, 0, 15, 0, 16, 0,
-            6, 0, 0, 7, 0, 0, 8]
-            .map(function(dotNumber, arrIndex){
-                return {
-                    id: arrIndex, isDot: dotNumber >= 1, associatedDotId: dotNumber, isAvailable: dotNumber >= 1 
-                }
-            });
-    }
+
 
     firebase.auth().onAuthStateChanged((user) => {
    
@@ -131,6 +112,21 @@ function Muehle() {
 
         const db = firebase.firestore();
 
+        let basicGameField = 
+        [
+            1, 0, 0, 2, 0, 0, 3,
+            0, 9, 0, 10, 0, 11, 0,
+            0, 0, 17, 18, 19, 0, 0,
+            4, 12, 20, 0, 21, 13, 5,
+            0, 0, 22, 23, 24, 0, 0,
+            0, 14, 0, 15, 0, 16, 0,
+            6, 0, 0, 7, 0, 0, 8
+        ]
+        .map(function(dotNumber, arrIndex){
+            return {
+                id: arrIndex, isDot: dotNumber >= 1, associatedDotId: dotNumber, isAvailable: dotNumber >= 1 
+            }
+        });
         db.collection("muehleGames").doc(`${user}-`).set({
             id: `${user}-`,
             playerOne: user,
@@ -138,7 +134,7 @@ function Muehle() {
             createDate: new Date(),
             finished: false,
             playerOneName: userName,
-            gameField: getBasicGameField(),
+            gameField: basicGameField,
             playerOneLeftStones: 9,
             currentPlayer:  Math.round(1 + Math.random() * (2 - 1)),
         }).then(function () {

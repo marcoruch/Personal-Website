@@ -6,7 +6,7 @@ import { MuehlenContext } from '../MuehleContext/MuehleContext'
 
 function MuehleDot(props) {
 
-
+    console.log(props);
     const normalStyle =
     {
         backgroundColor: props.color

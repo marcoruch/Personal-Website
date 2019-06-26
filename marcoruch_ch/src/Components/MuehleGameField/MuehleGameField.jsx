@@ -20,6 +20,9 @@ function MuehleGameField(props) {
         setSelectedStone] = useContext(MuehlenContext);
 
 
+        const getGameStone = (i) => {
+            return props.chosenGame.gameField[props.chosenGame.gameField.filter(item => item.associatedDotId === i)[0].id];
+        }
 
     return (
         <div className="muehle">
@@ -33,12 +36,12 @@ function MuehleGameField(props) {
             <MuehlePlayerSide id={1} isPlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne}  playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
             <div className="muehle-game">
                 <div className="outer-field">
-                    {dotsOuter.map(i =><MuehleDot  id={i}></MuehleDot> )}
+                    {dotsOuter.map(i =><MuehleDot  id={i} gameStone={getGameStone(i)}></MuehleDot> )}
                   
                     <div className="middle-field">
-                        {dotsMiddle.map(i =><MuehleDot id={i}></MuehleDot> )}
+                        {dotsMiddle.map(i =><MuehleDot id={i} gameStone={getGameStone(i)}></MuehleDot> )}
                         <div className="center-field">
-                            {dotsCenter.map(i =><MuehleDot id={i}></MuehleDot> )} 
+                            {dotsCenter.map(i =><MuehleDot id={i} gameStone={getGameStone(i)}></MuehleDot> )} 
                         </div>
                     </div>
                 </div>
