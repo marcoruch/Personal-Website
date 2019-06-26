@@ -26,20 +26,18 @@ function Muehle() {
 
     const getBasicGameField = () => {
         return [
-                    [1, 0, 0, 2, 0, 0, 3],
-                    [0, 9, 0, 10, 0, 11, 0],
-                    [0, 0, 17, 18, 19, 0, 0],
-                    [4, 12, 20, 0, 21, 13, 5],
-                    [0, 0, 22, 23, 24, 0, 0],
-                    [0, 14, 0, 15, 0, 16, 0],
-                    [6, 0, 0, 7, 0, 0, 8],
-                ].map(function(dotArr, arrIndex){
-                        return {id: arrIndex, arrayRow: dotArr.map(function(dotNumber) 
-                        {
-                            index++;
-                            return { id: index, isDot: dotNumber >= 1, associatedDotId: dotNumber, isAvailable: dotNumber >= 1 }
-                        })};
-                    });
+            1, 0, 0, 2, 0, 0, 3,
+            0, 9, 0, 10, 0, 11, 0,
+            0, 0, 17, 18, 19, 0, 0,
+            4, 12, 20, 0, 21, 13, 5,
+            0, 0, 22, 23, 24, 0, 0,
+            0, 14, 0, 15, 0, 16, 0,
+            6, 0, 0, 7, 0, 0, 8]
+            .map(function(dotNumber, arrIndex){
+                return {
+                    id: arrIndex, isDot: dotNumber >= 1, associatedDotId: dotNumber, isAvailable: dotNumber >= 1 
+                }
+            });
     }
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -146,7 +144,18 @@ function Muehle() {
         }).then(function () {
             console.log("Added new searching Game... wait for Opponent");
             setSearchingGame(true);
-            db.collection("muehleGames").doc(`${user}-`).onSnapshot((doc) => doc.exists ? setChosenGame(doc.data()) : console.log("Doesnt exist anymore"));
+            // set chosenGame to firstplayer userid
+            db.collection("muehleGames").doc(`${user}-`).onSnapshot((doc) => {
+                // when it updates for a first time, this it means that a user joined
+                // so if it got updated & wasn't deleted, try fetching with the new doc id
+                if (doc.exists) {
+                    setChosenGame(doc.data())
+                    db.collection("muehleGames").doc(`${doc.data().id}`).onSnapshot((doc) => doc.exists ? setChosenGame(doc.data()) : console.log("Doesnt exist anymore"));
+                }
+              
+            });
+        
+
         }).catch(function () {
             console.log("Couldnt add Document?");
             setSearchingGame(false);

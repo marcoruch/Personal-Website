@@ -3,6 +3,7 @@ import LoginNav from "./../LoginNav/LoginNav";
 import Backdrop from "./../Backdrop/Backdrop";
 import UserControlPanelNav from './../UserControlPanelNav/UserControlPanelNav';
 import { Link } from "react-router-dom";
+import Back from './../GoBack/GoBack'
 import './Header.scss';
 
 
@@ -51,6 +52,10 @@ function Header() {
         <header className="App-header">
             <div className="large">
             <ul>
+                
+            <li>
+                <Back />
+                </li>
                 <li>
                     <Link to="/">Home</Link>
                 </li>
