@@ -11,9 +11,10 @@ function MuehleStone(props) {
         setMuehleGameField,
         SelectedDot,
         setSelectedDot,
-        Dragged, setDragged] = useContext(MuehlenContext);
+        Dragged, setDragged,
+        DraggedOut, setDraggedOut] = useContext(MuehlenContext);
 
-    
+
 
 
     const onDragStart = (e) => {
@@ -21,15 +22,22 @@ function MuehleStone(props) {
     }
 
     return (
-        <div 
-        id={props.index}
-        key={props.id}
-        className="stone" 
-        draggable
-        onDragStart={(e)=> onDragStart(e)}
-        style={{backgroundColor: props.color}}>
- 
-        </div>
+        props.playerHasMuehle
+            ? <div
+                id={props.index}
+                key={props.id}
+                className="stone"
+                style={{ backgroundColor: props.color, cursor: 'unset'}}>
+            </div>
+            : <div
+                id={props.index}
+                key={props.id}
+                className="stone"
+                draggable
+                onDragStart={(e) => onDragStart(e)}
+                style={{ backgroundColor: props.color, }}>
+            </div>
+
     )
 }
 

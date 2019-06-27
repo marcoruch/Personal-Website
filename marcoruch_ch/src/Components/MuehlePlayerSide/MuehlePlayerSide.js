@@ -15,7 +15,8 @@ function MuehlePlayerSide(props) {
         MuehleGameField,
         setMuehleGameField,
         SelectedDot,
-        setSelectedDot] = useContext(MuehlenContext);
+        setSelectedDot,
+        DraggedOut, setDraggedOut] = useContext(MuehlenContext);
 
 
     const normal = {
@@ -30,15 +31,16 @@ function MuehlePlayerSide(props) {
     return (
         <div className="playerside" style={props.isPlaying ? normal : disabled}>
             <h3>Spieler: {props.playerName}</h3>
+            <h4>{props.isPlaying && props.playerHasMuehle ? "Sie besitzen eine Mühle, klicken sie einen Gegnerischen Stein an, welchen Sie entfernen wollen." : ""}</h4>
             <div className="stones">
 
                 {props.playerLeftStones >0 ?
                     props.id === 1
                     ? PlayerOneStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item,index) => {
-                        return <MuehleStone id={item.key} index={index} key={item.key} color={item.color}></MuehleStone>
+                        return <MuehleStone id={item.key} playerHasMuehle={props.playerHasMuehle} index={index} key={item.key} color={item.color}></MuehleStone>
                     })
                     : PlayerTwoStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item,index) => {
-                        return <MuehleStone id={item.key} index={index} key={item.key} color={item.color}></MuehleStone>
+                        return <MuehleStone id={item.key} playerHasMuehle={props.playerHasMuehle} index={index} key={item.key} color={item.color}></MuehleStone>
                     })
                     : <div><h5>Alle Steine wurden gesetzt</h5></div>
                 }

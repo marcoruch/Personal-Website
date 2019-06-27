@@ -23,19 +23,19 @@ function MuehleGameField(props) {
                              </p>
             </div>
          
-            <MuehlePlayerSide id={1} isPlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne}  playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
+            <MuehlePlayerSide id={1} playerHasMuehle={props.chosenGame.playerHasMuehle} isPlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne}  playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
             <div className="muehle-game">
                 <div className="outer-field">
-                    {dotsOuter.map(i =><MuehleDot handleGameStoneSetOnField={props.handleGameStoneSetOnField}  id={i} gameStone={getGameStone(i)}></MuehleDot> )}
+                    {dotsOuter.map(i =><MuehleDot currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneSetOnField={props.handleGameStoneSetOnField}  id={i} gameStone={getGameStone(i)}></MuehleDot> )}
                     <div className="middle-field">
-                        {dotsMiddle.map(i =><MuehleDot handleGameStoneSetOnField={props.handleGameStoneSetOnField} id={i} gameStone={getGameStone(i)}></MuehleDot> )}
+                        {dotsMiddle.map(i =><MuehleDot currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneSetOnField={props.handleGameStoneSetOnField} id={i} gameStone={getGameStone(i)}></MuehleDot> )}
                         <div className="center-field">
-                            {dotsCenter.map(i =><MuehleDot handleGameStoneSetOnField={props.handleGameStoneSetOnField} id={i} gameStone={getGameStone(i)}></MuehleDot> )} 
+                            {dotsCenter.map(i =><MuehleDot currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneSetOnField={props.handleGameStoneSetOnField} id={i} gameStone={getGameStone(i)}></MuehleDot> )} 
                         </div>
                     </div>
                 </div>
             </div>
-            <MuehlePlayerSide id={2} isPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo}  playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerTwoLeftStones}></MuehlePlayerSide>
+            <MuehlePlayerSide id={2} playerHasMuehle={props.chosenGame.playerHasMuehle} isPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo}  playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerTwoLeftStones}></MuehlePlayerSide>
 
         </div>
     )

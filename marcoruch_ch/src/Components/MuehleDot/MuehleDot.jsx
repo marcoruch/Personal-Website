@@ -1,35 +1,43 @@
 import React, { useEffect, useState, useContext } from "react";
 import { MuehlenContext } from '../MuehleContext/MuehleContext'
-
+import BlackStone from './../../Content/img/black_stone.png'
+import WhiteStone from './../../Content/img/white_stone.png'
 
 
 
 function MuehleDot(props) {
 
-    const [PlayerOneStones,
-        setPlayerOneStones,
-        PlayerTwoStones,
-        setPlayerTwoStones,
-        MuehleGameField,
-        setMuehleGameField,
-        SelectedDot,
-        setSelectedDot,
-        Dragged,
-         setDragged] = useContext(MuehlenContext);
+    const [PlayerOneStones, setPlayerOneStones,
+        PlayerTwoStones, setPlayerTwoStones,
+        MuehleGameField, setMuehleGameField,
+        SelectedDot, setSelectedDot,
+        Dragged, setDragged,
+        DraggedOut, setDraggedOut] = useContext(MuehlenContext);
 
     const [style, setStyle] = useState(null);
 
+    var img = new Image(); 
+    if (props.gameStone.isBlack)  {
+        img.src = BlackStone; 
+    } else {
+        img.src = WhiteStone; 
+    }
+    
     const onDragOver = (e) => {
-
         e.stopPropagation();
         e.preventDefault();
     }
 
     const onDropped = (e) => {
-        console.log(parseInt(e.target.id));
         props.handleGameStoneSetOnField({ dragTo: parseInt(e.target.id), draggedFrom: Dragged})
     }
-     
+    
+
+    const onDragStart = (e) => {
+        console.log(e.target);
+        e.dataTransfer.setDragImage(img, 64,64);
+        setDraggedOut(props);
+    }
 
     useEffect(() => {
         if (SelectedDot === props.id) {
@@ -38,7 +46,6 @@ function MuehleDot(props) {
                 width: '100%',
                 height: '100%',
                 transform: (props.gameStone.isBlack || props.gameStone.isWhite) ? 'scale(1.75)' : 'scale(1.25)',
-                cursor: 'pointer',
                 backgroundColor: props.gameStone.isBlack ? 'black' : props.gameStone.isWhite ? 'white' : 'grey',
                 WebkitFilter: props.gameStone.isBlack ? 'black' : props.gameStone.isWhite ? 'white' : 'blur(20px) saturate(2)',
                 zIndex: 100,
@@ -53,7 +60,6 @@ function MuehleDot(props) {
                 width: '100%',
                 height: '100%', 
                 borderRadius:'100%',
-                cursor: 'pointer',
             });
         }
     }, [])
@@ -63,31 +69,52 @@ function MuehleDot(props) {
 
 
 
-    const dotClicked = (id) => {
-
-        // case 1 - dot already selected
-        if (SelectedDot === id) {
-            setSelectedDot(null);
-
-            // case 2 - select dot
-        } else {
-            setSelectedDot(id);
-        }
-    }
-
 
     return (
-
+        props.playerHasMuehle && props.currentPlayer === 1 && props.gameStone.isBlack
+        ?
+        // when it's a muehle stone of the opponent
         <div 
-       
             id={props.id} 
             className={`dot ${props.id}`} 
-            onClick={() => dotClicked(props.id)} 
+            key={props.id}
+            draggable
+            onDragStart={(e) => onDragStart(e)}>
+                <div  id={props.id}  style={{color:'red',...style}}>
+                
+                </div>
+        </div>
+        : props.playerHasMuehle && props.currentPlayer === 2 && props.gameStone.isWhite
+        ?         <div 
+            id={props.id} 
+            className={`dot ${props.id}`} 
+            key={props.id}
+            draggable
+            onDragStart={(e) => onDragStart(e)}>
+                <div  id={props.id}  style={{color:'red',...style}}>
+                
+                </div>
+        </div>
+        // when there is any muehle
+        : props.playerHasMuehle
+        ? <div 
+        id={props.id} 
+        className={`dot ${props.id}`} 
+        key={props.id}>
+            <div  id={props.id}  style={{color:'red',...style}}>
+            
+            </div>
+        </div>
+        :
+        // when there is no muehle
+        <div 
+            id={props.id} 
+            className={`dot ${props.id}`} 
             key={props.id}
             onDragOver={(e) => onDragOver(e)}
             onDrop={(e) => onDropped(e)}>
                 <div  id={props.id}  style={{color:'red',...style}}>
-                  
+                
                 </div>
         </div>
     )
