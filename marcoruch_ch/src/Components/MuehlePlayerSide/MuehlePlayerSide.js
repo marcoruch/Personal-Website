@@ -14,8 +14,6 @@ function MuehlePlayerSide(props) {
         setPlayerTwoStones,
         MuehleGameField,
         setMuehleGameField,
-        SelectedStone,
-        setSelectedStone,
         SelectedDot,
         setSelectedDot] = useContext(MuehlenContext);
 
@@ -29,57 +27,23 @@ function MuehlePlayerSide(props) {
 
     }
 
-    const SetStoneToDot = async () => {
-        console.log("setting stone " + SelectedStone + " to dot " + SelectedDot)
-
-        let oldRefGame = firebase.firestore().collection('muehleGames').doc(props.chosenGameId);
-
-        console.log(props.id);
-        let updatePackage = {};
-        if (props.id === 1) {
-            updatePackage = {
-                playerOneLeftStones: props.playerLeftStones-1,
-                currentPlayer : props.id === 1 ? 2 : 1,
-                updateDate : new Date(),
-            }
-        } else if (props.id === 2) {
-            updatePackage = {
-                playerTwoLeftStones : props.playerLeftStones-1,
-                currentPlayer : props.id === 1 ? 2 : 1,
-                updateDate : new Date(),
-            }
-        } else {
-            console.log("Fatal - no Player id", props);
-            return;
-        }
-
-        oldRefGame.update(updatePackage)
-            .then(async function () {
-                console.log("Game successfully updated!");
-            })
-            .catch(function (error) {
-                // The document probably doesn't exist.
-                console.error("Error updating Game: ", error);
-            });
-    }
-
     return (
         <div className="playerside" style={props.isPlaying ? normal : disabled}>
             <h3>Spieler: {props.playerName}</h3>
             <div className="stones">
 
-                {props.id === 1
+                {props.playerLeftStones >0 ?
+                    props.id === 1
                     ? PlayerOneStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item,index) => {
                         return <MuehleStone id={item.key} index={index} key={item.key} color={item.color}></MuehleStone>
                     })
                     : PlayerTwoStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item,index) => {
                         return <MuehleStone id={item.key} index={index} key={item.key} color={item.color}></MuehleStone>
                     })
+                    : <div><h5>Alle Steine wurden gesetzt</h5></div>
                 }
 
             </div>
-            <Button disabled={!SelectedStone || !SelectedDot || !props.isPlaying} onClick={() => SetStoneToDot()}>Stein setzen</Button>
-
         </div>
     )
 }

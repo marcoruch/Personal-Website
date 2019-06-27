@@ -12,8 +12,6 @@ function MuehleDot(props) {
         setPlayerTwoStones,
         MuehleGameField,
         setMuehleGameField,
-        SelectedStone,
-        setSelectedStone,
         SelectedDot,
         setSelectedDot,
         Dragged,
@@ -88,8 +86,8 @@ function MuehleDot(props) {
             key={props.id}
             onDragOver={(e) => onDragOver(e)}
             onDrop={(e) => onDropped(e)}>
-                <div  id={props.id}  style={style}>
-                   
+                <div  id={props.id}  style={{color:'red',...style}}>
+                  
                 </div>
         </div>
     )

@@ -7,7 +7,25 @@ import firebase from './../Firebase/Firebase';
 import MuehleGameField from './../MuehleGameField/MuehleGameField'
 import "./Muehle.scss";
         
-
+const muehlePossibilities = 
+[
+    [1,2,3],
+    [9,10,11],
+    [17,18,19],
+    [4,12,20],
+    [21,13,5],
+    [22,23,24],
+    [14,15,16],
+    [6,7,8],
+    [1,4,6],
+    [9,12,14],
+    [17,20,22],
+    [2,10,18],
+    [23,15,7],
+    [19,21,24],
+    [11,13,16],
+    [3,5,8]
+]
 
 
 function Muehle() {
@@ -34,6 +52,56 @@ function Muehle() {
             firebase.auth().signInAnonymously()
         }
     })
+
+    const arraysEqual = (a1,a2) => {
+        return JSON.stringify(a1)===JSON.stringify(a2);
+    }
+
+    const isNewMuehleInGameFieldForColor = (gameField, existingMuehlen, color) => {
+        const newExistingMuehlen = [];
+        let anyNewMuehle = false;
+        for (let possibilityIndex = 0; possibilityIndex < muehlePossibilities.length; possibilityIndex++) {
+            const possibility = muehlePossibilities[possibilityIndex];
+            
+            let isWhiteMuehle = true;
+            let isBlackMuehle = true;
+            for (let possibilityPartIndex = 0; possibilityPartIndex < possibility.length; possibilityPartIndex++) {
+                const possibilityPart = possibility[possibilityPartIndex];
+               
+                    if (isBlackMuehle) {
+                        if (!gameField.filter(item => item.associatedDotId === possibilityPart)[0].isBlack) {
+                            isBlackMuehle = false;
+                        }
+                    }
+                    
+                    if (isWhiteMuehle) {
+                        if (!gameField.filter(item => item.associatedDotId === possibilityPart)[0].isWhite) {
+                            isWhiteMuehle = false;
+                        }
+                    }
+            }
+
+            if ((isBlackMuehle && color === 'black') || (isWhiteMuehle && color === 'white')){
+                // if is not a new muhle
+                 if (existingMuehlen && existingMuehlen.filter(existingMuehle =>arraysEqual(existingMuehle.possibility, possibility)).length >0) {
+                    newExistingMuehlen.push(possibility);
+                } else {
+                    anyNewMuehle = true;
+                    newExistingMuehlen.push(possibility);
+                }
+              
+            }
+
+            if ((isBlackMuehle && color !== 'black') || (isWhiteMuehle && color !== 'white')){
+                    newExistingMuehlen.push(possibility);
+            }
+        }
+        if (anyNewMuehle){
+            return {isMuehle: true,  existingMuehlen: newExistingMuehlen.map((item, index) => { return {id: index, possibility: item}})};
+        } else {
+            return {isMuehle: false,  existingMuehlen: newExistingMuehlen.map((item, index) => { return {id: index, possibility: item}})};
+        }
+    }
 
 
     async function fetchGames() {
@@ -145,6 +213,8 @@ function Muehle() {
                 // when it updates for a first time, this it means that a user joined
                 // so if it got updated & wasn't deleted, try fetching with the new doc id
                 if (doc.exists) {
+                    
+                    setChosenGame(null);
                     setChosenGame(doc.data())
                     db.collection("muehleGames").doc(`${doc.data().id}`).onSnapshot((doc) => doc.exists ? (setChosenGame(null),setChosenGame(doc.data())) : console.log("Doesnt exist anymore"));
                 }
@@ -173,9 +243,14 @@ function Muehle() {
                         newField[key].isAvailable = false;
                         newField[key].isWhite = false;
                         newField[key].isBlack = true;
+                        
+                        let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'black');
+                        
                         oldRefGame.update({
+                            playerHasMuehle: muehlenCheckResult.isMuehle,
                             gameField: newField,
-                            currentPlayer: 1,
+                            currentPlayer: muehlenCheckResult.isMuehle ? 2 : 1,
+                            existingMuehlen: muehlenCheckResult.existingMuehlen,
                             playerTwoLeftStones: chosenGame.playerTwoLeftStones - 1,
                         }).then(async function () {
                             console.log("Game successfully updated!");
@@ -198,9 +273,12 @@ function Muehle() {
                         newField[key].isAvailable = false;
                         newField[key].isWhite = true;
                         newField[key].isBlack = false;
+                        let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'white');
                         oldRefGame.update({
+                            playerHasMuehle: muehlenCheckResult.isMuehle,
                             gameField: newField,
-                            currentPlayer: 2,
+                            currentPlayer: muehlenCheckResult.isMuehle ? 1 : 2,
+                            existingMuehlen: muehlenCheckResult.existingMuehlen,
                             playerOneLeftStones: chosenGame.playerOneLeftStones - 1,
                         }).then(async function () {
                             console.log("Game successfully updated!");

@@ -9,28 +9,12 @@ function MuehleStone(props) {
         setPlayerTwoStones,
         MuehleGameField,
         setMuehleGameField,
-        SelectedStone,
-        setSelectedStone,
         SelectedDot,
         setSelectedDot,
         Dragged, setDragged] = useContext(MuehlenContext);
 
-    const normalStyle =
-    {
-        backgroundColor: props.color
-    }
+    
 
-    const selectedStyle =
-    {
-        WebkitFilter: 'blur(5px) saturate(2)',
-        transform: 'scale(1.1)',
-        backgroundColor: props.color,
-    }
-
-
-    const setStone = () => {
-        setSelectedStone(SelectedStone === props.id ? null : props.id)
-    }
 
     const onDragStart = (e) => {
         setDragged(props);
@@ -41,9 +25,9 @@ function MuehleStone(props) {
         id={props.index}
         key={props.id}
         className="stone" 
-        draggable onClick={() => setStone()} 
+        draggable
         onDragStart={(e)=> onDragStart(e)}
-        style={SelectedStone === props.id ? selectedStyle : normalStyle}>
+        style={{backgroundColor: props.color}}>
  
         </div>
     )
