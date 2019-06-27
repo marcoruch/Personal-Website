@@ -9,12 +9,16 @@
     flex-wrap: wrap;
     padding: 25px;
     border-radius: 3px;
+    min-width:300px;
+    margin-bottom:50px;
 
     h3 {
         font-size:20px;
         font-weight: bold;
         width:80%;
         margin-bottom: 0px;
+        text-align: center;
+        word-wrap: break-word;
     }
 
     h4 {
@@ -22,6 +26,7 @@
         font-size:12px;
         margin-top: 10px;
         margin-bottom: 20px;
+        text-align: center;
         color: crimson;
     }
     .stones {

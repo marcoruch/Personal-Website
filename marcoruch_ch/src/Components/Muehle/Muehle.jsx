@@ -229,7 +229,35 @@ function Muehle() {
 
     }
 
+    const handleGameStoneRemovedFromField = (item) => {
+        let oldRefGame = firebase.firestore().collection('muehleGames').doc(chosenGame.id);
 
+        for (let index = 0; index < chosenGame.existingMuehlen.length; index++) {
+            const element = chosenGame.existingMuehlen[index];
+            if (element.possibility.includes(item.gameStone.associatedDotId)) {
+                return;
+            }
+        }
+        let newField = [...chosenGame.gameField];
+        for (let index = 0; index < newField.length; index++) {
+            if (newField[index].associatedDotId === item.gameStone.associatedDotId) {
+                newField[index].isWhite = false;
+                newField[index].isBlack = false;
+                newField[index].isAvailable = true;
+            }
+        }
+        oldRefGame.update({
+            playerHasMuehle: false,
+            gameField: newField,
+            currentPlayer: chosenGame.currentPlayer === 1 ? 2 : 1,
+        }).then(async function () {
+            console.log("Game successfully updated!");
+        })
+        .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error("Error updating Game: ", error);
+        });
+    }
 
     const handleGameStoneSetOnField = (item) => {
         let newField = [...chosenGame.gameField];
@@ -370,7 +398,7 @@ function Muehle() {
                                 <Form.Button onClick={() => createGameRoom()} >Neuen Spielraum erstellen</Form.Button>
 
                             </div>
-                            : <MuehleGameField handleGameStoneSetOnField={handleGameStoneSetOnField} user={user} userName={userName} chosenGame={chosenGame}></MuehleGameField>
+                            : <MuehleGameField handleGameStoneRemovedFromField={handleGameStoneRemovedFromField} handleGameStoneSetOnField={handleGameStoneSetOnField} user={user} userName={userName} chosenGame={chosenGame}></MuehleGameField>
             }
         </MuehlenProvider>
     )

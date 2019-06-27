@@ -16,12 +16,8 @@ function MuehleDot(props) {
 
     const [style, setStyle] = useState(null);
 
-    var img = new Image(); 
-    if (props.gameStone.isBlack)  {
-        img.src = BlackStone; 
-    } else {
-        img.src = WhiteStone; 
-    }
+    const dragImg = new Image(); 
+    dragImg.src =props.gameStone.isBlack ? BlackStone : WhiteStone; 
     
     const onDragOver = (e) => {
         e.stopPropagation();
@@ -34,8 +30,7 @@ function MuehleDot(props) {
     
 
     const onDragStart = (e) => {
-        console.log(e.target);
-        e.dataTransfer.setDragImage(img, 64,64);
+        e.dataTransfer.setDragImage(dragImg, 64,64);
         setDraggedOut(props);
     }
 

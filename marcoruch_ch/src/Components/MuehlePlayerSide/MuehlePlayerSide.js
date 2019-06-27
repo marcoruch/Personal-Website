@@ -7,15 +7,11 @@ import firebase from './../Firebase/Firebase';
 import "./MuehlePlayerSide.scss"
 function MuehlePlayerSide(props) {
 
-    const [
-        PlayerOneStones,
-        setPlayerOneStones,
-        PlayerTwoStones,
-        setPlayerTwoStones,
-        MuehleGameField,
-        setMuehleGameField,
-        SelectedDot,
-        setSelectedDot,
+    const [PlayerOneStones, setPlayerOneStones,
+        PlayerTwoStones, setPlayerTwoStones,
+        MuehleGameField, setMuehleGameField,
+        SelectedDot, setSelectedDot,
+        Dragged, setDragged,
         DraggedOut, setDraggedOut] = useContext(MuehlenContext);
 
 
@@ -24,13 +20,37 @@ function MuehlePlayerSide(props) {
     }
 
     const disabled = {
-        pointerEvents: 'none',
+        userSelect:'none'
 
     }
 
+    const playing ={
+        color: 'black',
+    }
+
+    const notPlaying = {
+        color: 'rgba(100,100,100,0.5)',
+    }
+
+    const onDragOver = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    const onDropped = (e) => {
+        handleGameStoneRemovedFromField(DraggedOut);
+    }
+
+    const handleGameStoneRemovedFromField  = (item) => {
+        props.handleGameStoneRemovedFromField(item);
+    }
+
     return (
-        <div className="playerside" style={props.isPlaying ? normal : disabled}>
-            <h3>Spieler: {props.playerName}</h3>
+        <div className="playerside" 
+            style={props.isPlaying ? normal : disabled}
+            onDragOver={(e) => onDragOver(e)}
+            onDrop={(e) => onDropped(e)}>
+            <h3 style={props.isPlaying ? playing : notPlaying}>Spieler: {props.playerName}</h3>
             <h4>{props.isPlaying && props.playerHasMuehle ? "Sie besitzen eine Mühle, klicken sie einen Gegnerischen Stein an, welchen Sie entfernen wollen." : ""}</h4>
             <div className="stones">
 
