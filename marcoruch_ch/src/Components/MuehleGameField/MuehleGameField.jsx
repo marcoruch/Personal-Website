@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import { MuehlenProvider, MuehlenContext } from "../MuehleContext/MuehleContext";
 import MuehlePlayerSide from "../MuehlePlayerSide/MuehlePlayerSide";
 import MuehleDot from "../MuehleDot/MuehleDot";
 
@@ -9,15 +8,6 @@ const dotsCenter = [17, 18, 19, 20, 21, 22, 23, 24]
 
 function MuehleGameField(props) {
 
-    const [
-        PlayerOneStones,
-        setPlayerOneStones,
-        PlayerTwoStones,
-        setPlayerTwoStones, 
-        MuehleGameField,
-        setMuehleGameField,
-        SelectedStone,
-        setSelectedStone] = useContext(MuehlenContext);
 
 
         const getGameStone = (i) => {
@@ -36,12 +26,11 @@ function MuehleGameField(props) {
             <MuehlePlayerSide id={1} isPlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne}  playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones}></MuehlePlayerSide>
             <div className="muehle-game">
                 <div className="outer-field">
-                    {dotsOuter.map(i =><MuehleDot  id={i} gameStone={getGameStone(i)}></MuehleDot> )}
-                  
+                    {dotsOuter.map(i =><MuehleDot handleGameStoneSetOnField={props.handleGameStoneSetOnField}  id={i} gameStone={getGameStone(i)}></MuehleDot> )}
                     <div className="middle-field">
-                        {dotsMiddle.map(i =><MuehleDot id={i} gameStone={getGameStone(i)}></MuehleDot> )}
+                        {dotsMiddle.map(i =><MuehleDot handleGameStoneSetOnField={props.handleGameStoneSetOnField} id={i} gameStone={getGameStone(i)}></MuehleDot> )}
                         <div className="center-field">
-                            {dotsCenter.map(i =><MuehleDot id={i} gameStone={getGameStone(i)}></MuehleDot> )} 
+                            {dotsCenter.map(i =><MuehleDot handleGameStoneSetOnField={props.handleGameStoneSetOnField} id={i} gameStone={getGameStone(i)}></MuehleDot> )} 
                         </div>
                     </div>
                 </div>

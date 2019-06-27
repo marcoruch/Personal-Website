@@ -49,15 +49,14 @@ function Muehle() {
         });
     }
 
-    const rejoinGame = async (gameId) => {
-        var currentGame = null;
+    const rejoinGame = (gameId) => {
 
-        let refGame = firebase.firestore().collection('muehleGames').doc(gameId);
+        const refGame = firebase.firestore().collection('muehleGames').doc(gameId);
 
          refGame.onSnapshot(function(doc) {
-            currentGame= doc.data(); 
-            console.log("Current data: ", currentGame);
-            setChosenGame(currentGame);
+            setChosenGame(null);
+            console.log("Current data: ", doc.data());
+            setChosenGame(doc.data());
         });
         
         
@@ -88,6 +87,7 @@ function Muehle() {
 
             firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).onSnapshot(function(doc) {
                 currentGame = doc.data();
+                setChosenGame(null);
                 setChosenGame(currentGame);
             });
             
@@ -146,7 +146,7 @@ function Muehle() {
                 // so if it got updated & wasn't deleted, try fetching with the new doc id
                 if (doc.exists) {
                     setChosenGame(doc.data())
-                    db.collection("muehleGames").doc(`${doc.data().id}`).onSnapshot((doc) => doc.exists ? setChosenGame(doc.data()) : console.log("Doesnt exist anymore"));
+                    db.collection("muehleGames").doc(`${doc.data().id}`).onSnapshot((doc) => doc.exists ? (setChosenGame(null),setChosenGame(doc.data())) : console.log("Doesnt exist anymore"));
                 }
               
             });
@@ -156,6 +156,68 @@ function Muehle() {
             console.log("Couldnt add Document?");
             setSearchingGame(false);
         })
+
+    }
+
+
+
+    const handleGameStoneSetOnField = (item) => {
+        let newField = [...chosenGame.gameField];
+
+        let oldRefGame = firebase.firestore().collection('muehleGames').doc(chosenGame.id);
+        if (item.draggedFrom.color === "black" && chosenGame.currentPlayer === 2) {
+            for (const key in newField) {
+                if (newField.hasOwnProperty(key)) {
+                    const element = newField[key];
+                    if (element.isDot && element.associatedDotId === item.dragTo && element.isAvailable) {
+                        newField[key].isAvailable = false;
+                        newField[key].isWhite = false;
+                        newField[key].isBlack = true;
+                        oldRefGame.update({
+                            gameField: newField,
+                            currentPlayer: 1,
+                            playerTwoLeftStones: chosenGame.playerTwoLeftStones - 1,
+                        }).then(async function () {
+                            console.log("Game successfully updated!");
+                        })
+                        .catch(function (error) {
+                            // The document probably doesn't exist.
+                            console.error("Error updating Game: ", error);
+                        });
+                        return;
+                    }
+                }
+            }
+
+        } else if (item.draggedFrom.color === "white" && chosenGame.currentPlayer === 1) {
+
+            for (const key in newField) {
+                if (newField.hasOwnProperty(key)) {
+                    const element = newField[key];
+                    if (element.isDot && (element.associatedDotId === item.dragTo) && element.isAvailable) {
+                        newField[key].isAvailable = false;
+                        newField[key].isWhite = true;
+                        newField[key].isBlack = false;
+                        oldRefGame.update({
+                            gameField: newField,
+                            currentPlayer: 2,
+                            playerOneLeftStones: chosenGame.playerOneLeftStones - 1,
+                        }).then(async function () {
+                            console.log("Game successfully updated!");
+                        })
+                        .catch(function (error) {
+                            // The document probably doesn't exist.
+                            console.error("Error updating Game: ", error);
+                        });
+                        return;
+                    }
+                }
+            }
+        } else {
+            console.log("Error, player not recognized...");
+            return;
+        }
+
 
     }
 
@@ -230,7 +292,7 @@ function Muehle() {
                                 <Form.Button onClick={() => createGameRoom()} >Neuen Spielraum erstellen</Form.Button>
 
                             </div>
-                            : <MuehleGameField user={user} userName={userName} chosenGame={chosenGame}></MuehleGameField>
+                            : <MuehleGameField handleGameStoneSetOnField={handleGameStoneSetOnField} user={user} userName={userName} chosenGame={chosenGame}></MuehleGameField>
             }
         </MuehlenProvider>
     )

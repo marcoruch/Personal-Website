@@ -12,7 +12,8 @@ function MuehleStone(props) {
         SelectedStone,
         setSelectedStone,
         SelectedDot,
-         setSelectedDot] = useContext(MuehlenContext);
+        setSelectedDot,
+        Dragged, setDragged] = useContext(MuehlenContext);
 
     const normalStyle =
     {
@@ -31,9 +32,19 @@ function MuehleStone(props) {
         setSelectedStone(SelectedStone === props.id ? null : props.id)
     }
 
-    return (
-        <div className="stone" onClick={() => setStone()} style={SelectedStone === props.id ? selectedStyle : normalStyle}>
+    const onDragStart = (e) => {
+        setDragged(props);
+    }
 
+    return (
+        <div 
+        id={props.index}
+        key={props.id}
+        className="stone" 
+        draggable onClick={() => setStone()} 
+        onDragStart={(e)=> onDragStart(e)}
+        style={SelectedStone === props.id ? selectedStyle : normalStyle}>
+ 
         </div>
     )
 }

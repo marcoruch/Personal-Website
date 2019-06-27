@@ -69,11 +69,11 @@ function MuehlePlayerSide(props) {
             <div className="stones">
 
                 {props.id === 1
-                    ? PlayerOneStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item) => {
-                        return <MuehleStone id={item.key} key={item.key} color={item.color}></MuehleStone>
+                    ? PlayerOneStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item,index) => {
+                        return <MuehleStone id={item.key} index={index} key={item.key} color={item.color}></MuehleStone>
                     })
-                    : PlayerTwoStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item) => {
-                        return <MuehleStone id={item.key} key={item.key} color={item.color}></MuehleStone>
+                    : PlayerTwoStones.slice().splice(-(9 - props.playerLeftStones, props.playerLeftStones)).map((item,index) => {
+                        return <MuehleStone id={item.key} index={index} key={item.key} color={item.color}></MuehleStone>
                     })
                 }
 
