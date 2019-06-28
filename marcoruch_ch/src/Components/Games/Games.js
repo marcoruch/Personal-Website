@@ -36,7 +36,7 @@ function Games() {
 
                 <div className="card">
                     <header className="card-header" style={{ backgroundImage: `url(${game.gameImgUrl})` }}>
-                        <h4 className="card-header--title">{game.gameName}</h4>
+                        <h4 className="card-header--title">{game.gameNameShort}</h4>
                     </header>
 
                     <div className="card-body">

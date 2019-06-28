@@ -58,14 +58,9 @@ function MuehleDot(props) {
             });
         }
     }, [])
-
-
-
-
-
-
-
+    
     return (
+  
         props.playerHasMuehle && props.currentPlayer === 1 && props.gameStone.isBlack
         ?
         // when it's a muehle stone of the opponent

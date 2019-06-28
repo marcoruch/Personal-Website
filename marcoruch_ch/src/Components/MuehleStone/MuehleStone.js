@@ -11,8 +11,6 @@ function MuehleStone(props) {
         DraggedOut, setDraggedOut] = useContext(MuehlenContext);
 
 
-
-
     const onDragStart = (e) => {
         setDragged(props);
     }

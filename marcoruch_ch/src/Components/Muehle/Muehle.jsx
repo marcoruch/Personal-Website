@@ -53,10 +53,6 @@ function Muehle() {
         }
     })
 
-    const arraysEqual = (a1,a2) => {
-        return JSON.stringify(a1)===JSON.stringify(a2);
-    }
-
     const isNewMuehleInGameFieldForColor = (gameField, existingMuehlen, color) => {
         const newExistingMuehlen = [];
         let anyNewMuehle = false;
@@ -83,7 +79,7 @@ function Muehle() {
 
             if ((isBlackMuehle && color === 'black') || (isWhiteMuehle && color === 'white')){
                 // if is not a new muhle
-                 if (existingMuehlen && existingMuehlen.filter(existingMuehle =>arraysEqual(existingMuehle.possibility, possibility)).length >0) {
+                 if (existingMuehlen && existingMuehlen.filter(existingMuehle =>JSON.stringify(existingMuehle.possibility)===JSON.stringify(possibility)).length >0) {
                     newExistingMuehlen.push(possibility);
                 } else {
                     anyNewMuehle = true;
@@ -103,6 +99,27 @@ function Muehle() {
         }
     }
 
+    const isThereRemovableStone = (color, field, existingMuehlen) => {
+        if (!existingMuehlen) {
+            return true;
+        } 
+        
+        const muehlePoints = [];
+        for (let muehlePossibilitiesIndex = 0; muehlePossibilitiesIndex < existingMuehlen.length; muehlePossibilitiesIndex++) {
+            muehlePoints.push(existingMuehlen[muehlePossibilitiesIndex].possibility[0]);
+            muehlePoints.push(existingMuehlen[muehlePossibilitiesIndex].possibility[1]);
+            muehlePoints.push(existingMuehlen[muehlePossibilitiesIndex].possibility[2]);
+        }
+
+        const colorStones = field.filter(stone => (color === "black" && stone.isBlack) || (color === "white" && stone.isWhite)).map(stone => stone.associatedDotId);
+
+        for (let stoneIndex = 0; stoneIndex < colorStones.length; stoneIndex++) {
+            if  (!muehlePoints.includes(colorStones[stoneIndex])){
+                return true;
+            }
+        }
+        return false;
+    }
 
     async function fetchGames() {
         firebase.firestore().collection('muehleGames').onSnapshot(function(querySnapshot) {
@@ -273,7 +290,11 @@ function Muehle() {
                         newField[key].isBlack = true;
                         
                         let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'black');
-                        
+                        if (muehlenCheckResult.isMuehle){
+                            if (!isThereRemovableStone('white', newField, chosenGame.existingMuehlen)) {
+                                muehlenCheckResult.isMuehle = false;
+                            }
+                        }
                         oldRefGame.update({
                             playerHasMuehle: muehlenCheckResult.isMuehle,
                             gameField: newField,
@@ -302,6 +323,11 @@ function Muehle() {
                         newField[key].isWhite = true;
                         newField[key].isBlack = false;
                         let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'white');
+                        if (muehlenCheckResult.isMuehle){
+                            if (!isThereRemovableStone('black', newField, chosenGame.existingMuehlen)) {
+                                muehlenCheckResult.isMuehle = false;
+                            }
+                        }
                         oldRefGame.update({
                             playerHasMuehle: muehlenCheckResult.isMuehle,
                             gameField: newField,
