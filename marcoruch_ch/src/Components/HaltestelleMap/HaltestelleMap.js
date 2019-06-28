@@ -32,9 +32,8 @@ function HaltestelleMap() {
     });
 
     const handleClick = (e) => {
-
-        let x = e.clientX - e.target.offsetLeft;
-        let y = e.clientY - e.target.offsetTop;
+        let x = e.pageX - e.target.offsetLeft;
+        let y = e.pageY - e.target.offsetTop;
 
         if (haltestellen.length === 0 || haltestellen.filter(haltestelle => haltestelle.winner).length > 0) {
             setHaltestellen([{ x: x, y: y }]);
