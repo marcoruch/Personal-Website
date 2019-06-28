@@ -12,27 +12,48 @@ function MuehleDot(props) {
         MuehleGameField, setMuehleGameField,
         SelectedDot, setSelectedDot,
         Dragged, setDragged,
-        DraggedOut, setDraggedOut] = useContext(MuehlenContext);
+        DraggedOut, setDraggedOut,
+        DraggedInField, setDraggedInField] = useContext(MuehlenContext);
 
     const [style, setStyle] = useState(null);
 
     const dragImg = new Image(); 
     dragImg.src =props.gameStone.isBlack ? BlackStone : WhiteStone; 
     
-    const onDragOver = (e) => {
+
+    // # NOT ALL SET
+    const onDragStartNotAllSet = (e) => {
+        e.dataTransfer.setDragImage(dragImg, 64,64);
+        setDraggedOut(props);
+    }
+
+    const onDragOverNotAllSet = (e) => {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    const onDropped = (e) => {
+    const onDroppedNotAllSet = (e) => {
         props.handleGameStoneSetOnField({ dragTo: parseInt(e.target.id), draggedFrom: Dragged})
     }
-    
+    // #==================#
 
-    const onDragStart = (e) => {
+    // # ALL SET
+    const onDragStartAllSet = (e) => {
         e.dataTransfer.setDragImage(dragImg, 64,64);
-        setDraggedOut(props);
+        setDraggedInField(props);
     }
+    
+    const onDragOverAllSet = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    const onDroppedAllSet = (e) => {
+        props.handleGameStoneMovedOnField({ dragTo: parseInt(e.target.id), draggedFrom: DraggedInField})
+    }
+    // #==================#
+
+
 
     useEffect(() => {
         if (SelectedDot === props.id) {
@@ -61,7 +82,53 @@ function MuehleDot(props) {
     
     return (
   
-        props.playerHasMuehle && props.currentPlayer === 1 && props.gameStone.isBlack
+        props.canMove 
+        // # WHEN ALL STONES ARE SET
+        ? props.currentPlayer === 1 && props.gameStone.isWhite && props.isWhitePlaying
+        ?
+        <div 
+            id={props.id} 
+            className={`dot ${props.id}`} 
+            key={props.id}
+            draggable
+            onDragStart={(e) => onDragStartAllSet(e)}>
+                <div  id={props.id}  style={{cursor:'pointer',...style}}>
+                    
+                </div>
+        </div>
+        : props.currentPlayer === 2 && props.gameStone.isBlack && props.isBlackPlaying
+        ? <div 
+            id={props.id} 
+            className={`dot ${props.id}`} 
+            key={props.id}
+            draggable
+            onDragStart={(e) => onDragStartAllSet(e)}>
+                <div  id={props.id}  style={{cursor:'pointer',...style}}>
+                
+                </div>
+        </div>
+        // when there is any muehle
+        : !props.gameStone.isBlack && !props.gameStone.isWhite ?
+            <div 
+            id={props.id} 
+            className={`dot ${props.id}`} 
+            key={props.id}
+            onDragOver={(e) => onDragOverAllSet(e)}
+            onDrop={(e) => onDroppedAllSet(e)}>
+                <div  id={props.id}  style={style}>
+                
+                </div>
+        </div> :
+        <div 
+        id={props.id} 
+        className={`dot ${props.id}`} 
+        key={props.id}>
+            <div  id={props.id}  style={style}>
+            
+            </div>
+    </div>
+        // # WHEN NOT ALL STONES ARE SET
+        :  props.playerHasMuehle && props.currentPlayer === 1 && props.gameStone.isBlack
         ?
         // when it's a muehle stone of the opponent
         <div 
@@ -69,8 +136,8 @@ function MuehleDot(props) {
             className={`dot ${props.id}`} 
             key={props.id}
             draggable
-            onDragStart={(e) => onDragStart(e)}>
-                <div  id={props.id}  style={{color:'red',...style}}>
+            onDragStart={(e) => onDragStartNotAllSet(e)}>
+                <div  id={props.id}  style={style}>
                 
                 </div>
         </div>
@@ -80,8 +147,8 @@ function MuehleDot(props) {
             className={`dot ${props.id}`} 
             key={props.id}
             draggable
-            onDragStart={(e) => onDragStart(e)}>
-                <div  id={props.id}  style={{color:'red',...style}}>
+            onDragStart={(e) => onDragStartNotAllSet(e)}>
+                <div  id={props.id}  style={style}>
                 
                 </div>
         </div>
@@ -91,7 +158,7 @@ function MuehleDot(props) {
         id={props.id} 
         className={`dot ${props.id}`} 
         key={props.id}>
-            <div  id={props.id}  style={{color:'red',...style}}>
+            <div  id={props.id}  style={style}>
             
             </div>
         </div>
@@ -101,9 +168,9 @@ function MuehleDot(props) {
             id={props.id} 
             className={`dot ${props.id}`} 
             key={props.id}
-            onDragOver={(e) => onDragOver(e)}
-            onDrop={(e) => onDropped(e)}>
-                <div  id={props.id}  style={{color:'red',...style}}>
+            onDragOver={(e) => onDragOverNotAllSet(e)}
+            onDrop={(e) => onDroppedNotAllSet(e)}>
+                <div  id={props.id}  style={style}>
                 
                 </div>
         </div>

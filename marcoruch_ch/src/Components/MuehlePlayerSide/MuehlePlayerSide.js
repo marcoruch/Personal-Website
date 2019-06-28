@@ -58,7 +58,9 @@ function MuehlePlayerSide(props) {
             onDragOver={(e) => onDragOver(e)}
             onDrop={(e) => onDropped(e)}>
             <h3 style={{...disabled,...(props.isPlaying ? playing : notPlaying)}}>Spieler: {props.playerName}</h3>
+            {props.isPlaying ? <h4>Sie sind am Zug.</h4> : <React.Fragment></React.Fragment>}
             <h4 style={disabled}>{props.isPlaying && props.playerHasMuehle ? "Sie besitzen eine Mühle, klicken sie einen Gegnerischen Stein an, welchen Sie entfernen wollen." : ""}</h4>
+            
             <div className="stones" style={props.isPlaying ? {} : {pointerEvents:'none',...disabled}}>
 
                 {props.playerLeftStones > 0 ?

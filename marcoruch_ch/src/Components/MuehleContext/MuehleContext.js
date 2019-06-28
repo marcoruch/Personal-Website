@@ -17,6 +17,7 @@ export const MuehlenProvider = props => {
     const [SelectedDot, setSelectedDot] = useState(null);
     const [Dragged, setDragged] = useState(null);
     const [DraggedOut, setDraggedOut] = useState(null);
+    const [DraggedInField, setDraggedInField] = useState(null);
 
     return (
         <MuehlenContext.Provider value={
@@ -26,7 +27,8 @@ export const MuehlenProvider = props => {
                 MuehleGameField, setMuehleGameField,
                 SelectedDot, setSelectedDot,
                 Dragged, setDragged,
-                DraggedOut, setDraggedOut
+                DraggedOut, setDraggedOut,
+                DraggedInField, setDraggedInField
             ]}>
             {props.children}
         </MuehlenContext.Provider>
