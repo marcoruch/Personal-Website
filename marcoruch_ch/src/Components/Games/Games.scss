@@ -46,6 +46,8 @@
     padding: 15px;
     background-color:#fff;
     width:100%;
+    height:350px;
+    position: relative;
 
     .btn {
         border: none;
@@ -53,7 +55,9 @@
         font-family: inherit;
         background-color: transparent;
         display: block;
-
+        position: absolute;
+        bottom:30px;
+        left:15px;
         color: #b4a892 !important;
         font-size: 20px;
         transition: .25s;
@@ -85,7 +89,7 @@
   .designer-link {
     color:#fff;
     text-align:center;
-    fon-size: 12px;
+    font-size: 12px;
     text-decoration: none;
     display:block;
   }
