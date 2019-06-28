@@ -60,19 +60,19 @@ function Header() {
                     <Link to="/">Home</Link>
                 </li>
             <li>
-                 <Link to="/projects">Projects</Link>
+                 <Link to="/projects">Projekte</Link>
                 </li>
                 <li>
-                    <Link to="/skills">Skills</Link>
+                    <Link to="/skills">Fähigkeiten</Link>
                 </li>
                 <li>
-                    <Link to="/games">Games</Link>
+                    <Link to="/games">Spiele & Aufgaben</Link>
                 </li>
                 <li>
                     <Link to="/blog">Blog</Link>
                 </li>
                 <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/contact">Kontakt</Link>
                 </li>
                 <li style={login}>
                     {user ? <UserControlPanelNav /> : <LoginNav />}
@@ -98,19 +98,19 @@ function Header() {
                     <Link to="/" onClick={() => setHamburger(!hamburger)}>Home</Link>
                 </li>
             <li>
-                 <Link to="/projects" onClick={() => setHamburger(!hamburger)}>Projects</Link>
+                 <Link to="/projects" onClick={() => setHamburger(!hamburger)}>Projekte</Link>
                 </li>
                 <li>
-                    <Link to="/skills" onClick={() => setHamburger(!hamburger)}>Skills</Link>
+                    <Link to="/skills" onClick={() => setHamburger(!hamburger)}>Fähigkeiten</Link>
                 </li>
                 <li>
-                    <Link to="/games" onClick={() => setHamburger(!hamburger)}>Games</Link>
+                    <Link to="/games" onClick={() => setHamburger(!hamburger)}>Spiele & Aufgaben</Link>
                 </li>
                 <li>
                     <Link to="/blog" onClick={() => setHamburger(!hamburger)}>Blog</Link>
                 </li>
                 <li>
-                    <Link to="/contact" onClick={() => setHamburger(!hamburger)}>Contact</Link>
+                    <Link to="/contact" onClick={() => setHamburger(!hamburger)}>Kontakt</Link>
                 </li>
                 <li >
                     {user ? <UserControlPanelNav /> : <LoginNav />}

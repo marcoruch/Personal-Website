@@ -46,7 +46,7 @@ function Games() {
                     </header>
 
                     <div className="card-body">
-                        <p className="date">{game.gameUpdated.toDate().toLocaleDateString() + "-" + game.gameUpdated.toDate().toLocaleTimeString()}</p>
+                        <p className="date">{game.gameUpdated.toDate().toLocaleDateString()}</p>
 
                         <h2>{game.gameName}</h2>
 

@@ -9,14 +9,15 @@
     min-width: 350px;
     flex: 1 0 25%;
     /* explanation below */
-
     .content {
-
         min-height: 300px;
-
         .body {
             animation: flip-back 1s forwards;
             padding: 15px;
+
+            .header-text {
+                text-align: left !important;
+            }
         }
 
         .meta {}
