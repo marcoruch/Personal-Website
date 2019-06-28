@@ -127,7 +127,6 @@ function Muehle() {
                     querySnapshot.forEach(function(doc) {
                     fetchedGames.push(doc.data());
             });
-            console.log(fetchedGames);
             setGames(fetchedGames);
         }, function(error) {
             console.log("couldn't fetch games", error);
@@ -140,7 +139,6 @@ function Muehle() {
 
          refGame.onSnapshot(function(doc) {
             setChosenGame(null);
-            console.log("Current data: ", doc.data());
             setChosenGame(doc.data());
         });
         
