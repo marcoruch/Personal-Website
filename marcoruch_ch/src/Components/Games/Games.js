@@ -31,7 +31,13 @@ function Games() {
         ? <div className="skillsloader"><Loader active inline='centered' /></div>
         : <div className="games">
 
+            <div className="header">
 
+            <h1>Minispiele & gelöste Aufgaben</h1>
+
+            </div>
+
+            <div className="games-holder">
             {games.map((game, index) =>
 
                 <div className="card">
@@ -57,6 +63,7 @@ function Games() {
                 </div>
             )}
 
+            </div>
         </div>
     );
 }

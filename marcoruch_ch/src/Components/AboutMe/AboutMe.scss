@@ -4,7 +4,7 @@
 
     #hero-top {
 
-        height: 70vh;
+        min-height: 70vh;
         background-color: #837A7B;
         display: flex;
         flex-direction: column;
@@ -14,7 +14,6 @@
 
         #hero-image-section {
             margin-bottom: 50px;
-
             img {
                 max-width: 30vw;
                 width:300px;
@@ -28,7 +27,23 @@
             align-content: center;
             align-items: center;
 
+            .icons-holder {
+                margin-top:25px;
+                display:flex;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
 
+                i {
+                    cursor: pointer;
+                }
+            }
+            img {
+                background-color:rgba(85, 85, 85, 0.5);
+                border-radius:25px;
+                padding:20px;
+            }
             >h1 {
                 text-align: center;
                 color: #b4a892 !important;

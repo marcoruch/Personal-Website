@@ -4,6 +4,7 @@ import { Responsive, Icon, Image } from 'semantic-ui-react'
 import Wave from 'react-wavify';
 import ProgrammerLogo from './../../Content/img/programmer.jpg';
 
+import GithubChart from '../GitHubChart/GithubChart'
 import { Link } from "react-router-dom";
 import './AboutMe.scss';
 
@@ -12,8 +13,8 @@ import './AboutMe.scss';
 function AboutMe() {
   const [icons, setIcons] = useState(
     [
-      { icon: "linkedin", url: "www.google.ch" },
-      { icon: "github", url: "www.google.ch" },
+      { icon: "linkedin", url: "https://www.linkedin.com/in/marco-ruch-60b437153/" },
+      { icon: "github", url: "https://github.com/marcoruch" },
     ]);
 
   const [bubbles, setBubbles] = useState(
@@ -52,7 +53,9 @@ function AboutMe() {
             </div>
             <div id="hero-text-section"><h1>Marco Ruch</h1>
               <h2>Quality over Quantity</h2>
-              {icons.map(item => <Icon key={item.icon} name={item.icon} size='small' href={item.url} />)}
+            <GithubChart></GithubChart>
+            <div className="icons-holder">
+              {icons.map(item => <Icon key={item.icon} name={item.icon} size='large'  onClick={() => {  window.open(item.url, '_blank'  )}}   />)}</div>
             </div>
           </div>
         </Responsive>
@@ -68,7 +71,9 @@ function AboutMe() {
             </div>
             <div id="hero-text-section"> <h1>Marco Ruch</h1>
               <h2>Quality over Quantity</h2>
-              {icons.map(item => <Icon key={item.icon} name={item.icon} href={item.url} />)}
+            <GithubChart></GithubChart>
+            <div className="icons-holder">
+              {icons.map(item => <Icon key={item.icon} name={item.icon}  size='large' onClick={() => {  window.open(item.url, '_blank'  )}}  />)}</div>
             </div>
           </div>
         </Responsive>
@@ -84,7 +89,9 @@ function AboutMe() {
             </div>
             <div id="hero-text-section"> <h1>Marco Ruch</h1>
               <h2>Quality over Quantity</h2>
-              {icons.map(item => <Icon key={item.icon} name={item.icon} size='large' href={item.url} />)}
+            <GithubChart></GithubChart>
+            <div className="icons-holder">
+              {icons.map(item => <Icon key={item.icon} name={item.icon} size='large' onClick={() => {  window.open(item.url, '_blank'  )}}  />)}</div>
             </div>
           </div>
         </Responsive>
@@ -100,7 +107,9 @@ function AboutMe() {
             </div>
             <div id="hero-text-section"> <h1>Marco Ruch</h1>
               <h2>Quality over Quantity</h2>
-              {icons.map(item => <Icon key={item.icon} name={item.icon} size='big' href={item.url} />)}
+              <GithubChart></GithubChart>
+              <div className="icons-holder">
+              {icons.map(item => <Icon key={item.icon} name={item.icon} size='big' onClick={() => {  window.open(item.url, '_blank'  )}}  />)}</div>
               {bubbles.map(bubble => <Link to={`/${bubble.link}`} key={bubble.key} className={"hero-bubble"} style={bubbleStyle(bubble)} >{bubble.text}</Link>)}
             </div>
           </div>

@@ -48,6 +48,7 @@ function GetHome() {
 
     <Projects></Projects>
     <Skills></Skills>
+    <Games></Games>
     <Contact></Contact>
   </React.Fragment>;
 }

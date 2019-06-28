@@ -36,12 +36,13 @@ class Projects extends Component {
         return !this.state.projects
             ? <Loader active inline='centered' />
             :
-
             <div className="projects">
+                
+
                 <div className="header">
 
                     <h1>Bisherige Arbeiten</h1>
-
+           
                 </div>
                 <div className="projects-holder">
                 <div className="more-projects">
