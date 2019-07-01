@@ -56,10 +56,12 @@ function AboutMe() {
             <div id="hero-text-section"> <h1 className="rubberBand">Marco Ruch</h1>
               <h2 className="rubberBand">shape your own future</h2>
               <GithubChart></GithubChart>
+              
               <div className="icons-holder">
               {icons.map(item => <Icon key={item.icon} name={item.icon} size='big' onClick={() => {  window.open(item.url, '_blank'  )}}  />)}</div>
             </div>
           </div>
+
         </Responsive>
         <div id="hero-bot">
           <Wave id="hero-wave" fill='#212121'

@@ -50,9 +50,10 @@ class Projects extends Component {
            
                 </div>
                 <div className="projects-holder">
-                <div className="more-projects">
+               
+               {!this.props.loadAll ?  <div className="more-projects">
                         <Link className="btn" to="/projects">Alle Projekte einsehen</Link>
-                    </div>
+                    </div> : <React.Fragment></React.Fragment> }
                     {
                         this.state.projects.map((project) =>
                             <Project id={"Project_" + project.key} project={project}> </Project>
