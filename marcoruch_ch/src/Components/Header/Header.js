@@ -72,6 +72,9 @@ function Header() {
                     <Link to="/blog">Blog</Link>
                 </li>
                 <li>
+                    <Link to="/curriculumvitae">CV</Link>
+                </li>
+                <li>
                     <Link to="/contact">Kontakt</Link>
                 </li>
                 <li style={login}>
@@ -105,6 +108,9 @@ function Header() {
                 </li>
                 <li>
                     <Link to="/games" onClick={() => setHamburger(!hamburger)}>Spiele & Aufgaben</Link>
+                </li>
+                <li>
+                    <Link to="/curriculumvitae" onClick={() => setHamburger(!hamburger)}>CV</Link>
                 </li>
                 <li>
                     <Link to="/blog" onClick={() => setHamburger(!hamburger)}>Blog</Link>
