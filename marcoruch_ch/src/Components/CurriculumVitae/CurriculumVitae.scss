@@ -1,0 +1,43 @@
+
+.curriculumVitae {
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    
+    padding-left: 400px;
+    padding-right: 400px;
+    .header{
+        display:flex;
+        flex-direction: row;
+        height: 200px;
+        img {
+            width: auto;
+            height: 80%;
+            border-radius: 50%;
+            
+        }
+
+        .meta {
+                display:flex;
+                flex-direction: column;
+                justify-content:center;
+                align-content: center;
+                align-items: flex-start;
+                padding-left:50px;
+            h1 {
+
+                color: #b4a892;
+            }
+
+            h2 {
+                color:grey;
+            }
+
+            h3{
+                color: whitesmoke;
+            }
+        }
+
+        width:100%;
+        border-bottom: 3px solid #b4a892;
+    }
+}

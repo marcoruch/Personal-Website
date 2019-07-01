@@ -14,6 +14,7 @@ import BlogCardHolder from "../BlogCardHolder/BlogCardHolder";
 import OverviewBlog from "../OverviewBlog/OverviewBlog";
 import EditBlog from "../EditBlog/EditBlog";
 import Haltestelle from "../Haltestelle/Haltestelle";
+import CurriculumVitae from "../CurriculumVitae/CurriculumVitae";
 import Muehle from "../Muehle/Muehle";
 import Games from "../Games/Games";
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/games" component={GetGames} />
         <Route path="/haltestelle" component={GetHaltestelle} />
         <Route path="/muehle" component={GetMuehle} />
+        <Route path="/curriculumvitae" component={GetCV} />
         <Footer />
               </div>
     </Router>
@@ -56,6 +58,13 @@ function GetHome() {
 function GetAboutMe() {
   return <React.Fragment>
     <AboutMe></AboutMe>
+  </React.Fragment>;
+}
+
+
+function GetCV() {
+  return <React.Fragment>
+    <CurriculumVitae></CurriculumVitae>
   </React.Fragment>;
 }
 function GetProjects() {
