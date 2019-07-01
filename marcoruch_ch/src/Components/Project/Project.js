@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Button, Card, Image } from 'semantic-ui-react'
 
 
 import "./Project.scss";

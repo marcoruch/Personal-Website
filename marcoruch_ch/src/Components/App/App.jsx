@@ -46,7 +46,7 @@ function GetHome() {
 
 <AboutMe></AboutMe>
 
-    <Projects></Projects>
+    <Projects loadAll={false} loadAmount={5}></Projects>
     <Skills></Skills>
     <Games></Games>
     <Contact></Contact>
@@ -61,7 +61,7 @@ function GetAboutMe() {
 function GetProjects() {
 
   return <React.Fragment>
-    <Projects></Projects>
+    <Projects loadAll={true}></Projects>
   </React.Fragment>;
 }
 function GetSkills() {

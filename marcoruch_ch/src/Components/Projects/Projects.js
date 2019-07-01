@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Project from './../Project/Project';
 import firebase from './../Firebase/Firebase';
-import { Loader, Grid, Button, Icon } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 
 import "./Projects.scss";
@@ -14,20 +14,25 @@ class Projects extends Component {
         this.state = {
             loading: true,
             projects: [],
-            currentProject: null,
         };
     }
 
 
     async componentWillMount() {
         let projectsCollection = firebase.firestore().collection('projects');
-        let loadedProjects = await projectsCollection.get().then(snapshot => snapshot.docs.slice(0, 5).map(doc => doc.data()));
+        let loadedProjects = [];
+
+        if (this.props.loadAll) {
+             loadedProjects = await projectsCollection.get().then(snapshot => snapshot.docs.map(doc => doc.data()));
+        } else {
+             loadedProjects = await projectsCollection.get().then(snapshot => snapshot.docs.slice(0, this.props.loadAmount).map(doc => doc.data()));
+        }
 
         for (let i = 0; i < loadedProjects.length; i++) {
             loadedProjects[i].key = i;
         }
 
-        this.setState({ projects: loadedProjects, loading: false, currentProject: Math.ceil(loadedProjects.length / 2) });
+        this.setState({ projects: loadedProjects, loading: false });
     }
 
 
