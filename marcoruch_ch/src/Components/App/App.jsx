@@ -22,7 +22,6 @@ function App() {
   return (
 
     <Router>
-      <div>
         <Header />
         <Route exact path="/" component={GetHome} />
         <Route path="/aboutme" component={GetAboutMe} />
@@ -36,8 +35,7 @@ function App() {
         <Route path="/haltestelle" component={GetHaltestelle} />
         <Route path="/muehle" component={GetMuehle} />
         <Route path="/curriculumvitae" component={GetCV} />
-        <Footer />
-              </div>
+     
     </Router>
   );
 }
@@ -63,15 +61,11 @@ function GetAboutMe() {
 
 
 function GetCV() {
-  return <React.Fragment>
-    <CurriculumVitae></CurriculumVitae>
-  </React.Fragment>;
+  return <CurriculumVitae></CurriculumVitae>;
 }
 function GetProjects() {
 
-  return <React.Fragment>
-    <Projects loadAll={true}></Projects>
-  </React.Fragment>;
+  return <Projects loadAll={true}></Projects>;
 }
 function GetSkills() {
 

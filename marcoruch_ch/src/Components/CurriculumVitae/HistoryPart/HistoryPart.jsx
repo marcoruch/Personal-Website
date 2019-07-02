@@ -5,14 +5,16 @@ import './HistoryPart.scss';
 function HistoryPart(props) {
     return <div className="historyPart" style={props.historyFadeStyle}>
         <div className="history-left">
-        <div className="timeSpentDisplay" style={{fontSize: Math.ceil(props.bubbleStyle.width/ 10) + 10}}>{props.historyPart.timeSpent}</div>
+        <div className="timeSpentDisplay" style={{height: props.bubbleStyle.width, width: props.bubbleStyle.width, fontSize: Math.ceil(props.bubbleStyle.width/ 10) + 10}}>{props.historyPart.timeSpent}</div>
         <div className="bubbleConnector"></div>
-        <div className="bubble" style={props.bubbleStyle}>
+        <div className={`bubble ${props.historyPart.timeSpent ? "": "current"}`} style={props.bubbleStyle}>
         </div>
         </div>
         <div className="history-middle">
-            <h1>{props.historyPart.place}</h1>
-            <h2>{props.historyPart.desc}</h2>
+            <h1>{props.historyPart.title}</h1>
+            {props.historyPart.mileStone ? <h2 className="mileStone">{props.historyPart.mileStone}</h2>: <React.Fragment></React.Fragment>}
+            {Object.values(props.historyPart.partialDesc).map(item =><h3>{item}</h3>)}
+            
         </div>
         <div className="history-right">
             

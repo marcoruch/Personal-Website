@@ -67,8 +67,8 @@ function CurriculumVitae() {
     const historyFadeStyle = (index) => {
         return {
             opacity: 0,
-            animation: `fadeHistoryPartIn 0.3s  forwards`,
-            animationDelay: `${index*0.3}s`
+            animation: `fadeHistoryPartIn 1.25s  forwards`,
+            animationDelay: `${index*0.6}s`
         }
     }
 
@@ -98,7 +98,7 @@ function CurriculumVitae() {
                 <div className="meta">
                 <h1>Marco Ruch</h1>
                 <h2>Junior Software Engineer</h2>
-                <h3>Aarau, Schweiz</h3></div>
+                <h3>📍 Aarau, Schweiz</h3></div>
             </div>
             {
                 historyParts === null
