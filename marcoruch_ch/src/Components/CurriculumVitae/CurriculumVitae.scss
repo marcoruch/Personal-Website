@@ -2,19 +2,73 @@
 .curriculumVitae {
     height: 100vh;
     font-family: 'Roboto', sans-serif;
-    
-    padding-left: 400px;
-    padding-right: 400px;
-    .header{
+    margin-top:50px;
+    padding-left: 20%;
+    padding-right: 20%;
+
+    .historyloader {
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        height: 100vh !important;
+    } 
+
+    .header { 
         display:flex;
         flex-direction: row;
         height: 200px;
-        img {
-            width: auto;
-            height: 80%;
-            border-radius: 50%;
-            
+        padding-top:20px;
+        border-top: 3px solid #b4a892;
+        width:100%;
+        border-bottom: 3px solid #b4a892;
+        padding-bottom:20px;
+
+        .picture-holder {
+            position: relative;
+            height: calc(100%);
+            .imgAfter { 
+                position: absolute;
+                bottom:0;
+                right:0;
+                display: block;
+                font-size:50px;   
+                transition: 1s all cubic-bezier(0.680, -0.550, 0.265, 1.550);
+                opacity: 0;
+
+                &:hover {
+                    transform: scale(1.1);
+                    opacity: 1;
+                    cursor: pointer;
+                }
+
+            }
+
+            img {
+                height: calc(100%);
+                border-radius: 50%;
+                box-shadow: 0 0 0 8px transparent, 0 0 0 11px rgba(0,0,0,.2);
+                z-index: 2;
+                transition: .3s all;
+                -webkit-filter: grayscale(.5);
+                cursor: pointer;
+                
+                
+                &:hover {
+                    transform: scale3d(1,1,1);
+                    -webkit-filter: grayscale(0);
+                     box-shadow: 0 0 0 3px rgba(205, 193, 166, 0.8), 0 0 0 11px rgba(0,0,0,.2);
+                    z-index: 100;
+                }
+
+                &:hover + .imgAfter {
+                    transform: translate(-50%, -50%), scale(1.1);
+                    opacity: 1;
+                }
+            }
         }
+       
 
         .meta {
                 display:flex;
@@ -23,22 +77,60 @@
                 align-content: center;
                 align-items: flex-start;
                 padding-left:50px;
+                height: 100%;
             h1 {
-
-                color: #b4a892;
+                font-size: 30px;
+                color: rgb(205, 193, 166) !important;
+                margin-top:0px;
+                padding:0px;
+                margin-bottom:10px;
             }
 
             h2 {
-                color:grey;
+                margin-top:0px;
+                margin-bottom:10px;
+                padding:0px;
+                color:#8B8372;
             }
 
             h3{
-                color: whitesmoke;
+                margin-top:0px;
+                padding:0px;
+                color:#8B8372;
             }
         }
+    }
 
+    .history {
         width:100%;
-        border-bottom: 3px solid #b4a892;
+        height: 100%;
+        margin-bottom:50px;
+        
+        .history-header {
+            padding: 10px;
+            border-radius: 3px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-content: center;
+            align-items: center;
+            position: relative;
+            color: #d7d7d7;
+            margin-bottom:50px;
+            flex: 1 0 25%;
+            flex-wrap: wrap;
+            /* explanation below */
+        
+            .type-small {
+                font-size: 14px;
+                margin: 10px;   
+                cursor: pointer;
+                &.active {
+                    border-bottom:  1px solid #b4a892;
+                    font-weight: bold !important;
+                }
+            }
+        }
     }
 
 }
