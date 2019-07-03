@@ -36,10 +36,7 @@ function Project(props) {
                 <div className="meta">{project.type} mit {project.lang}</div>
 
                 <div className="content">
-                  <div className="short-desc">
-                    {project.desc}
-                    <div className="fadeOut"></div>
-                  </div>
+                 
                 </div>
               </div>
 

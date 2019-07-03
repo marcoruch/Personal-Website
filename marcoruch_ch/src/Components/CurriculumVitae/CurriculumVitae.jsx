@@ -93,7 +93,7 @@ function CurriculumVitae() {
                 <div className="meta">
                 <h1>Marco Ruch</h1>
                 <h2>Junior Software Engineer</h2>
-                <h3>📍 Aarau, Schweiz</h3></div>
+                <h3>Aarau, Schweiz</h3></div>
             </div>
             {
                 historyParts === null
