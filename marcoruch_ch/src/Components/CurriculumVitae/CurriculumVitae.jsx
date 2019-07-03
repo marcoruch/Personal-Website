@@ -25,24 +25,28 @@ function CurriculumVitae() {
         })
         setHistoryParts(fetchedHistoryParts);
 
+        let min= null;
+        let max= null;
+
         for (let index = 0; index < fetchedHistoryParts.length; index++) {
+            const element = fetchedHistoryParts[index];
             let span = null;
 
-            if (fetchedHistoryParts[index].to){
-                span =fetchedHistoryParts[index].to.seconds - fetchedHistoryParts[index].from.seconds;
+            if (element.to){
+                span =element.to.seconds - element.from.seconds;
             } else {
-                span = Math.floor(Date.now() / 1000) - fetchedHistoryParts[index].from.seconds; 
+                span = Math.floor(Date.now() / 1000) - element.from.seconds; 
             }
 
             if (span > max || max === null){
-                setMax(span);
+                max = span;
             } else if (span < min || min === null){
-                setMin(span);
+                min = span;
             } 
         }
 
-       
-       
+        setMin(min);
+        setMax(max);
     }
 
     useEffect(() => {
@@ -81,7 +85,8 @@ function CurriculumVitae() {
         } else {
             span = Math.floor(Date.now() / 1000) - element.from.seconds; 
         }
-        return (span - min) / (max - min) +0.4;
+
+        return (span - min) / (max - min)+0.4;
     }
 
     return <div className="curriculumVitae">
@@ -115,8 +120,7 @@ function CurriculumVitae() {
                          <HistoryPart 
                          key={index} 
                          historyPart={item} 
-                         bubbleStyle={bubbleStyle(normalize(item))}
-                         last={index===historyParts.filter(item => type === null || item.type === type).length-1}
+                         bubbleStyle={bubbleStyle(normalize(item))} 
                          historyFadeStyle={historyFadeStyle(index)}></HistoryPart>)
                     }
                 </div>

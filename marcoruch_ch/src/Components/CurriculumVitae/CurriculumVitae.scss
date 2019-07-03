@@ -50,16 +50,17 @@
             img {
                 height: calc(100%);
                 border-radius: 50%;
+                box-shadow: 0 0 0 8px transparent, 0 0 0 11px rgba(0,0,0,.2);
                 z-index: 2;
                 transition: .3s all;
                 -webkit-filter: grayscale(.3);
                 cursor: pointer;
-                box-shadow: 0 0 0 3px rgba(205, 193, 166, 0.8), 0 0 0 11px rgba(0,0,0,.2);
-
+                
                 
                 &:hover {
                     transform: scale3d(1,1,1);
                     -webkit-filter: grayscale(0);
+                     box-shadow: 0 0 0 3px rgba(205, 193, 166, 0.8), 0 0 0 11px rgba(0,0,0,.2);
                     z-index: 100;
                 }
 
@@ -123,12 +124,9 @@
             /* explanation below */
         
             .type-small {
-                position: relative;
                 font-size: 14px;
                 margin: 10px;   
                 cursor: pointer;
-                transition: all  cubic-bezier(0.075, 0.82, 0.165, 1);
-                animation: fadeInFromRight 2s forwards;
                 &.active {
                     border-bottom:  1px solid #b4a892;
                     font-weight: bold !important;
@@ -148,16 +146,5 @@
      100% {
         opacity: 1;
         margin-left:0;
-     }
-}
-@keyframes fadeInFromRight {
-    0% {
-        opacity: 0;
-        right:-100vw;
-     }
-
-     100% {
-        opacity: 1;
-        right:0;
      }
 }
