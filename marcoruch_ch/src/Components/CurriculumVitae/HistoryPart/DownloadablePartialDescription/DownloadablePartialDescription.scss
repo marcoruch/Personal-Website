@@ -1,0 +1,21 @@
+.download {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  a {
+    small {
+        &:hover {
+            font-size: 14px;
+            color: rgb(195, 232, 250);
+        }
+      font-size: 14px;
+      color: grey;
+    }
+    
+    
+    margin-bottom: 14px;
+    margin-left: 20px;
+  }
+}

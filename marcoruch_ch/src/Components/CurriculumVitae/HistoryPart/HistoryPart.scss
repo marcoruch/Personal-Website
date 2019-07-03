@@ -24,11 +24,12 @@
       writing-mode: vertical-rl;
       text-orientation: mixed;
       transform: rotate(-180deg) !important;
-      left: 0;
+      left: -10%;
       color: #bdbbb6;
       z-index: 1000;
       transition: all 0.5s ease-in-out 0.5s;
       text-align: center;
+      animation: fadeInFromLeft 2.5s forwards;
     }
 
     .bubble {
@@ -40,6 +41,19 @@
       );
       position: relative;
       margin-bottom: 30%;
+      &:before {
+        content: "";
+        width: 105%;
+        height: 105%;
+        background: rgba(255, 226, 170, 0.1);
+        position: absolute;
+        border-radius: 50%;
+        left: -2.5%;
+        right: 0;
+        bottom: 0;
+        top: -2.5%;
+        animation: bubbleUp 4s infinite;
+      }
 
       &.current {
         background: radial-gradient(
@@ -47,19 +61,8 @@
           rgb(255, 226, 170),
           rgb(205, 193, 166)
         );
-        animation: bubbleUp 2s infinite;
-        &:before {
-            content:'';
-            width:110%;
-            height: 110%;
-            background: rgba(255, 226, 170,0.1);
-            position: absolute;
-            border-radius: 50%;
-            left:-5%;
-            right:0;
-            bottom:0;
-            top:-5%;
-            animation: bubbleUp 2s infinite;
+        &:before { 
+          animation: bubbleUpMore 4s infinite;
         }
       }
     }
@@ -86,10 +89,19 @@
       animation: fadeHistoryPartIn 1.5s forwards;
       opacity: 0;
       color: rgb(255, 226, 170) !important;
+      small {
+        opacity: 0;
+        font-size: 14px;
+        color: grey;
+        transition: all .3s;
+      }
       &:hover {
         color: #fff1d5 !important;
         cursor: pointer;
         opacity: 1;
+        small {
+          opacity: 1;
+        }
       }
       &:before {
         content: "";
@@ -172,8 +184,32 @@
 
 @keyframes bubbleUp {
   0% {
+  }
+  50% {
     transform: scale(1.05);
   }
   100% {
   }
+}
+
+@keyframes bubbleUpMore {
+  0% {
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+  }
+}
+
+@keyframes fadeInFromLeft {
+  0% {
+      opacity: 0;
+      margin-left:-100vw;
+   }
+
+   100% {
+      opacity: 1;
+      margin-left:0;
+   }
 }
