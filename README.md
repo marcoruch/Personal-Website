@@ -71,3 +71,14 @@ Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> 
     Firestore Filestorage
   </li>
 </ul>
+
+<h2>Lerninhalte Node.js</h2>
+<ul>
+  <li>
+    Setup von Node.js Projekt
+  </li>
+  
+   <li>
+    Setup von Node.js Applikation für Firebase Projekt
+  </li>
+</ul>
