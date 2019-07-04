@@ -4,8 +4,10 @@ import { Responsive, Icon, Image } from 'semantic-ui-react'
 import Wave from 'react-wavify';
 import GithubChart from '../GitHubChart/GithubChart'
 import './AboutMe.scss';
+import API_HOST from '../../environment';
 
 
+alert(API_HOST);
 
 function AboutMe() {
   const [icons] = useState(
