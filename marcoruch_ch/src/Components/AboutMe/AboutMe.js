@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Responsive, Icon, Image } from 'semantic-ui-react'
 import Wave from 'react-wavify';
 import GithubChart from '../GitHubChart/GithubChart'
@@ -13,9 +13,6 @@ function AboutMe() {
       { icon: "linkedin", url: "https://www.linkedin.com/in/marco-ruch-60b437153/" },
       { icon: "github", url: "https://github.com/marcoruch" },
     ]);
-
-
-
 
   return (
     <React.Fragment>
