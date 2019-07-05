@@ -271,6 +271,7 @@ function Muehle() {
     }
 
     const handleGameStoneRemovedFromField = (item) => {
+        if (!item) return;
         let oldRefGame = firebase.firestore().collection('muehleGames').doc(chosenGame.id);
 
         for (let index = 0; index < chosenGame.existingMuehlen.length; index++) {
@@ -308,6 +309,7 @@ function Muehle() {
             let oldRefGame = firebase.firestore().collection('muehleGames').doc(chosenGame.id);
             if (chosenGame.currentPlayer === 1){
                 for (let index = 0; index < newField.length; index++) {
+                    console.log(item.draggedFrom.gameStone.associatedDotId, newField[index].associatedDotId)
                     if (newField[index].associatedDotId === item.draggedFrom.gameStone.associatedDotId) {
                         newField[index].isWhite = false;
                         newField[index].isBlack = false;
@@ -339,7 +341,7 @@ function Muehle() {
                         });
             } else if (chosenGame.currentPlayer ===2){
                 for (let index = 0; index < newField.length; index++) {
-                    if (newField[index].associatedDotId === item.draggedFrom.associatedDotId) {
+                    if (newField[index].associatedDotId === item.draggedFrom.gameStone.associatedDotId) {
                         newField[index].isWhite = false;
                         newField[index].isBlack = false;
                         newField[index].isAvailable = true;

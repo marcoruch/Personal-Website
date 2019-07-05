@@ -41,6 +41,10 @@ function MuehleDot(props) {
     const onDragStartAllSet = (e) => {
         e.dataTransfer.setDragImage(dragImg, 64,64);
         setDraggedInField(props);
+        
+        if (props.playerHasMuehle) {
+            setDraggedOut(props);
+        }
     }
     
     const onDragOverAllSet = (e) => {
@@ -84,7 +88,7 @@ function MuehleDot(props) {
   
         props.canMove 
         // # WHEN ALL STONES ARE SET
-        ? props.currentPlayer === 1 && props.gameStone.isWhite && props.isWhitePlaying
+        ? props.currentPlayer === 1 && props.gameStone.isWhite && props.isWhitePlaying && !props.playerHasMuehle
         ?
         <div 
             id={props.id} 
@@ -96,7 +100,7 @@ function MuehleDot(props) {
                     
                 </div>
         </div>
-        : props.currentPlayer === 2 && props.gameStone.isBlack && props.isBlackPlaying
+        : props.currentPlayer === 2 && props.gameStone.isBlack && props.isBlackPlaying  && !props.playerHasMuehle
         ? <div 
             id={props.id} 
             className={`dot ${props.id}`} 
@@ -108,7 +112,7 @@ function MuehleDot(props) {
                 </div>
         </div>
         // when there is any muehle
-        : !props.gameStone.isBlack && !props.gameStone.isWhite ?
+        : !props.gameStone.isBlack && !props.gameStone.isWhite && !props.playerHasMuehle ? 
             <div 
             id={props.id} 
             className={`dot ${props.id}`} 
@@ -118,14 +122,40 @@ function MuehleDot(props) {
                 <div  id={props.id}  style={style}>
                 
                 </div>
-        </div> :
+        </div> : props.playerHasMuehle && props.currentPlayer === 1 && props.gameStone.isBlack
+        ?
+        // when it's a muehle stone of the opponent
         <div 
-        id={props.id} 
-        className={`dot ${props.id}`} 
-        key={props.id}>
-            <div  id={props.id}  style={style}>
-            
-            </div>
+            id={props.id} 
+            className={`dot ${props.id}`} 
+            key={props.id}
+            draggable
+            onDragStart={(e) => onDragStartNotAllSet(e)}>
+                <div  id={props.id}  style={{cursor:'pointer', ...style}}>
+                
+                </div>
+        </div>
+        : props.playerHasMuehle && props.currentPlayer === 2 && props.gameStone.isWhite
+        ?         <div 
+            id={props.id} 
+            className={`dot ${props.id}`} 
+            key={props.id}
+            draggable
+            onDragStart={(e) => onDragStartAllSet(e)}>
+                <div  id={props.id}  style={{cursor:'pointer', ...style}}>
+                
+                </div>
+        </div>
+        : 
+        <div 
+            id={props.id} 
+            className={`dot ${props.id}`} 
+            key={props.id}
+            onDragOver={(e) => onDragOverAllSet(e)}
+            onDrop={(e) => onDroppedAllSet(e)}>
+                <div  id={props.id}  style={style}>
+                
+                </div>
     </div>
         // # WHEN NOT ALL STONES ARE SET
         :  props.playerHasMuehle && props.currentPlayer === 1 && props.gameStone.isBlack

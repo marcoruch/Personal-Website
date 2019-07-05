@@ -39,11 +39,6 @@ function MuehlePlayerSide(props) {
     }
 
     const onDropped = (e) => {
-        if (!props.playerHasMuehle) {
-            e.stopPropagation();
-            e.preventDefault();
-            return;
-        }
         console.log(JSON.stringify(DraggedOut));
         handleGameStoneRemovedFromField(DraggedOut);
     }
