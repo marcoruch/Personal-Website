@@ -82,3 +82,7 @@ Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> 
     Setup von Node.js Applikation für Firebase Projekt
   </li>
 </ul>
+
+
+<h5>To use API use:</h5>
+<code>import API_HOST from '../../environment';</code>

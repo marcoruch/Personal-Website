@@ -1,13 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
-import { Responsive, Icon, Image } from 'semantic-ui-react'
+import React, { useState } from 'react';
+import { Responsive, Icon } from 'semantic-ui-react'
 import Wave from 'react-wavify';
 import GithubChart from '../GitHubChart/GithubChart'
 import './AboutMe.scss';
-import API_HOST from '../../environment';
-
-
-alert(API_HOST);
 
 function AboutMe() {
   const [icons] = useState(
@@ -16,11 +12,6 @@ function AboutMe() {
       { icon: "github", url: "https://github.com/marcoruch" },
     ]);
 
-    useEffect(() => {
-      fetch(`${API_HOST}/api/greeting`)
-      .then(response => response.json())
-      .then(data => console.log({ data }));
-    }, [])
   return (
     <React.Fragment>
       <div id="hero">

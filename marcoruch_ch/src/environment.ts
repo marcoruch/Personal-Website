@@ -1,9 +1,9 @@
 const API_HOST =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:9000/"
+    ? "http://localhost:9000"
     : process.env.NODE_ENV === "production"
-    ? "https://marcoruchch-backend.firebaseapp.com/"
-    : "http://localhost:9000/";
+    ? "https://marcoruchch-backend.firebaseapp.com"
+    : "http://localhost:9000";
 
 
     // API

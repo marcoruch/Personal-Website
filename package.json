@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd marcoruch_ch && npm start \"  \"cd ../Firebase-Express-Backend && firebase serve --port=9000\" \"sleep 5 && start http://localhost:9000/ \""
+    "start": "concurrently \"cd marcoruch_ch && npm start \"  \"cd ../Firebase-Express-Backend && firebase serve --port=9000\" \"start http://localhost:9000/ \""
   },
   "keywords": [],
   "author": "",
