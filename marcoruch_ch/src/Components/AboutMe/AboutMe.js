@@ -16,6 +16,11 @@ function AboutMe() {
       { icon: "github", url: "https://github.com/marcoruch" },
     ]);
 
+    useEffect(() => {
+      fetch(`${API_HOST}/api/greeting`)
+      .then(response => response.json())
+      .then(data => console.log({ data }));
+    }, [])
   return (
     <React.Fragment>
       <div id="hero">
