@@ -160,29 +160,47 @@
   }
 }
 
-
-
 @media (max-width: 600px) {
+  .curriculumVitae {
+    padding-left: 0px;
+    padding-right: 0px;
 
-  .header {
-    flex-direction: column !important;
-    height: 400px !important;
-    justify-content: center !important;
-    align-content: center !important;
-    align-items:  center !important;
-    .meta {
-      
-      margin: 0px !important;
-      padding: 0px !important;
-      * {
-        font-size: 100% !important;
-        text-align: center !important;
-        width:100% !important;
+    .history {
+      padding-left: 20% !important;
+      padding-right: 5% !important;
+
+      .history-header {
+        margin-right: 20%;
+        * {
+          margin-left: 0px !important;
+          margin-right: 0px !important;
+        }
       }
-   
     }
-    .picture-holder {
-      height: 50% !important;
+    .header {
+      flex-direction: column !important;
+      height: 400px !important;
+      justify-content: center !important;
+      align-content: center !important;
+      align-items: center !important;
+      width: 60% !important;
+      left: 20%;
+
+      .meta {
+        margin: 0px !important;
+        padding: 0px !important;
+        * {
+          font-size: 100% !important;
+          text-align: center !important;
+          width: 100% !important;
+        }
+      }
+      .picture-holder {
+        height: 50% !important;
+      }
+    }
+    .history-header {
+      justify-content: center !important;
     }
   }
 }

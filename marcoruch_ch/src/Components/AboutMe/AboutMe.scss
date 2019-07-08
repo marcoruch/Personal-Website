@@ -1,210 +1,232 @@
-
-
 #hero {
+  position: relative;
 
-    position: relative;
-    
-  
-    margin-bottom: 20vh;
+  margin-bottom: 20vh;
 
-    #hero-top {
+  #hero-top {
+    min-height: 70vh;
+    background-color: #212121;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 
-        min-height: 70vh;
-        background-color: #212121;
+    #hero-text-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+
+      .icons-holder {
+        margin-top: 25px;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
         align-content: center;
         align-items: center;
+        justify-content: center;
+        position: relative;
 
-        #hero-text-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-content: center;
-            align-items: center;
-
-            .icons-holder {
-                margin-top:25px;
-                display:flex;
-                flex-direction: row;
-                align-content: center;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-
-                &:before {
-                    content: '<div>';
-                    font-family: 'La Belle Aurore',cursive;
-                    font-weight: bold;
-                    color: #515152;
-                    font-size: 14px;
-                    position: absolute;
-                    left:-20px;
-                    top:-20px;
-               
-                }
-
-                &:after {
-                    content: '</div>';
-                    font-family: 'La Belle Aurore',cursive;
-                    color: #515152;
-                    font-size: 14px;
-                    position: absolute;
-                    left:-20px;   
-                    font-weight: bold;
-                    bottom: -20px;
-                }
-
-                i {
-                    color: white;
-                    cursor: pointer;
-                    width:80px;
-                    display:flex;
-                    flex-direction: row;
-                    justify-content: space-around;
-                    align-content: space-around;
-                    align-items: center;
-                    &:hover {
-                        transition: 0.5s;
-                        transform: scale(1.4);
-                    }
-                }
-            }
-            img {
-                border-radius:25px;
-                padding:20px;
-
-
-                
-            }
-            >h1 {    
-                text-align: center;
-                font-weight: bold;
-                font-size: 5rem;
-                margin-bottom: 0px;
-                padding-left:25px;
-                padding-right: 25px;
-                position: relative;
-                font-family: Comfortaa;
-                color: white !important;
-
-                &.rubberBand {
-                    
-                    -webkit-animation-duration: 1s;
-                    animation-duration: 1s;
-                    -webkit-animation-fill-mode: both;
-                    animation-fill-mode: both;
-                    animation: rubberBand 1s  forwards;
-                }
-
-                &:before {
-                    content: '<h1>';
-                    font-family: 'La Belle Aurore',cursive;
-                    color: #515152;
-                    font-size: 14px;
-                    position: absolute;
-                    left:0;
-                    top:-50px;
-               
-                }
-
-                &:after {
-                    content: '</h1>';
-                    font-family: 'La Belle Aurore',cursive;
-                    color: #515152;
-                    font-size: 14px;
-                    position: absolute;
-                    left:0;
-                    bottom: -40px;
-                }
-     
-            }
-
-            >h2 {
-                text-align: center;
-                font-size:2.5rem;
-                color: white !important;
-                padding-left:25px;
-                padding-right: 25px;
-                position: relative;
-                &.rubberBand {
-                    
-                    -webkit-animation-duration: 1s;
-                    animation-duration: 1s;
-                    -webkit-animation-fill-mode: both;
-                    animation-fill-mode: both;
-                    animation: rubberBand 1.2s forwards;
-                }
-
-                &:before {
-                    content: '<h2>';
-                    font-family: 'La Belle Aurore',cursive;
-                    color: #515152;
-                    font-size: 14px;
-                    position: absolute;
-                    left:0;
-                    top:-25px;
-               
-                }
-
-                &:after {
-                    content: '</h2>';
-                    font-family: 'La Belle Aurore',cursive;
-                    color: #515152;
-                    font-size: 14px;
-                    position: absolute;
-                    left:0;
-                    bottom: -30px;
-                }
-
-                
-            }
+        &:before {
+          content: "<div>";
+          font-family: "La Belle Aurore", cursive;
+          font-weight: bold;
+          color: #515152;
+          font-size: 14px;
+          position: absolute;
+          left: -20px;
+          top: -20px;
         }
-    }
 
-    #hero-bot {
-        svg {
-            transform: rotate(180deg);
+        &:after {
+          content: "</div>";
+          font-family: "La Belle Aurore", cursive;
+          color: #515152;
+          font-size: 14px;
+          position: absolute;
+          left: -20px;
+          font-weight: bold;
+          bottom: -20px;
         }
+
+        i {
+          color: white;
+          cursor: pointer;
+          width: 80px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-content: space-around;
+          align-items: center;
+          &:hover {
+            transition: 0.5s;
+            transform: scale(1.4);
+          }
+        }
+      }
+      img {
+        border-radius: 25px;
+        padding: 20px;
+        cursor: pointer;
+        min-height: 150px;
+      }
+      > h1 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 5rem;
+        margin-bottom: 0px;
+        padding-left: 25px;
+        padding-right: 25px;
+        position: relative;
+        font-family: Comfortaa;
+        color: white !important;
+
+        &.rubberBand {
+          -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          animation: rubberBand 1s forwards;
+        }
+
+        &:before {
+          content: "<h1>";
+          font-family: "La Belle Aurore", cursive;
+          color: #515152;
+          font-size: 14px;
+          position: absolute;
+          left: 0;
+          top: -50px;
+        }
+
+        &:after {
+          content: "</h1>";
+          font-family: "La Belle Aurore", cursive;
+          color: #515152;
+          font-size: 14px;
+          position: absolute;
+          left: 0;
+          bottom: -40px;
+        }
+      }
+
+      > h5 {
+        color: white !important;
+      }
+
+      > h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: white !important;
+        padding-left: 25px;
+        padding-right: 25px;
+        position: relative;
+        &.rubberBand {
+          -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          animation: rubberBand 1.2s forwards;
+        }
+
+        &:before {
+          content: "<h2>";
+          font-family: "La Belle Aurore", cursive;
+          color: #515152;
+          font-size: 14px;
+          position: absolute;
+          left: 0;
+          top: -25px;
+        }
+
+        &:after {
+          content: "</h2>";
+          font-family: "La Belle Aurore", cursive;
+          color: #515152;
+          font-size: 14px;
+          position: absolute;
+          left: 0;
+          bottom: -30px;
+        }
+      }
     }
+  }
+
+  #hero-bot {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
 }
 
-
 @keyframes rubberBand {
-    0% {
-        -webkit-transform:scale3d(1,1,1);
-        -ms-transform:scale3d(1,1,1);
-        transform:scale3d(1,1,1);
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    -ms-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    -ms-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    -ms-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    -ms-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    -ms-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@media (max-width: 600px) {
+  #hero {
+    #hero-top {
+      #hero-text-section {
+        h1 {
+            font-size: 4rem;
+            margin-bottom:50px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom:50px;
+        }
+
+        img {
+          width: 90vw !important;
+          padding: 0px !important;
+          border-radius: 0 !important;
+          
+          min-height: 63px !important;
+          margin-bottom:25px;
+        }
+
+        .icons-holder {
+            i {
+                font-size: xx-large;
+            }
+        }
+      }
     }
-    30% {
-        -webkit-transform:scale3d(1.25,.75,1);
-        -ms-transform:scale3d(1.25,.75,1);
-        transform:scale3d(1.25,.75,1)
-    }
-    40% {
-        -webkit-transform:scale3d(.75,1.25,1);
-        -ms-transform:scale3d(.75,1.25,1);
-        transform:scale3d(.75,1.25,1)
-    }
-    50% {
-        -webkit-transform:scale3d(1.15,.85,1);
-        -ms-transform:scale3d(1.15,.85,1);
-        transform:scale3d(1.15,.85,1)
-    }
-    65% {
-        -webkit-transform:scale3d(.95,1.05,1);
-        -ms-transform:scale3d(.95,1.05,1);
-        transform:scale3d(.95,1.05,1)
-    }
-    75%  {
-        -webkit-transform:scale3d(1.05,.95,1);
-        -ms-transform:scale3d(1.05,.95,1);
-        transform:scale3d(1.05,.95,1)
-    }
-    100%  {
-        -webkit-transform:scale3d(1,1,1);
-        -ms-transform:scale3d(1,1,1);
-        transform:scale3d(1,1,1)
-    }
+  }
 }

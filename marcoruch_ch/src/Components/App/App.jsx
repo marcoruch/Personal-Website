@@ -17,10 +17,10 @@ import Haltestelle from "../Haltestelle/Haltestelle";
 import CurriculumVitae from "../CurriculumVitae/CurriculumVitae";
 import Muehle from "../Muehle/Muehle";
 import Games from "../Games/Games";
+import FoodLookup from "../FoodLookup/FoodLookup";
 
 function App() {
   return (
-
     <Router>
         <Header />
         <Route exact path="/" component={GetHome} />
@@ -32,10 +32,13 @@ function App() {
         <Route path="/overviewBlog" component={GetOverviewBlog} />
         <Route path="/contact" component={GetContact} />
         <Route path="/games" component={GetGames} />
+        <Route path="/games/haltestelle" component={GetHaltestelle} />
         <Route path="/haltestelle" component={GetHaltestelle} />
+        <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/muehle" component={GetMuehle} />
         <Route path="/curriculumvitae" component={GetCV} />
-     
+        <Route path="/games/foodlookup" component={GetFoodLookup} />
+        <Route path="/foodlookup" component={GetFoodLookup} />
     </Router>
   );
 }
@@ -59,6 +62,10 @@ function GetAboutMe() {
   </React.Fragment>;
 }
 
+
+function GetFoodLookup(){
+  return <FoodLookup></FoodLookup>;
+}
 
 function GetCV() {
   return <CurriculumVitae></CurriculumVitae>;

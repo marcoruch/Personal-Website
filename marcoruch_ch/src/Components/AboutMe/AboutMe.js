@@ -20,6 +20,7 @@ function AboutMe() {
           <div id="hero-top">
             <div id="hero-text-section"><h1>Marco Ruch</h1>
               <h2>shape your own future</h2>
+              <h5>Github Contributions</h5>
             <GithubChart></GithubChart>
             <div className="icons-holder">
               {icons.map(item => <Icon key={item.icon} name={item.icon} size='large'  onClick={() => {  window.open(item.url, '_blank'  )}}   />)}</div>
@@ -30,6 +31,7 @@ function AboutMe() {
           <div id="hero-top" >
             <div id="hero-text-section"> <h1>Marco Ruch</h1>
               <h2>shape your own future</h2>
+              <h5>Github Contributions</h5>
             <GithubChart></GithubChart>
             <div className="icons-holder">
               {icons.map(item => <Icon key={item.icon} name={item.icon}  size='large' onClick={() => {  window.open(item.url, '_blank'  )}}  />)}</div>
@@ -40,6 +42,7 @@ function AboutMe() {
           <div id="hero-top">
             <div id="hero-text-section"> <h1>Marco Ruch</h1>
               <h2>shape your own future</h2>
+              <h5>Github Contributions</h5>
             <GithubChart></GithubChart>
             <div className="icons-holder">
               {icons.map(item => <Icon key={item.icon} name={item.icon} size='large' onClick={() => {  window.open(item.url, '_blank'  )}}  />)}</div>
@@ -50,6 +53,7 @@ function AboutMe() {
           <div id="hero-top">
             <div id="hero-text-section"> <h1 className="rubberBand">Marco Ruch</h1>
               <h2 className="rubberBand">shape your own future</h2>
+              <h5 className="rubberBand">Github Contributions</h5>
               <GithubChart></GithubChart>
               
               <div className="icons-holder">
