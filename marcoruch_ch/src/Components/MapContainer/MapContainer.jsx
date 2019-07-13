@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import { Loader} from 'semantic-ui-react'
 import GoogleMapsAPI_config from './GoogleMapsAPI_config';
 
 import './MapContainer.scss';
