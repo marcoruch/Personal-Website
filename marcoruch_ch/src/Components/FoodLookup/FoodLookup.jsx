@@ -26,11 +26,16 @@ function FoodLookup() {
     ]
 
 
-    const handleLazyLoadingDropDownInputChanged = (options, inputQuery) => {
+    const handleLazyLoadingDropDownInputChanged = async (options, inputQuery) => {
         console.log(inputQuery)
+         fetch('http://localhost:5000/api/placesApiSearch',{place:"Kuettigen"}).then(response => response.json())
+         .then(data => {
+           console.log(data) // Prints result from `response.json()` in getRequest
+         })
+         .catch(error => console.error(error));
         const newFoundOptions = {};
         setSearchPlaceOptions(newFoundOptions);
-        return options.filter(opt => true)
+        return options;
     }
 
 
