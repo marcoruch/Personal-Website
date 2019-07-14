@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Dropdown, Menu, Icon, Button } from 'semantic-ui-react'
+import { Dropdown,  Icon, Button } from 'semantic-ui-react'
 import GoogleApiWrapper from '../MapContainer/MapContainer'
 
 import './FoodLookup.scss';
@@ -13,7 +13,6 @@ function FoodLookup() {
     const [local, setLocal] = useState(true);
     const [searchPlaceOptions, setSearchPlaceOptions] = useState({});
 
-    const searchBaseQuery = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=YOUR_API_KEY";
     const starOptions = [
         { key: 1, value: 1 },
         { key: 2, value: 1.5 },
