@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Dropdown,  Icon, Button } from 'semantic-ui-react'
+import { Dropdown, Icon, Button, Input } from 'semantic-ui-react'
 import GoogleApiWrapper from '../MapContainer/MapContainer'
 
 import './FoodLookup.scss';
@@ -11,7 +11,9 @@ function FoodLookup() {
 
     const [rating, setRating] = useState(null);
     const [local, setLocal] = useState(true);
-    const [searchPlaceOptions, setSearchPlaceOptions] = useState({});
+    const [geometryLocation, setGeometryLocation] = useState(null);
+    const [searchPlaceOptions, setSearchPlaceOptions] = useState([{}]);
+    const [radius, setRadius] = useState(1500);
 
     const starOptions = [
         { key: 1, value: 1 },
@@ -24,21 +26,6 @@ function FoodLookup() {
         { key: 8, value: 4.5 },
         { key: 9, value: 5 },
     ]
-
-
-    const handleLazyLoadingDropDownInputChanged = async (options, inputQuery) => {
-        console.log(inputQuery)
-         fetch('http://localhost:5000/api/placesApiSearch',{place:"Kuettigen"}).then(response => response.json())
-         .then(data => {
-           console.log(data) // Prints result from `response.json()` in getRequest
-         })
-         .catch(error => console.error(error));
-        const newFoundOptions = {};
-        setSearchPlaceOptions(newFoundOptions);
-        return options;
-    }
-
-
 
     const navStyles = {
         width: '30%',
@@ -80,9 +67,49 @@ function FoodLookup() {
         const halfStars = starAmount - fullStars;
         const stars = Array(fullStars).fill(<Icon name="star"></Icon>);
         if (halfStars > 0) stars.push(<Icon name="star half"></Icon>)
-        console.log(stars);
         return stars;
     }
+
+
+    const handleInputChanged = async (event) => {
+        fetch('http://localhost:9000/api/placesApiSearchLocation', {
+            method: 'POST',
+            body: JSON.stringify({ queryText: event.target.value }),
+            headers: { 'Content-type': 'application/json' }
+        }).then(response => response.json())
+            .then(data => {
+                if (data.status === "OK") {
+                    let newFoundOptions = [];
+                    data.results.forEach((dataResult,i) => newFoundOptions.push({ key: i, text : dataResult.formatted_address, value: dataResult.geometry.location }));
+                    setSearchPlaceOptions(newFoundOptions);
+                }
+
+            })
+            .catch(error => console.error(error));
+
+    }
+
+    const handleLocationDropDownChange = (data) => {
+        setGeometryLocation(data.value);
+    }
+
+    const submitPlaceSearch = () => {
+        fetch('http://localhost:9000/api/placesApiSearch', {
+            method: 'post',
+            body: JSON.stringify({ geometryLocation, radius }),
+            headers: { 'Content-type': 'application/json' }
+        }).then(response => response.json())
+            .then(data => {
+                if (data.status === "OK") {
+                 console.log(data);
+                }
+
+            })
+            .catch(error => console.error(error));
+    }
+
+
+  
 
     return <div className="food-lookup">
         <div className='nav-left' style={navStyles}>
@@ -95,13 +122,17 @@ function FoodLookup() {
                     <Button.Or />
                     {local ? <Button onClick={() => setSearchLocal(false)} inverted color='red'>Anderer Ort</Button> : <Button color='green' onClick={() => setSearchLocal(false)} >Anderer Ort</Button>}
                 </Button.Group>
-                {!local ? <Dropdown
+                {!local ? 
+                <React.Fragment>
+                    <Input placeholder='Search...' onChange={handleInputChanged}/>
+                    <Dropdown
                     fluid
                     options={searchPlaceOptions}
                     placeholder='Try to search for case or CASE'
-                    search={handleLazyLoadingDropDownInputChanged}
+                    onChange={(e,data)=> handleLocationDropDownChange(data)}
+                    search
                     selection
-                /> : <React.Fragment></React.Fragment>}
+                /> </React.Fragment>: <React.Fragment></React.Fragment>}
                 <Dropdown text={rating ? `Mindestens ${rating} Sterne` : "Mindestbewertung"} icon='star' floating labeled button className='icon'>
                     <Dropdown.Menu>
                         <Dropdown.Header icon='google' content='1-5 Sterne' />
@@ -114,6 +145,8 @@ function FoodLookup() {
                                     {getStars(starOption.value).map(star => star)}</div>} onClick={() => handleRatingSelected(starOption.value)} />)}
                     </Dropdown.Menu>
                 </Dropdown>
+                
+                <Button onClick={() => submitPlaceSearch()}></Button>
             </div>
         </div>
         <GoogleApiWrapper mapStyles={mapStyles}></GoogleApiWrapper>
