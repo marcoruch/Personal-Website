@@ -21,6 +21,7 @@
     "firebase-admin": "^8.2.0",
     "google-maps-react": "^2.0.2",
     "npm-clean": "^1.0.3",
+    "react": "^16.8.6",
     "react-countdown-now": "^2.1.1",
     "react-semantic-ui-range": "^0.7.0",
     "typescript": "^3.5.3"

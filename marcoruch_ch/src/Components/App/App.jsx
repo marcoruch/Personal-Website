@@ -17,6 +17,7 @@ import CurriculumVitae from "../CurriculumVitae/CurriculumVitae";
 import Muehle from "../Muehle/Muehle";
 import Games from "../Games/Games";
 import FoodLookup from "../FoodLookup/FoodLookup";
+import { MapProvider } from "../MapContainer/MapContext/MapContext"
 
 function App() {
   return (
@@ -63,7 +64,7 @@ function GetAboutMe() {
 
 
 function GetFoodLookup(){
-  return <FoodLookup></FoodLookup>;
+  return <MapProvider><FoodLookup></FoodLookup></MapProvider>;
 }
 
 function GetCV() {

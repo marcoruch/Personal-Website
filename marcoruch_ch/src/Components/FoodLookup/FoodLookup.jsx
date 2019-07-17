@@ -1,11 +1,14 @@
 
-import React, { useState } from 'react';
-import { Dropdown, Icon, Button, Input } from 'semantic-ui-react'
+import React, { useState, useContext} from 'react';
+import { Dropdown, Icon, Button, Input, Grid, Divider } from 'semantic-ui-react'
 import GoogleApiWrapper from '../MapContainer/MapContainer'
+import { MapContext } from "../MapContainer/MapContext/MapContext"
 
+
+import API_HOST from '../../environment';
 import './FoodLookup.scss';
 
-
+let inputChanged;
 
 function FoodLookup() {
 
@@ -14,6 +17,7 @@ function FoodLookup() {
     const [geometryLocation, setGeometryLocation] = useState(null);
     const [searchPlaceOptions, setSearchPlaceOptions] = useState([{}]);
     const [radius, setRadius] = useState(1500);
+    const [positions, setPositions, myLocation, setMyLocation] = useContext(MapContext)
 
     const starOptions = [
         { key: 1, value: 1 },
@@ -71,37 +75,44 @@ function FoodLookup() {
     }
 
 
-    const handleInputChanged = async (event) => {
-        fetch('http://localhost:9000/api/placesApiSearchLocation', {
-            method: 'POST',
-            body: JSON.stringify({ queryText: event.target.value }),
-            headers: { 'Content-type': 'application/json' }
-        }).then(response => response.json())
-            .then(data => {
-                if (data.status === "OK") {
-                    let newFoundOptions = [];
-                    data.results.forEach((dataResult,i) => newFoundOptions.push({ key: i, text : dataResult.formatted_address, value: dataResult.geometry.location }));
-                    setSearchPlaceOptions(newFoundOptions);
-                }
+    const handleInputChanged = async (event, data) => {
+        clearTimeout(inputChanged);
 
-            })
-            .catch(error => console.error(error));
+        inputChanged = setTimeout(async () => {
+            fetch(`${API_HOST}/api/placesApiSearchLocation`, {
+                method: 'POST',
+                body: JSON.stringify({ queryText: escape(data.value) }),
+                headers: { 'Content-type': 'application/json' }
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.status === "OK") {
+                        let newFoundOptions = [];
+                        data.results.forEach((dataResult, i) => newFoundOptions.push({ key: i, text: dataResult.formatted_address, value: dataResult.geometry.location }));
+                        setSearchPlaceOptions(newFoundOptions);
+                        console.log("New Dropdown Options loaded..", newFoundOptions);
+                    }
 
+                })
+                .catch(error => console.error(error));
+        }, 500);
     }
 
-    const handleLocationDropDownChange = (data) => {
+    const handleLocationDropDownChange = (e, data) => {
         setGeometryLocation(data.value);
     }
 
     const submitPlaceSearch = () => {
-        fetch('http://localhost:9000/api/placesApiSearch', {
+        fetch(`${API_HOST}/api/placesApiSearch`, {
             method: 'post',
             body: JSON.stringify({ geometryLocation, radius }),
             headers: { 'Content-type': 'application/json' }
         }).then(response => response.json())
             .then(data => {
                 if (data.status === "OK") {
-                 console.log(data);
+                    let newFoundResults = [];
+                    data.results.forEach((dataResult, i) => newFoundResults.push(dataResult));
+                    setPositions(newFoundResults);
+                    console.info("New DataResult:", newFoundResults);
                 }
 
             })
@@ -109,7 +120,6 @@ function FoodLookup() {
     }
 
 
-  
 
     return <div className="food-lookup">
         <div className='nav-left' style={navStyles}>
@@ -118,21 +128,33 @@ function FoodLookup() {
 
             <div className="filters">
                 <Button.Group>
-                    {local ? <Button onClick={() => setSearchLocal(true)} inverted color='green'>Jetzige Umgebung </Button> : <Button onClick={() => setSearchLocal(true)} color='red'>Jetzige Umgebung</Button>}
+                    {local ? <Button onClick={() => setSearchLocal(true)} inverted color='green'>Jetzige Umgebung </Button> : <Button onClick={() => setSearchLocal(true)} inverted color='grey'>Jetzige Umgebung</Button>}
                     <Button.Or />
-                    {local ? <Button onClick={() => setSearchLocal(false)} inverted color='red'>Anderer Ort</Button> : <Button color='green' onClick={() => setSearchLocal(false)} >Anderer Ort</Button>}
+                    {local ? <Button onClick={() => setSearchLocal(false)} inverted color='grey'>Anderer Ort</Button> : <Button inverted color='green' onClick={() => setSearchLocal(false)} >Anderer Ort</Button>}
                 </Button.Group>
-                {!local ? 
-                <React.Fragment>
-                    <Input placeholder='Search...' onChange={handleInputChanged}/>
-                    <Dropdown
-                    fluid
-                    options={searchPlaceOptions}
-                    placeholder='Try to search for case or CASE'
-                    onChange={(e,data)=> handleLocationDropDownChange(data)}
-                    search
-                    selection
-                /> </React.Fragment>: <React.Fragment></React.Fragment>}
+                <Divider inverted />
+                {!local ?
+                    <React.Fragment>
+                        <Grid>
+                            <Grid.Row>
+                                <Grid.Column width={6}>
+                                    <Input placeholder='In Karte suchen' onChange={handleInputChanged} />
+                                </Grid.Column>
+                                <Grid.Column width={10}>
+                                    <Dropdown
+                                        fluid
+                                        options={searchPlaceOptions}
+                                        placeholder='Aus Ergebnissen auswählen'
+                                        onChange={(e, data) => handleLocationDropDownChange(e, data)}
+                                        search
+                                        selection
+                                    />
+                                </Grid.Column>
+                            </Grid.Row>
+                        </Grid>
+                        <Divider inverted />
+                    </React.Fragment>
+                    : <React.Fragment></React.Fragment>}
                 <Dropdown text={rating ? `Mindestens ${rating} Sterne` : "Mindestbewertung"} icon='star' floating labeled button className='icon'>
                     <Dropdown.Menu>
                         <Dropdown.Header icon='google' content='1-5 Sterne' />
@@ -145,11 +167,12 @@ function FoodLookup() {
                                     {getStars(starOption.value).map(star => star)}</div>} onClick={() => handleRatingSelected(starOption.value)} />)}
                     </Dropdown.Menu>
                 </Dropdown>
-                
+
                 <Button onClick={() => submitPlaceSearch()}></Button>
             </div>
         </div>
-        <GoogleApiWrapper mapStyles={mapStyles}></GoogleApiWrapper>
+       
+        <GoogleApiWrapper mapStyles={mapStyles} ></GoogleApiWrapper>
     </div>
 }
 

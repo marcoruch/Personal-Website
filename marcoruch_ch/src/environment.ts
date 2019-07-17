@@ -5,7 +5,7 @@ const API_HOST =
     ? "https://marcoruchch-backend.firebaseapp.com"
     : "http://localhost:9000";
 
-
-    // API
-    console.log("API HOST SET AS" + API_HOST);
+// API
+console.log("API HOST SET AS => " + API_HOST);
+console.log("Use /api/{function} to access Backendfunctonality.");
 export default API_HOST;
