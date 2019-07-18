@@ -1,0 +1,111 @@
+.preview-box {
+  width: 30vw;
+  min-width: 250px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 1);
+  position: absolute;
+  left: 0;
+  top: 100px;
+  bottom: 0;
+  z-index: 10001;
+  
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
+
+  .header {
+    width: 55px;
+    position: absolute;
+    top: 35px;
+    right: 0px;
+    cursor: pointer;
+    margin-left: auto !important;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+
+    .hamburger {
+      width: 35px;
+      height: 5px;
+      background-color: #b4a892;
+      margin: 6px 0;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .hamburger:nth-child(1) {
+      transform: rotate(45deg) translateY(15px);
+      margin: 0;
+    }
+
+    .hamburger:nth-child(2) {
+      width: 0;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .hamburger:nth-child(3) {
+      transform: rotate(-45deg) translateY(-15px);
+      margin: 0;
+    }
+  } 
+  
+  .imageHolder {
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

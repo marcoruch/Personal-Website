@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import GoogleMapsAPI_config from './GoogleMapsAPI_config';
-
 import { MapContext } from "./MapContext/MapContext"
+import PlacePreview from "./PlacePreview/PlacePreview";
 
 import './MapContainer.scss';
 // ...
@@ -76,11 +76,12 @@ function MapContainer(props) {
     }
 
 
-    const clickedMarker = (index) => {
-        setCurrentClickedMarker(index);
+    const handleClickedMarker = (placeData) => {
+        setCurrentClickedMarker(null);
+        setCurrentClickedMarker(placeData);
     }
 
-    const handleCloseCall = (index)=>{
+    const handleCloseCall = () => {
         setCurrentClickedMarker(null);
     }
 
@@ -90,28 +91,21 @@ function MapContainer(props) {
                 title={item.name}
                 name={item.name}
                 position={{ lat: item.geometry.location.lat, lng: item.geometry.location.lng }}
-                onClick={() => clickedMarker(index)}>
-                {currentClickedMarker===index &&
-                    <InfoWindow onCloseClick={() => handleCloseCall(index)}>
-                      <div>
-                <h4>RANDOM TEXT</h4>
-                <span>RANDOM</span>
-              </div>
-                    </InfoWindow>
-                }
-            </Marker>)
+                onClick={() => handleClickedMarker(item)}/>)
         })
     }
 
 
-    return (myLocation !== null && <Map
+    return (<React.Fragment>{myLocation !== null && <Map
         google={props.google}
         zoom={positions.length > 0 ? 14 : 10}
         style={props.mapStyles}
         initialCenter={myLocation}
         center={centerLocation ? centerLocation : myLocation}>
         {displayMarkers()}
-    </Map>
+    </Map>}
+    {currentClickedMarker && <PlacePreview handleCloseCall={handleCloseCall} place={currentClickedMarker}/>}
+    </React.Fragment>
     );
 }
 

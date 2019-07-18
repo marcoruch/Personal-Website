@@ -1,7 +1,9 @@
 # Persönliche Website
 
+<h1>Technologies</h1>
 Diese Website wurde mit <a href="https://github.com/facebook/react">React.js</a> programmiert.
-Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> gespeichert.
+Die Daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> gespeichert.
+Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Backend</a> existiert und wurde basierend auf <a href="https://nodejs.org/en/">Node.js</a> und <a href="https://expressjs.com/de/4x/api.html">Express</a> implementiert.
 
 <h2>Inhalt der Website</h2>
 <ul>
@@ -30,7 +32,6 @@ Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> 
   </li>
 </ul>
 
-
 <h2>Lerninhalte React</h2>
 <ul>
   <li>
@@ -49,8 +50,6 @@ Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> 
     Functional-/ & Class Components
   </li>
 </ul>
-
-
 
 <h2>Lerninhalte Firebase</h2>
 <ul>
@@ -82,7 +81,6 @@ Die daten wurden auf <a href="https://github.com/firebase/">Google Firebase</a> 
     Setup von Node.js Applikation für Firebase Projekt
   </li>
 </ul>
-
 
 <h5>To use API use:</h5>
 <code>import API_HOST from '../../environment';</code>
