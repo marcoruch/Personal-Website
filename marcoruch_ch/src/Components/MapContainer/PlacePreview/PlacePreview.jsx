@@ -12,7 +12,6 @@ function PlacePreview(props) {
     const [PhotoUrl, setPhotoUrl] = useState(null)
     const [PlaceFurtherDetails, setPlaceFurtherDetails] = useState(null);
     const [PlaceFurtherPhotos, setPlaceFurtherPhotos] = useState(null);
-    const [activeItemIndex, setactiveItemIndex] = useState(0)
 
     const carouselImgStyle = { cursor: 'pointer', maxWidth: "80%", maxHeight: "200px", alignSelf: "center" };
     useEffect(() => {
@@ -28,11 +27,16 @@ function PlacePreview(props) {
                 console.log("Place further Details...", data);
                 setPlaceFurtherDetails(data);
                 const photos = [];
-                await Promise.all(data.photos.map(async (photo) => {
-                    await getGooglePhotoByPhotoDetail(photo).then((data) => {
-                        console.log("Further photo-url resolved...", data);
-                        photos.push(data);
-                    });
+                await Promise.all(data.photos.map(async (photo,i) => {
+                    await (async () => {
+                        await new Promise(r => setTimeout(r, i*150));
+                        await getGooglePhotoByPhotoDetail(photo).then((data) => {
+                            console.log("Further photo-url resolved...", data);
+                            photos.push(data);
+                        });
+                    })()
+                    
+                    
                 }));
                 console.log("New Resolved photo urls", photos);
                 setPlaceFurtherPhotos(photos);
@@ -98,7 +102,6 @@ function PlacePreview(props) {
         return pictureUrl;
     }
 
-    const changeActiveItem = (index) => setactiveItemIndex(index);
 
 
     const handleCloseCall = () => {
