@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "react-alice-carousel": "^1.15.2"
   }
 }
