@@ -22,6 +22,7 @@ function CurriculumVitae() {
         // Get History Parts
 
         let fetchedHistoryParts = [];
+
         await axios.get(`${API_HOST}/api/curriculumvitae`)
             .then(res => {
                 console.log(res.data);
@@ -37,10 +38,10 @@ function CurriculumVitae() {
             for (let index = 0; index < fetchedHistoryParts.length; index++) {
                 let span = null;
 
-                if (fetchedHistoryParts[index].to) {
-                    span = fetchedHistoryParts[index].to.seconds - fetchedHistoryParts[index].from.seconds;
+                if (fetchedHistoryParts[index].toSec) {
+                    span = fetchedHistoryParts[index].toSec - fetchedHistoryParts[index].fromSec;
                 } else {
-                    span = Math.floor(Date.now() / 1000) - fetchedHistoryParts[index].from.seconds;
+                    span = Math.floor(Date.now() / 1000) - fetchedHistoryParts[index].fromSec;
                 }
 
                 if (span > max || max === null) {
@@ -54,7 +55,11 @@ function CurriculumVitae() {
 
     
     useEffect(() => {
-            fetchHistoryParts();
+        (async()=>{
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        fetchHistoryParts();
+        })()
+            
     }, []);
 
 
@@ -84,10 +89,10 @@ function CurriculumVitae() {
 
     const normalize = (element) => {
         let span = null;
-        if (element.to) {
-            span = element.to.seconds - element.from.seconds;
+        if (element.toSec) {
+            span = element.toSec - element.fromSec;
         } else {
-            span = Math.floor(Date.now() / 1000) - element.from.seconds;
+            span = Math.floor(Date.now() / 1000) - element.fromSec;
         }
         return (span - min) / (max - min) + 0.4;
     }

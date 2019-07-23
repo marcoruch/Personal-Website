@@ -19,11 +19,14 @@ import Games from "../Games/Games";
 import FoodLookup from "../FoodLookup/FoodLookup";
 import { MapProvider } from "../MapContainer/MapContext/MapContext"
 import { UserProvider } from "../UserContext/UserContext";
+import axios from 'axios'
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 
 function App() {
   return (
     <Router basename="/">
+       <UserProvider>
         <Header />
         <Route exact path="/" component={GetHome} />
         <Route path="/aboutme" component={GetAboutMe} />
@@ -41,6 +44,7 @@ function App() {
         <Route path="/games/haltestelle" component={GetHaltestelle} />
         <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/foodlookup" component={GetFoodLookup} />
+        </UserProvider>
     </Router>
   );
 }
@@ -70,7 +74,7 @@ function GetFoodLookup(){
 }
 
 function GetCV() {
-  return  <UserProvider><CurriculumVitae></CurriculumVitae></UserProvider>;
+  return <CurriculumVitae></CurriculumVitae>;
 }
 function GetProjects() {
 

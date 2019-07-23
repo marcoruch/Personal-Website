@@ -11,7 +11,7 @@ function HistoryPart(props) {
             <div className={`bubble ${props.historyPart.timeSpent ? "" : "current"}`} style={props.bubbleStyle}></div>
         </div>
         <div className="history-right">
-            <h1>{props.historyPart.title}  <small>{"( " + props.historyPart.from + (props.historyPart.to ? " - " + props.historyPart.to : "") + " )"}</small></h1>
+            <h1>{props.historyPart.title}  <small>{"( " + props.historyPart.fromStr + (props.historyPart.to ? " - " + props.historyPart.toStr : "") + " )"}</small></h1>
             {props.historyPart.mileStone ? <h2 className="mileStone">{props.historyPart.mileStone}</h2> : <React.Fragment></React.Fragment>}
             {Object.values(props.historyPart.partialDesc)
                 .map(item => 
