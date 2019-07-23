@@ -1,8 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import Me from './../../Content/img/marcoruch_cv.jpg'
+import firebase from './../Firebase/Firebase';
 import { Loader } from 'semantic-ui-react'
 import HistoryPart from './HistoryPart/HistoryPart'
+import dateFormat from 'dateformat';
 import axios from 'axios';
 import API_HOST from '../../environment'
 
@@ -21,16 +23,25 @@ function CurriculumVitae() {
     async function fetchHistoryParts() {
         // Get History Parts
 
-        let fetchedHistoryParts = [];
-
-        await axios.get(`${API_HOST}/api/curriculumvitae`)
+        const fetchedHistoryParts = [];
+                const querySnapshot = await firebase.firestore().collection('historyParts').orderBy("to", "desc").get()
+                querySnapshot.forEach((doc) => {
+                    let part = doc.data();
+                    part.fromSec = doc.data().from.toDate().getTime() / 1000
+                    part.toSec = doc.data().to.toDate().getTime() / 1000;
+                    part.fromStr = dateFormat(doc.data().from.toDate(), "dd.mm.yyyy");
+                    part.toStr = dateFormat(doc.data().to.toDate(), "dd.mm.yyyy");
+                    fetchedHistoryParts.push(part);
+                });
+                /* AXIOS ONLY POSSIBLE WITH BLAZE */
+               /*await axios.get(`${API_HOST}/api/curriculumvitae`)
             .then(res => {
                 console.log(res.data);
                 fetchedHistoryParts = res.data;
             }).catch((error => {
                 console.log(error.response);
                 return;
-            }))
+            })) */
 
         if (fetchedHistoryParts && fetchedHistoryParts.length > 0) {
             setHistoryParts(fetchedHistoryParts);
