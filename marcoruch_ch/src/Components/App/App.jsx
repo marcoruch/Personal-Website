@@ -18,10 +18,12 @@ import Muehle from "../Muehle/Muehle";
 import Games from "../Games/Games";
 import FoodLookup from "../FoodLookup/FoodLookup";
 import { MapProvider } from "../MapContainer/MapContext/MapContext"
+import { UserProvider } from "../UserContext/UserContext";
+
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
         <Header />
         <Route exact path="/" component={GetHome} />
         <Route path="/aboutme" component={GetAboutMe} />
@@ -32,12 +34,12 @@ function App() {
         <Route path="/overviewBlog" component={GetOverviewBlog} />
         <Route path="/contact" component={GetContact} />
         <Route path="/games" component={GetGames} />
-        <Route path="/games/haltestelle" component={GetHaltestelle} />
         <Route path="/haltestelle" component={GetHaltestelle} />
-        <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/muehle" component={GetMuehle} />
         <Route path="/curriculumvitae" component={GetCV} />
         <Route path="/games/foodlookup" component={GetFoodLookup} />
+        <Route path="/games/haltestelle" component={GetHaltestelle} />
+        <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/foodlookup" component={GetFoodLookup} />
     </Router>
   );
@@ -68,7 +70,7 @@ function GetFoodLookup(){
 }
 
 function GetCV() {
-  return <CurriculumVitae></CurriculumVitae>;
+  return  <UserProvider><CurriculumVitae></CurriculumVitae></UserProvider>;
 }
 function GetProjects() {
 

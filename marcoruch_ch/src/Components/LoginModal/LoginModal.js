@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useState } from "react";
 import './LoginModal.scss';
 import firebase from './../Firebase/Firebase';
 import Swal from 'sweetalert2'
 import Backdrop from './../Backdrop/Backdrop';
+
 
 import {
     Button,
@@ -22,6 +23,8 @@ function LoginModal() {
     const [userLogin, setUserLoginModal] = useState(true);
     const [shouldHide, setShouldHide] = useState(false);
     
+
+
     function handleEmailChange(e){
         setEmail(e.target.value);
     }
