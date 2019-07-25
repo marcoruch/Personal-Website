@@ -19,7 +19,13 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
         <li>
         Haltestellen
         </li>
+      <li>
+        Google Maps Food Search
+      </li>
     </ul>
+  </li>
+  <li>
+    Beautiful CV (Only with Permission)
   </li>
    <li>
     Persönlicher Blog
