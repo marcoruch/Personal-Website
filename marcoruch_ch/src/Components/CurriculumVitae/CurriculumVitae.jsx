@@ -120,9 +120,8 @@ function CurriculumVitae() {
                 <h3>Aarau, Schweiz</h3></div>
         </div>
         
-        { Unauthorized && <Container textAlign='center'>It seems like you are not authorized yet.</Container>}
-        {
-            historyParts === null
+        { Unauthorized ? <Container className="unauthorized" textAlign='center'>It seems like you are not authorized yet.</Container>
+           : historyParts === null
                 ? <div className="historyloader"><Loader active inline='centered' /></div>
                 : <div className="history">
 
