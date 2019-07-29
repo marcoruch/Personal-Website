@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Me from './../../Content/img/marcoruch_cv.jpg'
 import firebase from './../Firebase/Firebase';
-import { Loader } from 'semantic-ui-react'
+import { Loader, Container } from 'semantic-ui-react'
 import HistoryPart from './HistoryPart/HistoryPart'
 import dateFormat from 'dateformat';
 import axios from 'axios';
@@ -19,12 +19,13 @@ function CurriculumVitae() {
     const [type, setType] = useState(null);
     const [min, setMin] = useState(null);
     const [max, setMax] = useState(null);
+    const [Unauthorized, setUnauthorized] = useState(false)
 
     async function fetchHistoryParts() {
         // Get History Parts
 
-        const fetchedHistoryParts = [];
-                const querySnapshot = await firebase.firestore().collection('historyParts').orderBy("to", "desc").get()
+        let fetchedHistoryParts = [];
+               /*  const querySnapshot = await firebase.firestore().collection('historyParts').orderBy("to", "desc").get()
                 querySnapshot.forEach((doc) => {
                     let part = doc.data();
                     part.fromSec = doc.data().from.toDate().getTime() / 1000
@@ -32,18 +33,18 @@ function CurriculumVitae() {
                     part.fromStr = dateFormat(doc.data().from.toDate(), "dd.mm.yyyy");
                     part.toStr = dateFormat(doc.data().to.toDate(), "dd.mm.yyyy");
                     fetchedHistoryParts.push(part);
-                });
+                }); */
                 /* AXIOS ONLY POSSIBLE WITH BLAZE */
-               /*await axios.get(`${API_HOST}/api/curriculumvitae`)
+              await axios.get(`${API_HOST}/api/curriculumvitae`)
             .then(res => {
                 console.log(res.data);
                 fetchedHistoryParts = res.data;
             }).catch((error => {
                 console.log(error.response);
                 return;
-            })) */
+            }))
 
-        if (fetchedHistoryParts && fetchedHistoryParts.length > 0) {
+        if (fetchedHistoryParts && Array.isArray(fetchedHistoryParts) &&  fetchedHistoryParts.length > 0) {
             setHistoryParts(fetchedHistoryParts);
 
             for (let index = 0; index < fetchedHistoryParts.length; index++) {
@@ -61,15 +62,14 @@ function CurriculumVitae() {
                     setMin(span);
                 }
             }
+        } else {
+            setUnauthorized(true);
         }
     }
 
     
     useEffect(() => {
-        (async()=>{
-        await new Promise(resolve => setTimeout(resolve, 3000));
         fetchHistoryParts();
-        })()
             
     }, []);
 
@@ -120,6 +120,7 @@ function CurriculumVitae() {
                 <h3>Aarau, Schweiz</h3></div>
         </div>
         
+        { Unauthorized && <Container textAlign='center'>It seems like you are not authorized yet.</Container>}
         {
             historyParts === null
                 ? <div className="historyloader"><Loader active inline='centered' /></div>
