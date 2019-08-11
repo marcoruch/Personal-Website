@@ -25,15 +25,6 @@ function CurriculumVitae() {
         // Get History Parts
 
         let fetchedHistoryParts = [];
-               /*  const querySnapshot = await firebase.firestore().collection('historyParts').orderBy("to", "desc").get()
-                querySnapshot.forEach((doc) => {
-                    let part = doc.data();
-                    part.fromSec = doc.data().from.toDate().getTime() / 1000
-                    part.toSec = doc.data().to.toDate().getTime() / 1000;
-                    part.fromStr = dateFormat(doc.data().from.toDate(), "dd.mm.yyyy");
-                    part.toStr = dateFormat(doc.data().to.toDate(), "dd.mm.yyyy");
-                    fetchedHistoryParts.push(part);
-                }); */
                 /* AXIOS ONLY POSSIBLE WITH BLAZE */
               await axios.get(`${API_HOST}/api/curriculumvitae`)
             .then(res => {

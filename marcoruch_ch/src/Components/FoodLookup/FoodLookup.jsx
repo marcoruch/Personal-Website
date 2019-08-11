@@ -22,7 +22,18 @@ function FoodLookup() {
     const [openTo, setOpenTo] = useState(2400);
     const [pricing, setPricing] = useState(null);
     const [searching, setSearching] = useState(false);
+    const [resultAmount, setResultAmount] = useState(20);
+    const [resultType, setResultType] = useState('restaurant');
 
+    const typeOptions =[ { key: "restaurant", value: "restaurant",  text: "restaurant"} ]
+
+    const amountOptions = [
+        {key: 5, value: 5, text: 5 },
+        {key: 10, value: 10, text: 10 },
+        {key: 20, value: 20, text: 20 },
+        {key: 50, value: 50, text: 50 },
+        {key: 100, value: 100, text: 100 },
+    ]
     const openingHoursOptions = [
         { key: 30, value: 30, text: '00:30' },
         { key: 100, value: 100, text: '01:00' },
@@ -124,6 +135,11 @@ function FoodLookup() {
             setRating(stars)
         }
     }
+
+    const handleAmountChanged = (e, data) => {
+        setResultAmount(data.value);
+    }
+
     const handleOpenFromSelected = (e, data) => {
         setOpenFrom(data.value);
     }
@@ -151,6 +167,7 @@ function FoodLookup() {
     const handleInputChanged = async (event, data) => {
         clearTimeout(inputChanged);
 
+    
         inputChanged = setTimeout(async () => {
             setSearching(true);
             await fetch(`${API_HOST}/api/placesApiSearchLocation`, {
@@ -184,10 +201,19 @@ function FoodLookup() {
             body: JSON.stringify(
                 {
                     geometryLocation: geometryLocation ? geometryLocation : myLocation,
+                    
+                    // #TODO implement radius
                     radius,
+                    // #TODO implement pricing
                     pricing,
+                    
+                    // #TODO implement opening hours
                     openFrom,
-                    openTo
+                    openTo,
+                    
+                    resultType,
+                    // #TODO implement amount
+                    resultAmount
                 }),
             headers: { 'Content-type': 'application/json' }
         }).then(response => response.json())
@@ -285,7 +311,7 @@ function FoodLookup() {
                     </Grid.Row>
                 </Grid>
                 <Divider inverted />
-                <Label color='brown' horizontal>Öffnungszeiten</Label>
+                <Label color='white' horizontal>Öffnungszeiten</Label>
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={8}>
@@ -304,6 +330,31 @@ function FoodLookup() {
                                 selection
                                 options={openingHoursOptions}
                                 onChange={handleOpenToSelected}
+                            />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+
+
+
+
+
+                <Divider inverted />
+                
+                <Grid>
+                    <Grid.Row>
+                        <Grid.Column width={8}>
+                           
+                        </Grid.Column>
+                        <Grid.Column width={8}>
+                        <Label color='white' horizontal>Ergebnisse pro Seite</Label>
+                            <Dropdown
+                                placeholder='Ergebnisse pro Seite'
+                                fluid
+                                selection
+                                value={resultAmount}
+                                options={amountOptions}
+                                onChange={handleAmountChanged}
                             />
                         </Grid.Column>
                     </Grid.Row>
