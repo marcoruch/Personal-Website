@@ -20,6 +20,7 @@ import FoodLookup from "../FoodLookup/FoodLookup";
 import { MapProvider } from "../MapContainer/MapContext/MapContext"
 import { UserProvider } from "../UserContext/UserContext";
 import axios from 'axios'
+import Footer from "../Footer/Footer";
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 
@@ -51,39 +52,46 @@ function App() {
 
 function GetHome() {
   return <React.Fragment>
-
-
-<AboutMe></AboutMe>
-
+    <AboutMe></AboutMe>
     <Projects loadAll={false} loadAmount={5}></Projects>
     <Skills></Skills>
     <Games></Games>
     <Contact></Contact>
+    <Footer></Footer>
   </React.Fragment>;
 }
 
 function GetAboutMe() {
   return <React.Fragment>
     <AboutMe></AboutMe>
+    <Footer></Footer>
   </React.Fragment>;
 }
 
 
 function GetFoodLookup(){
-  return <MapProvider><FoodLookup></FoodLookup></MapProvider>;
+  return <React.Fragment><MapProvider>
+    <FoodLookup></FoodLookup>
+  </MapProvider>
+  <Footer></Footer>
+  </React.Fragment>;
 }
 
 function GetCV() {
-  return <CurriculumVitae></CurriculumVitae>;
+  return <React.Fragment><CurriculumVitae></CurriculumVitae>
+  <Footer></Footer></React.Fragment>;
 }
 function GetProjects() {
 
-  return <Projects loadAll={true}></Projects>;
+  return <React.Fragment><Projects loadAll={true}></Projects>
+  <Footer></Footer></React.Fragment>;
 }
 function GetSkills() {
 
   return <React.Fragment>
     <Skills></Skills>
+    
+  <Footer></Footer>
   </React.Fragment>;
 }
 
@@ -91,6 +99,8 @@ function GetContact() {
 
   return <React.Fragment>
     <Contact></Contact>
+    
+  <Footer></Footer>
   </React.Fragment>;
 }
 
@@ -98,12 +108,16 @@ function GetHaltestelle() {
 
   return <React.Fragment>
     <Haltestelle></Haltestelle>
+    
+  <Footer></Footer>
   </React.Fragment>;
 }
 
 function GetMuehle() {
   return <React.Fragment>
     <Muehle></Muehle>
+    
+  <Footer></Footer>
   </React.Fragment>
 }
 
@@ -111,6 +125,8 @@ function GetGames() {
 
   return <React.Fragment>
     <Games></Games>
+    
+  <Footer></Footer>
   </React.Fragment>;
 }
 
@@ -118,12 +134,16 @@ function GetGames() {
 function GetCreateBlog() {
   return <React.Fragment>
     <CreateBlog></CreateBlog>
+    
+  <Footer></Footer>
   </React.Fragment>;
 }
 
 function GetEditBlog({ match }) {
   return <React.Fragment>
     <EditBlog id={match.params.id}></EditBlog>
+    
+  <Footer></Footer>
   </React.Fragment>;
 }
 function GetOverviewBlog({ match }) {
@@ -134,6 +154,8 @@ function GetOverviewBlog({ match }) {
         <React.Fragment>
           <SubHeader PageTitle="Meine Blogs"></SubHeader>
           <OverviewBlog></OverviewBlog>
+          
+  <Footer></Footer>
         </React.Fragment>
 
       } />
@@ -145,6 +167,8 @@ function GetBlogPost({ match }) {
   return <React.Fragment>
 
     <BlogPost id={match.params.id}></BlogPost>
+    
+  <Footer></Footer>
   </React.Fragment>;
 }
 
@@ -157,6 +181,8 @@ function GetBlog({ match }) {
       
           <BlogCardHolder amount={5} match={match}></BlogCardHolder>
       } />
+      
+  <Footer></Footer>
     </div>
   );
 }
