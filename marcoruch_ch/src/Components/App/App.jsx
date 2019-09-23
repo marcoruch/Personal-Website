@@ -33,9 +33,9 @@ function App() {
         <Route path="/aboutme" component={GetAboutMe} />
         <Route path="/projects" component={GetProjects} />
         <Route path="/skills" component={GetSkills} />
-        <Route path="/blog" component={GetBlog} />
+       { /* <Route path="/blog" component={GetBlog} />
         <Route path="/createBlog" component={GetCreateBlog} />
-        <Route path="/overviewBlog" component={GetOverviewBlog} />
+  <Route path="/overviewBlog" component={GetOverviewBlog} />*/}
         <Route path="/contact" component={GetContact} />
         <Route path="/games" component={GetGames} />
         <Route path="/haltestelle" component={GetHaltestelle} />

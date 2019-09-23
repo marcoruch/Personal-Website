@@ -1,3 +1,14 @@
+.projectsloader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 100vh !important;
+  }
+
+
+
 .projects {
     margin-top: 200px;
     .header {

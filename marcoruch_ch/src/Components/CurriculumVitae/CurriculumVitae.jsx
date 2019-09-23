@@ -1,10 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Me from './../../Content/img/marcoruch_cv.jpg'
-import firebase from './../Firebase/Firebase';
-import { Loader, Container } from 'semantic-ui-react'
+import Unauthorized from './../Unauthorized/Unauthorized'
+import { Loader } from 'semantic-ui-react'
 import HistoryPart from './HistoryPart/HistoryPart'
-import dateFormat from 'dateformat';
 import axios from 'axios';
 import API_HOST from '../../environment'
 
@@ -19,18 +18,25 @@ function CurriculumVitae() {
     const [type, setType] = useState(null);
     const [min, setMin] = useState(null);
     const [max, setMax] = useState(null);
-    const [Unauthorized, setUnauthorized] = useState(false)
+    const [IsUnauthorized, setIsUnauthorized] = useState(false);
+
+    /* Fetch Projects Max Retries */
+    const maxRetries = 3;
+    const [retriedFetching, setRetriedFetching] = useState(0);
+
 
     async function fetchHistoryParts() {
         // Get History Parts
 
         let fetchedHistoryParts = [];
+        let curriculumUrl =`${API_HOST}/api/curriculumvitae`;
                 /* AXIOS ONLY POSSIBLE WITH BLAZE */
-              await axios.get(`${API_HOST}/api/curriculumvitae`)
+        await axios.get(curriculumUrl)
             .then(res => {
                 console.log(res.data);
                 fetchedHistoryParts = res.data;
             }).catch((error => {
+                console.log(`Error when fetching ${curriculumUrl}...`)
                 console.log(error.response);
                 return;
             }))
@@ -54,15 +60,21 @@ function CurriculumVitae() {
                 }
             }
         } else {
-            setUnauthorized(true);
+            setRetriedFetching(retriedFetching+1); 
         }
     }
 
     
     useEffect(() => {
-        fetchHistoryParts();
-            
-    }, []);
+        if (retriedFetching <= maxRetries)
+        { 
+            fetchHistoryParts();
+        } 
+        else 
+        { 
+            setIsUnauthorized(true); 
+        }
+    }, [retriedFetching]);
 
 
     const unique = (arr) => {
@@ -111,8 +123,9 @@ function CurriculumVitae() {
                 <h3>Aarau, Schweiz</h3></div>
         </div>
         
-        { Unauthorized ? <Container className="unauthorized" textAlign='center'>It seems like you are not authorized yet.</Container>
-           : historyParts === null
+        { IsUnauthorized 
+            ? <Unauthorized ContentName={"CV"}/>
+            : historyParts === null
                 ? <div className="historyloader"><Loader active inline='centered' /></div>
                 : <div className="history">
 

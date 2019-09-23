@@ -1,69 +1,83 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react';
+
 import Project from './../Project/Project';
-import firebase from './../Firebase/Firebase';
+import Unauthorized from './../Unauthorized/Unauthorized'
 import { Loader } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
+
+import axios from 'axios';
+import API_HOST from '../../environment'
 
 import "./Projects.scss";
 
 
-class Projects extends Component {
-    constructor(props) {
-        super(props);
+function Projects(props) {
 
-        this.state = {
-            loading: true,
-            projects: [],
-        };
-    }
+    const [Projects, setProjects] = useState(null)
+    const [LoadAll, setLoadAll] = useState(props.loadAll)
+    const [LoadAmount, setLoadAmount] = useState(props.loadAmount)
+    const [IsUnauthorized, SetIsUnauthorized] = useState(false);
 
+    /* Fetch Projects Max Retries */
+    const maxRetries = 3;
+    const [retriedFetching, setRetriedFetching] = useState(0);
 
-    async componentWillMount() {
-        let projectsCollection = firebase.firestore().collection('projects');
-        let loadedProjects = [];
+    async function fetchProjects() {
 
-        if (this.props.loadAll) {
-             loadedProjects = await projectsCollection.get().then(snapshot => snapshot.docs.map(doc => doc.data()));
+        // Get History Parts
+
+        let fetchedProjects = [];
+        let projectsUrl = `${API_HOST}/api/projects`;
+        /* AXIOS ONLY POSSIBLE WITH BLAZE */
+        await axios.get(projectsUrl, {
+            loadAll: LoadAll,
+            loadAmount: LoadAmount,
+        })
+            .then(res => {
+                console.log(res.data);
+                fetchedProjects = res.data;
+            }).catch((error => {
+                console.log(`Error when fetching ${projectsUrl}...`);
+                console.log(error);
+                return;
+            }))
+
+        if (fetchedProjects && Array.isArray(fetchedProjects) && fetchedProjects.length > 0) {
+            setProjects(fetchedProjects);
         } else {
-             loadedProjects = await projectsCollection.get().then(snapshot => snapshot.docs.slice(0, this.props.loadAmount).map(doc => doc.data()));
+            setRetriedFetching(retriedFetching+1);
         }
 
-        for (let i = 0; i < loadedProjects.length; i++) {
-            loadedProjects[i].key = i;
-        }
-
-        this.setState({ projects: loadedProjects, loading: false });
     }
+    useEffect(() => {
+        if (retriedFetching <= maxRetries)
+        { 
+            fetchProjects();
+        } 
+        else 
+        { 
+            SetIsUnauthorized(true); 
+        }
+    }, [retriedFetching])
 
 
-
-    render() {
-        return !this.state.projects
-            ? <Loader active inline='centered' />
-            :
-            <div className="projects">
-                
-
+    return IsUnauthorized ? <Unauthorized ContentName={"Projects"} />
+        : Projects === null ? <div className="projectsloader"><Loader active inline='centered' /></div>
+            : <div className="projects">
                 <div className="header">
-
                     <h1>Bisherige Arbeiten</h1>
-           
                 </div>
                 <div className="projects-holder">
-               
-               {!this.props.loadAll ?  <div className="more-projects">
+
+                    {!LoadAll && Projects.length > 0 ? <div className="more-projects">
                         <Link className="btn" to="/projects">Alle Projekte einsehen</Link>
-                    </div> : <React.Fragment></React.Fragment> }
+                    </div> : <React.Fragment></React.Fragment>}
                     {
-                        this.state.projects.map((project) =>
+                        Projects.map((project) =>
                             <Project id={"Project_" + project.key} project={project}> </Project>
                         )
                     }
-                  
-                </div>  </div>
-    };
-
-
-}
-
+                </div> 
+            </div>
+};
 export default Projects;
