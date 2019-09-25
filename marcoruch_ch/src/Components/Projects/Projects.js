@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
 import Project from './../Project/Project';
 import Unauthorized from './../Unauthorized/Unauthorized'
 import { Loader } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-
 import axios from 'axios';
 import API_HOST from '../../environment'
 
@@ -12,7 +10,6 @@ import "./Projects.scss";
 
 
 function Projects(props) {
-
     const [Projects, setProjects] = useState(null)
     const [LoadAll, setLoadAll] = useState(props.loadAll)
     const [LoadAmount, setLoadAmount] = useState(props.loadAmount)
@@ -27,18 +24,16 @@ function Projects(props) {
         // Get History Parts
 
         let fetchedProjects = [];
-        let projectsUrl = `${API_HOST}/api/projects`;
-        /* AXIOS ONLY POSSIBLE WITH BLAZE */
-        await axios.get(projectsUrl, {
-            loadAll: LoadAll,
-            loadAmount: LoadAmount,
-        })
+        let projectsUrl = LoadAll 
+        ? `${API_HOST}/api/projects` 
+        : `${API_HOST}/api/projectslimit/${LoadAmount}`;
+
+        await axios.get(projectsUrl)
             .then(res => {
-                console.log(res.data);
                 fetchedProjects = res.data;
             }).catch((error => {
-                console.log(`Error when fetching ${projectsUrl}...`);
-                console.log(error);
+                console.error(`Error when fetching ${projectsUrl}...`);
+                console.log(error.response);
                 return;
             }))
 
