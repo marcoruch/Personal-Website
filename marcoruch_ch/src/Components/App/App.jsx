@@ -15,6 +15,7 @@ import EditBlog from "../EditBlog/EditBlog";
 import Haltestelle from "../Haltestelle/Haltestelle";
 import CurriculumVitae from "../CurriculumVitae/CurriculumVitae";
 import Muehle from "../Muehle/Muehle";
+import Nutrify from "../Nutrify/Nutrify";
 import Games from "../Games/Games";
 import FoodLookup from "../FoodLookup/FoodLookup";
 import { MapProvider } from "../MapContainer/MapContext/MapContext"
@@ -40,6 +41,7 @@ function App() {
         <Route path="/games" component={GetGames} />
         <Route path="/haltestelle" component={GetHaltestelle} />
         <Route path="/muehle" component={GetMuehle} />
+        <Route path="/nutrify" component={GetNutrify} />
         <Route path="/curriculumvitae" component={GetCV} />
         <Route path="/games/foodlookup" component={GetFoodLookup} />
         <Route path="/games/haltestelle" component={GetHaltestelle} />
@@ -116,6 +118,15 @@ function GetHaltestelle() {
 function GetMuehle() {
   return <React.Fragment>
     <Muehle></Muehle>
+    
+  <Footer></Footer>
+  </React.Fragment>
+}
+
+
+function GetNutrify() {
+  return <React.Fragment>
+    <Nutrify></Nutrify>
     
   <Footer></Footer>
   </React.Fragment>
