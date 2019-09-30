@@ -22,12 +22,15 @@ import { MapProvider } from "../MapContainer/MapContext/MapContext"
 import { UserProvider } from "../UserContext/UserContext";
 import axios from 'axios'
 import Footer from "../Footer/Footer";
+import Sitemap from 'react-router-sitemap';
+
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 
-function App() {
-  return (
-    <Router basename="/">
+
+
+const myRouter = () => {
+  return <Router basename="/">
        <UserProvider>
         <Header />
         <Route exact path="/" component={GetHome} />
@@ -49,6 +52,12 @@ function App() {
         <Route path="/foodlookup" component={GetFoodLookup} />
         </UserProvider>
     </Router>
+}
+
+
+function App() {
+  return (
+    myRouter()
   );
 }
 
