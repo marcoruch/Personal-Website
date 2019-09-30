@@ -7,6 +7,7 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     width: 100%;
+
     h2 {
         margin: 0;
     }
@@ -16,6 +17,7 @@
         flex-direction: row;
         list-style-type: none;
 
+        animation: fadeIn 1.2s ease-in-out;
      
         
         li {
@@ -27,7 +29,7 @@
          align-items: flex-start;
             cursor: pointer;
             width: 200px;
-            max-width: 12vw !important;
+            max-width: 12vw;
             
             a {
                 font-size: 50% !important;
@@ -71,7 +73,7 @@
                 }
                 height: 60px;
                 a{
-                    font-size:20px !important;
+                    font-size:100% !important;
                     color:black !important;
                 }
             }
@@ -151,6 +153,15 @@
 }
 
 
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+  
+    }
+    100%{
+      opacity: 1;
+    }
+  }
 
 
 @media screen and (max-width:800px) {
@@ -166,7 +177,7 @@
                 
                 li {
                     width: 200px;
-                    max-width: 12vw !important;
+                    max-width: 12vw;
         
                     a {
                         
@@ -178,3 +189,6 @@
         }
     }
 }
+
+
+@media (max-width:1023px)  {  ul {padding-left:0;} li  {text-align:center;}  li {max-width:  unset !important; width: unset !important;}}

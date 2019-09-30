@@ -8,6 +8,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     min-width: 350px;
     flex: 1 0 25%;
+
     /* explanation below */
     .content {
         min-height: 300px;
@@ -15,17 +16,19 @@
         .short-desc {
             max-height: 160px !important;
             white-space: pre-wrap;
-            width: 100%;                   
+            width: 100%;
             overflow: hidden;
-            position: relative;             
-          .fadeOut {
-           background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.9) 75%,#fff 80%,#fff);
-          height: 70%;
-            bottom: 0!important;
-            position: absolute;
-            width:100%;
-          }
+            position: relative;
+
+            .fadeOut {
+                background: linear-gradient(180deg, hsla(0, 0%, 100%, 0) 0, hsla(0, 0%, 100%, .9) 75%, #fff 80%, #fff);
+                height: 70%;
+                bottom: 0 !important;
+                position: absolute;
+                width: 100%;
+            }
         }
+
         .body {
             animation: flip-back 1s forwards;
             padding: 15px;
@@ -36,8 +39,8 @@
         }
 
         .meta {
-            color:grey;
-            margin-bottom:15px;
+            color: grey;
+            margin-bottom: 15px;
         }
 
         img {
@@ -126,14 +129,70 @@
         padding-bottom: 80px;
         height: auto;
     }
+
     .project {
         padding-bottom: 80px;
         height: auto;
 
-        .description {       
-             font-size: 80% !important;
-            width:100%;
+        .description {
+            font-size: 80% !important;
+            width: 100%;
             min-height: 435px;
         }
     }
+}
+
+
+@media (min-width:320px) {
+    .project {
+        max-width: 90vw !important;
+    }
+
+    .more-projects {
+        max-width: 90vw;
+    }
+}
+
+@media (min-width:480px) {
+    .project {
+        max-width: 90vw !important;
+    }
+
+    .more-projects {
+        max-width: 90vw;
+    }
+}
+
+@media (min-width:600px) {
+    .project {
+        max-width: 90vw;
+    }
+
+    .more-projects {
+        max-width: 90vw;
+    }
+}
+
+@media (min-width:801px) {
+    .project {
+        max-width: 90vw;
+    }
+
+    .more-projects {
+        max-width: 90vw;
+    }
+}
+
+@media (min-width:1025px) {
+    .project {
+        max-width: 90vw;
+    }
+
+    .more-projects {
+        max-width: 90vw;
+    }
+}
+
+@media (min-width:1281px) {
+    /* hi-res laptops and desktops */
 }

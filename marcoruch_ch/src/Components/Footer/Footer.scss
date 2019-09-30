@@ -1,7 +1,7 @@
 .App-footer {
     background-color: #121212;
     margin-top: 10px;
-    height: 400px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,6 +17,7 @@
         align-items: center;
         align-content: center;
         justify-content: center;
+        text-align: center;
         padding: 20px;
     }
 
@@ -28,6 +29,7 @@
         align-items: center;
         align-content: center;
         justify-content: center;
+        text-align: center;
         padding: 20px;
 
         a {
@@ -38,10 +40,12 @@
     }
 
     .footer-bottom {
-        display:flex;
+        display: flex;
         flex-direction: row;
-        
-        .references, .contact {
+        text-align: center;
+
+        .references,
+        .contact {
             width: 60vw;
             font-size: 12px;
             display: flex;
@@ -52,6 +56,7 @@
             h5 {
                 color: grey;
             }
+
             a {
 
                 color: white !important;
@@ -60,4 +65,89 @@
         }
     }
 
+}
+
+@media (min-width:320px) {
+    .App-footer {
+        min-height: 600px;
+        padding-top: 10%;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+    }
+
+    .references,
+    .contact {
+        flex: 0 0 100%;
+        max-height: 50%
+    }
+}
+
+@media (min-width:480px) {
+    .App-footer {
+        min-height: 600px;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+    }
+
+    .references,
+    .contact {
+        flex: 0 0 100%;
+        max-height: 50%
+    }
+}
+
+@media (min-width:600px) {
+    .App-footer {
+        min-height: 600px;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+    }
+
+    .references,
+    .contact {
+        flex: 0 0 100%;
+        max-height: 50%
+    }
+}
+
+@media (min-width:801px) {
+    .App-footer {
+        min-height: 600px;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+    }
+
+    .references,
+    .contact {
+        flex: 0 0 100%;
+        max-height: 50%
+    }
+}
+
+@media (min-width:1025px) {
+    .App-footer {
+        min-height: 600px;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+    }
+
+    .references,
+    .contact {
+        flex: 0 0 100%;
+        max-height: 50%
+    }
+}
+
+@media (min-width:1281px) {
+    /* hi-res laptops and desktops */
 }
