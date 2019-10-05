@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Project from './../Project/Project';
 import Unauthorized from './../Unauthorized/Unauthorized'
+import TopLevelEntryFormular from './../TopLevelEntryFormular/TopLevelEntryFormular'
 import { Loader } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
@@ -24,9 +25,9 @@ function Projects(props) {
         // Get History Parts
 
         let fetchedProjects = [];
-        let projectsUrl = LoadAll 
-        ? `${API_HOST}/api/projects` 
-        : `${API_HOST}/api/projectslimit/${LoadAmount}`;
+        let projectsUrl = LoadAll
+            ? `${API_HOST}/api/projects`
+            : `${API_HOST}/api/projectslimit/${LoadAmount}`;
 
         await axios.get(projectsUrl)
             .then(res => {
@@ -40,23 +41,21 @@ function Projects(props) {
         if (fetchedProjects && Array.isArray(fetchedProjects) && fetchedProjects.length > 0) {
             setProjects(fetchedProjects);
         } else {
-            setRetriedFetching(retriedFetching+1);
+            setRetriedFetching(retriedFetching + 1);
         }
 
     }
     useEffect(() => {
-        if (retriedFetching <= maxRetries)
-        { 
+        if (retriedFetching <= maxRetries) {
             fetchProjects();
-        } 
-        else 
-        { 
-            SetIsUnauthorized(true); 
+        }
+        else {
+            SetIsUnauthorized(true);
         }
     }, [retriedFetching])
 
 
-    return IsUnauthorized ? <Unauthorized ContentName={"Projects"} />
+    return <React.Fragment> {IsUnauthorized ? <Unauthorized ContentName={"Projects"} />
         : Projects === null ? <div className="projectsloader"><Loader active inline='centered' /></div>
             : <div className="projects">
                 <div className="header">
@@ -72,7 +71,10 @@ function Projects(props) {
                             <Project id={"Project_" + project.key} project={project}> </Project>
                         )
                     }
-                </div> 
-            </div>
+                </div>
+            </div>}
+            <TopLevelEntryFormular EntryKey={"projects"}></TopLevelEntryFormular>
+    </React.Fragment>
+
 };
 export default Projects;
