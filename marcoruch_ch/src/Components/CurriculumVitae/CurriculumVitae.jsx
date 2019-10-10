@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Me from './../../Content/img/marcoruch_cv.jpg'
 import Unauthorized from './../Unauthorized/Unauthorized'
+import TopLevelEntryFormular from '../TopLevelEntryFormular/TopLevelEntryFormular'
 import { Loader } from 'semantic-ui-react'
 import HistoryPart from './HistoryPart/HistoryPart'
 import axios from 'axios';
@@ -111,7 +112,7 @@ function CurriculumVitae() {
         return (span - min) / (max - min) + 0.4;
     }
 
-    return <div className="curriculumVitae">
+    return <React.Fragment><div className="curriculumVitae">
         <div className="header">
             <div className="picture-holder">
                 <img alt="CVpicture" src={Me}></img>
@@ -151,6 +152,8 @@ function CurriculumVitae() {
                 </div>
         }
     </div>
+    
+    <TopLevelEntryFormular EntryKey={"skills"}></TopLevelEntryFormular></React.Fragment>
 };
 
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Skill from './../Skill/Skill';
 import { Loader } from 'semantic-ui-react'
 import firebase from './../Firebase/Firebase'
+import TopLevelEntryFormular from '../TopLevelEntryFormular/TopLevelEntryFormular'
 
 
 import './Skills.scss';
@@ -37,7 +38,7 @@ function Skills() {
     }
 
 
-    return !skills
+    return <React.Fragment>{!skills
         ? <div  className="skillsloader"><Loader active inline='centered' /></div>
         : (<div className="skills">
             <h1>Meine Erfahrungen in Projekten</h1>
@@ -59,7 +60,9 @@ function Skills() {
             </div>}
             
         </div>
-        )
+        )}
+        <TopLevelEntryFormular EntryKey={"skills"}></TopLevelEntryFormular>
+        </React.Fragment>
 };
 
 

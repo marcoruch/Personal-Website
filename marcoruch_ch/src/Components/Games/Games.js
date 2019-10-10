@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Loader } from 'semantic-ui-react'
 import firebase from '../Firebase/Firebase'
 import { Link } from "react-router-dom";
+import TopLevelEntryFormular from '../TopLevelEntryFormular/TopLevelEntryFormular'
 import "./Games.scss"
 
 
@@ -27,7 +28,7 @@ function Games() {
         fetchGames();
     }, []);
 
-    return (!games
+    return <React.Fragment>{!games
         ? <div className="skillsloader"><Loader active inline='centered' /></div>
         : <div className="games">
 
@@ -65,7 +66,9 @@ function Games() {
 
             </div>
         </div>
-    );
+    }
+    <TopLevelEntryFormular EntryKey={"games"}></TopLevelEntryFormular>
+    </React.Fragment>
 }
 
 export default Games;
