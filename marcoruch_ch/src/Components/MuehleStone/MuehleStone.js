@@ -15,6 +15,10 @@ function MuehleStone(props) {
         setDragged(props);
     }
 
+    const onClickStart = (e) => {
+        setDragged(props)
+    }
+
     return (props.playerHasMuehle
         ? <div
             id={props.index}
@@ -27,6 +31,7 @@ function MuehleStone(props) {
             key={props.id}
             className="stone"
             draggable
+            onClick={(e) => onClickStart(e)}
             onDragStart={(e) => onDragStart(e)}
             style={{ backgroundColor: props.color, }}>
         </div>

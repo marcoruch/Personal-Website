@@ -133,7 +133,7 @@ function Muehle() {
 
     const handleGameStoneMovedOnField = (item) => {
         if (!item) return;
-        axios.post(`${API_HOST}/api/Muehle/MoveStone`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
+        axios.post(`${API_HOST}/api/Muehle/MoveStoneOnBoard`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
     }
 
     const handleGameStoneSetOnField = (item) => {
