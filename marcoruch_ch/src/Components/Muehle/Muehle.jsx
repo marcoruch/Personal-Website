@@ -5,8 +5,11 @@ import { MuehlenProvider } from "../MuehleContext/MuehleContext";
 import Swal from 'sweetalert2'
 import firebase from './../Firebase/Firebase';
 import MuehleGameField from './../MuehleGameField/MuehleGameField'
+import axios from 'axios';
+import API_HOST from '../../environment'
+
 import "./Muehle.scss";
-        
+
 const muehlePossibilities = 
 [
     [1,2,3],
@@ -42,9 +45,6 @@ function Muehle() {
     const [chosenGame, setChosenGame] = useState(null);
     const [searchingGame, setSearchingGame] = useState(false)
 
-
-
-
     firebase.auth().onAuthStateChanged((user) => {
    
         if (user) {
@@ -58,95 +58,6 @@ function Muehle() {
             firebase.auth().signInAnonymously()
         }
     })
-
-    const arraysEqual = (arr1, arr2) => {
-        if(arr1.length !== arr2.length)
-            return false;
-        for(var i = arr1.length; i--;) {
-            if(arr1[i] !== arr2[i])
-                return false;
-        }
-    
-        return true;
-    }
-
-    const canStoneMakeMove = (from, to, gameField) => {
-        if (movePossibilities.filter(possibility => arraysEqual(possibility,[from,to])).length>0 ||
-        movePossibilities.filter(possibility => arraysEqual(possibility,[to,from])).length>0){
-           if (gameField.filter(stone => stone.associatedDotId === to && stone.isAvailable).length >0){
-                return true;
-            }
-        }   
-        return false;
-     }
-
-    const isNewMuehleInGameFieldForColor = (gameField, existingMuehlen, color) => {
-        const newExistingMuehlen = [];
-        let anyNewMuehle = false;
-        for (let possibilityIndex = 0; possibilityIndex < muehlePossibilities.length; possibilityIndex++) {
-            const possibility = muehlePossibilities[possibilityIndex];
-            
-            let isWhiteMuehle = true;
-            let isBlackMuehle = true;
-            for (let possibilityPartIndex = 0; possibilityPartIndex < possibility.length; possibilityPartIndex++) {
-                const possibilityPart = possibility[possibilityPartIndex];
-               
-                    if (isBlackMuehle) {
-                        if (!gameField.filter(item => item.associatedDotId === possibilityPart)[0].isBlack) {
-                            isBlackMuehle = false;
-                        }
-                    }
-                    
-                    if (isWhiteMuehle) {
-                        if (!gameField.filter(item => item.associatedDotId === possibilityPart)[0].isWhite) {
-                            isWhiteMuehle = false;
-                        }
-                    }
-            }
-
-            if ((isBlackMuehle && color === 'black') || (isWhiteMuehle && color === 'white')){
-                // if is not a new muhle
-                 if (existingMuehlen && existingMuehlen.filter(existingMuehle =>arraysEqual(existingMuehle.possibility,possibility)).length >0) {
-                    newExistingMuehlen.push(possibility);
-                } else {
-                    anyNewMuehle = true;
-                    newExistingMuehlen.push(possibility);
-                }
-              
-            }
-
-            if ((isBlackMuehle && color !== 'black') || (isWhiteMuehle && color !== 'white')){
-                    newExistingMuehlen.push(possibility);
-            }
-        }
-        if (anyNewMuehle){
-            return {isMuehle: true,  existingMuehlen: newExistingMuehlen.map((item, index) => { return {id: index, possibility: item}})};
-        } else {
-            return {isMuehle: false,  existingMuehlen: newExistingMuehlen.map((item, index) => { return {id: index, possibility: item}})};
-        }
-    }
-
-    const isThereRemovableStone = (color, field, existingMuehlen) => {
-        if (!existingMuehlen) {
-            return true;
-        } 
-        
-        const muehlePoints = [];
-        for (let muehlePossibilitiesIndex = 0; muehlePossibilitiesIndex < existingMuehlen.length; muehlePossibilitiesIndex++) {
-            muehlePoints.push(existingMuehlen[muehlePossibilitiesIndex].possibility[0]);
-            muehlePoints.push(existingMuehlen[muehlePossibilitiesIndex].possibility[1]);
-            muehlePoints.push(existingMuehlen[muehlePossibilitiesIndex].possibility[2]);
-        }
-
-        const colorStones = field.filter(stone => (color === "black" && stone.isBlack) || (color === "white" && stone.isWhite)).map(stone => stone.associatedDotId);
-
-        for (let stoneIndex = 0; stoneIndex < colorStones.length; stoneIndex++) {
-            if  (!muehlePoints.includes(colorStones[stoneIndex])){
-                return true;
-            }
-        }
-        return false;
-    }
 
     async function fetchGames() {
         firebase.firestore().collection('muehleGames').onSnapshot(function(querySnapshot) {
@@ -217,37 +128,11 @@ function Muehle() {
             setSearchingGame(true);
             return;
         }
-
-        console.log("Creating a game");
-
+        console.log("Creating a game...");
         const db = firebase.firestore();
-
-        let basicGameField = 
-        [
-            1, 0, 0, 2, 0, 0, 3,
-            0, 9, 0, 10, 0, 11, 0,
-            0, 0, 17, 18, 19, 0, 0,
-            4, 12, 20, 0, 21, 13, 5,
-            0, 0, 22, 23, 24, 0, 0,
-            0, 14, 0, 15, 0, 16, 0,
-            6, 0, 0, 7, 0, 0, 8
-        ]
-        .map(function(dotNumber, arrIndex){
-            return {
-                id: arrIndex, isDot: dotNumber >= 1, associatedDotId: dotNumber, isAvailable: dotNumber >= 1 
-            }
-        });
-        db.collection("muehleGames").doc(`${user}-`).set({
-            id: `${user}-`,
-            playerOne: user,
-            playerSearching: true,
-            createDate: new Date(),
-            finished: false,
-            playerOneName: userName,
-            gameField: basicGameField,
-            playerOneLeftStones: 9,
-            currentPlayer:  Math.round(1 + Math.random() * (2 - 1)),
-        }).then(function () {
+        let CreateMuehleUrl = `${API_HOST}/api/Muehle/Create`;
+        axios.post(CreateMuehleUrl)
+        .then((res)=> {
             console.log("Added new searching Game... wait for Opponent");
             setSearchingGame(true);
             // set chosenGame to firstplayer userid
@@ -261,8 +146,6 @@ function Muehle() {
                 }
               
             });
-        
-
         }).catch(function () {
             console.log("Couldnt add Document?");
             setSearchingGame(false);
@@ -272,186 +155,16 @@ function Muehle() {
 
     const handleGameStoneRemovedFromField = (item) => {
         if (!item) return;
-        let oldRefGame = firebase.firestore().collection('muehleGames').doc(chosenGame.id);
-
-        for (let index = 0; index < chosenGame.existingMuehlen.length; index++) {
-            const element = chosenGame.existingMuehlen[index];
-            if (element.possibility.includes(item.gameStone.associatedDotId)) {
-                return;
-            }
-        }
-        let newField = [...chosenGame.gameField];
-        for (let index = 0; index < newField.length; index++) {
-            if (newField[index].associatedDotId === item.gameStone.associatedDotId) {
-                newField[index].isWhite = false;
-                newField[index].isBlack = false;
-                newField[index].isAvailable = true;
-            }
-        }
-        oldRefGame.update({
-            playerHasMuehle: false,
-            gameField: newField,
-            currentPlayer: chosenGame.currentPlayer === 1 ? 2 : 1,
-        }).then(async function () {
-            console.log("Game successfully updated!");
-        })
-        .catch(function (error) {
-            // The document probably doesn't exist.
-            console.error("Error updating Game: ", error);
-        });
+        axios.post(`${API_HOST}/api/Muehle/RemoveStone`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
     }
 
     const handleGameStoneMovedOnField = (item) => {
-        let newField = [...chosenGame.gameField];
-        let movePossible = canStoneMakeMove(item.draggedFrom.gameStone.associatedDotId, item.dragTo, newField);
-      
-        if (movePossible) {
-            let oldRefGame = firebase.firestore().collection('muehleGames').doc(chosenGame.id);
-            if (chosenGame.currentPlayer === 1){
-                for (let index = 0; index < newField.length; index++) {
-                    console.log(item.draggedFrom.gameStone.associatedDotId, newField[index].associatedDotId)
-                    if (newField[index].associatedDotId === item.draggedFrom.gameStone.associatedDotId) {
-                        newField[index].isWhite = false;
-                        newField[index].isBlack = false;
-                        newField[index].isAvailable = true;
-                    }
-                    if (newField[index].associatedDotId === item.dragTo) {
-                        newField[index].isWhite = true;
-                        newField[index].isBlack = false;
-                        newField[index].isAvailable = false;
-                    }
-                }
-                let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'white');
-                        if (muehlenCheckResult.isMuehle){
-                            if (!isThereRemovableStone('black', newField, chosenGame.existingMuehlen)) {
-                                muehlenCheckResult.isMuehle = false;
-                            }
-                        }
-                        oldRefGame.update({
-                            playerHasMuehle: muehlenCheckResult.isMuehle,
-                            gameField: newField,
-                            currentPlayer: muehlenCheckResult.isMuehle ? 1 : 2,
-                            existingMuehlen: muehlenCheckResult.existingMuehlen,
-                        }).then(async function () {
-                            console.log("Game successfully updated!");
-                        })
-                        .catch(function (error) {
-                            // The document probably doesn't exist.
-                            console.error("Error updating Game: ", error);
-                        });
-            } else if (chosenGame.currentPlayer ===2){
-                for (let index = 0; index < newField.length; index++) {
-                    if (newField[index].associatedDotId === item.draggedFrom.gameStone.associatedDotId) {
-                        newField[index].isWhite = false;
-                        newField[index].isBlack = false;
-                        newField[index].isAvailable = true;
-                    }
-                    if (newField[index].associatedDotId === item.dragTo) {
-                        newField[index].isWhite = false;
-                        newField[index].isBlack = true;
-                        newField[index].isAvailable = false;
-                    }
-                }
-                let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'black');
-                        if (muehlenCheckResult.isMuehle){
-                            if (!isThereRemovableStone('white', newField, chosenGame.existingMuehlen)) {
-                                muehlenCheckResult.isMuehle = false;
-                            }
-                        }
-                        oldRefGame.update({
-                            playerHasMuehle: muehlenCheckResult.isMuehle,
-                            gameField: newField,
-                            currentPlayer: muehlenCheckResult.isMuehle ? 2 : 1,
-                            existingMuehlen: muehlenCheckResult.existingMuehlen,
-                        }).then(async function () {
-                            console.log("Game successfully updated!");
-                        })
-                        .catch(function (error) {
-                            // The document probably doesn't exist.
-                            console.error("Error updating Game: ", error);
-                        });
-            } else {
-                // something went wrong
-                console.log("Player not recognized");
-            }
-        }
+        if (!item) return;
+        axios.post(`${API_HOST}/api/Muehle/MoveStone`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
     }
 
     const handleGameStoneSetOnField = (item) => {
-        let newField = [...chosenGame.gameField];
-
-        let oldRefGame = firebase.firestore().collection('muehleGames').doc(chosenGame.id);
-        if (item.draggedFrom.color === "black" && chosenGame.currentPlayer === 2) {
-            for (const key in newField) {
-                if (newField.hasOwnProperty(key)) {
-                    const element = newField[key];
-                    if (element.isDot && element.associatedDotId === item.dragTo && element.isAvailable) {
-                        newField[key].isAvailable = false;
-                        newField[key].isWhite = false;
-                        newField[key].isBlack = true;
-                        
-                        let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'black');
-                        if (muehlenCheckResult.isMuehle){
-                            if (!isThereRemovableStone('white', newField, chosenGame.existingMuehlen)) {
-                                muehlenCheckResult.isMuehle = false;
-                            }
-                        }
-                        oldRefGame.update({
-                            playerHasMuehle: muehlenCheckResult.isMuehle,
-                            gameField: newField,
-                            currentPlayer: muehlenCheckResult.isMuehle ? 2 : 1,
-                            existingMuehlen: muehlenCheckResult.existingMuehlen,
-                            playerTwoLeftStones: chosenGame.playerTwoLeftStones - 1,
-                        }).then(async function () {
-                            console.log("Game successfully updated!");
-                        })
-                        .catch(function (error) {
-                            // The document probably doesn't exist.
-                            console.error("Error updating Game: ", error);
-                        });
-                        return;
-                    }
-                }
-            }
-
-        } else if (item.draggedFrom.color === "white" && chosenGame.currentPlayer === 1) {
-
-            for (const key in newField) {
-                if (newField.hasOwnProperty(key)) {
-                    const element = newField[key];
-                    if (element.isDot && (element.associatedDotId === item.dragTo) && element.isAvailable) {
-                        newField[key].isAvailable = false;
-                        newField[key].isWhite = true;
-                        newField[key].isBlack = false;
-                        let muehlenCheckResult = isNewMuehleInGameFieldForColor(newField, chosenGame.existingMuehlen, 'white');
-                        if (muehlenCheckResult.isMuehle){
-                            if (!isThereRemovableStone('black', newField, chosenGame.existingMuehlen)) {
-                                muehlenCheckResult.isMuehle = false;
-                            }
-                        }
-                        oldRefGame.update({
-                            playerHasMuehle: muehlenCheckResult.isMuehle,
-                            gameField: newField,
-                            currentPlayer: muehlenCheckResult.isMuehle ? 1 : 2,
-                            existingMuehlen: muehlenCheckResult.existingMuehlen,
-                            playerOneLeftStones: chosenGame.playerOneLeftStones - 1,
-                        }).then(async function () {
-                            console.log("Game successfully updated!");
-                        })
-                        .catch(function (error) {
-                            // The document probably doesn't exist.
-                            console.error("Error updating Game: ", error);
-                        });
-                        return;
-                    }
-                }
-            }
-        } else {
-            console.log("Error, player not recognized...");
-            return;
-        }
-
-
+        axios.post(`${API_HOST}/api/Muehle/SetStone`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
     }
 
     useEffect(() => {
@@ -483,12 +196,9 @@ function Muehle() {
                                         <List.Item className="game-item" key={game.id}>
                                             <Icon name='game' size='big' />
                                             <List.Content>
-                                                <List.Header>Freies Spiel mit {game.userName}</List.Header>
+                                                <List.Header>Freies Spiel mit {user.uid === game.playerOne ? game.playerTwoName : game.playerOneName}</List.Header>
                                                 <List.Description>
-                                                    Created on {' '}
-                                                    <a>
-                                                        <b>{game.createDate.toDate().toLocaleString()}</b>
-                                                    </a>{' '}.
+                                                 Zuletzt gespielt am <b>{game.updateDate.toDate().toLocaleString()}</b>
                                                 </List.Description>
                                             </List.Content>
                                             <List.Content floated='right'>
@@ -499,7 +209,6 @@ function Muehle() {
                                 : <div>Momentan sind keine laufenden Spiele von Ihnen vorhanden.</div>
                                 }<br></br>
 
-                                
                                 <h1>Wartende Gegner</h1>
                                 {games.filter(game => game.playerSearching &&  game.playerOne !== user).length > 0?
                                 <List>
@@ -507,12 +216,9 @@ function Muehle() {
                                         <List.Item className="game-item" key={game.id}>
                                             <Icon name='game' size='big' />
                                             <List.Content>
-                                                <List.Header>Freies Spiel mit {game.userName}</List.Header>
-                                                <List.Description>
-                                                    Created on {' '}
-                                                    <a>
-                                                        <b>{game.createDate.toDate().toLocaleString()}</b>
-                                                    </a>{' '}.
+                                                <List.Header>Freies Spiel mit {game.playerOneName}</List.Header>
+                                                <List.Description> 
+                                                    Created on <b>{game.createDate.toDate().toLocaleString()}</b>
                                                 </List.Description>
                                             </List.Content>
                                             <List.Content floated='right'>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import API_HOST from '../../environment'
-import { Form, Button, Icon } from 'semantic-ui-react'
+import { Form, Button, Icon, Accordion } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import NumberInput from 'semantic-ui-react-numberinput';
+
 
 
 import PropTypes, { array } from 'prop-types'
@@ -17,6 +19,7 @@ function TopLevelEntryFormular(props) {
     const [NewObject, SetNewObject] = useState({});
     const [FormConfiguration, setFormConfiguration] = useState(null)
     const [CantLoad, setCantLoad] = useState(false)
+    const [AccordionOpen, SetAccordionOpen] = useState(false);
 
 
     /* Fetch Projects Max Retries */
@@ -31,14 +34,6 @@ function TopLevelEntryFormular(props) {
         return <Form.Input className={"input-string"} onChange={(_, { value }) => setConfigValueToProps(name, value)} placeholder={readableName}></Form.Input>
     }
 
-    const ValidateNumeric = (event, data, next) => {
-        if (isNaN(data)) {
-            event.target.value = event.target.value.substring(0, event.target.value.length - 1);
-        } else {
-            next();
-        }
-    }
-
     const getImageUploadField = (name, readableName) => {
         let fileInputRef = React.createRef();
         return <React.Fragment>
@@ -51,7 +46,9 @@ function TopLevelEntryFormular(props) {
     }
 
     const getNumericInputField = (name, readableName) => {
-        return <Form.Input className={"input-string"} onChange={(event, { value }) => ValidateNumeric(event, value, () => setConfigValueToProps(name, value))} placeholder={readableName}></Form.Input>
+        let standardValue = 1;
+        return <NumberInput value={NewObject[name] ? NewObject[name] : standardValue} onChange={(changeValue) => setConfigValueToProps(name, changeValue)} placeholder={readableName} />
+
     }
 
     const getDateInput = (name) => {
@@ -98,7 +95,7 @@ function TopLevelEntryFormular(props) {
 
 
     const onObjectPosted = (postedObject) => {
-        if (props.onObjectPosted){
+        if (props.onObjectPosted) {
             props.onObjectPosted(postedObject);
         }
     }
@@ -131,7 +128,7 @@ function TopLevelEntryFormular(props) {
 
         if (fetchedConfiguration) {
             setFormConfiguration(fetchedConfiguration);
-            SetNewObject(({...NewObject, "configFields" : fetchedConfiguration.configFields, "entryKey" : ConfigurationKey}));
+            SetNewObject(({ ...NewObject, "configFields": fetchedConfiguration.configFields, "entryKey": ConfigurationKey }));
         } else {
             setRetriedFetching(retriedFetching + 1);
         }
@@ -151,9 +148,22 @@ function TopLevelEntryFormular(props) {
         <div className="toplevel-form">
             {FormConfiguration != null
                 ? <React.Fragment>
-                    <h3>Neues Objekt</h3>
-                    {Object.keys(FormConfiguration.configFields).map(propName => getFieldByConfig(propName, FormConfiguration.configFields[propName]))}
+
+<Accordion styled className={"accordion"}>
+        <Accordion.Title
+          active={AccordionOpen}
+          index={0}
+          onClick={() => SetAccordionOpen(!AccordionOpen)}
+        >
+          <Icon name='dropdown' />
+          Neues Objekt
+        </Accordion.Title>
+        <Accordion.Content active={AccordionOpen}>
+        {Object.keys(FormConfiguration.configFields).map(propName => getFieldByConfig(propName, FormConfiguration.configFields[propName]))}
                     <Form.Button name="Add Object" onClick={() => handleSubmit()}>Objekt hinzufügen</Form.Button>
+        </Accordion.Content>
+
+        </Accordion>
                 </React.Fragment> : ""}
         </div>
     )

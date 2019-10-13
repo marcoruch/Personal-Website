@@ -130,12 +130,10 @@ function LoginModal() {
                                 type="password"
                                 onChange={handlePasswordChange}
                             />
-                            <Button  fluid size="large" onClick={signInEmailPasswordToFirebase}>Login</Button>
+                            <Button  fluid size="large" onClick={signInEmailPasswordToFirebase}>Login</Button><br />
+                            <Button  fluid size="large" onClick={handleModalToggle}>Jetzt Registrieren</Button>
                         </Form>
                     </Segment>
-                    <Message>
-                        <a href="#register" onClick={handleModalToggle}>Jetzt Registrieren</a>
-                    </Message>
                 </Grid.Column>
             </Grid>
         </div> 
@@ -168,12 +166,10 @@ function LoginModal() {
                                 type="password"
                                 onChange={handleCheckCreatePasswordChange}
                             />
-                            <Button  fluid size="large" onClick={createEmailPasswordFirebaseUser}>Registrieren</Button>
+                            <Button  fluid size="large" onClick={createEmailPasswordFirebaseUser}>Registrieren</Button><br />
+                            <Button  fluid size="large"  onClick={handleModalToggle}>Zurück zum Login</Button>
                         </Form>
                     </Segment>
-                    <Message>
-                        <a href="#login" onClick={handleModalToggle}>Zurück zum Login</a>
-                    </Message>
                 </Grid.Column>
             </Grid>
         </div> }</React.Fragment>

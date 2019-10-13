@@ -15,23 +15,21 @@ function MuehleStone(props) {
         setDragged(props);
     }
 
-    return (
-        props.playerHasMuehle
-            ? <div
-                id={props.index}
-                key={props.id}
-                className="stone"
-                style={{ backgroundColor: props.color, cursor: 'unset'}}>
-            </div>
-            : <div
-                id={props.index}
-                key={props.id}
-                className="stone"
-                draggable
-                onDragStart={(e) => onDragStart(e)}
-                style={{ backgroundColor: props.color, }}>
-            </div>
-
+    return (props.playerHasMuehle
+        ? <div
+            id={props.index}
+            key={props.id}
+            className="stone"
+            style={{ backgroundColor: props.color, cursor: 'unset' }}>
+        </div>
+        : <div
+            id={props.index}
+            key={props.id}
+            className="stone"
+            draggable
+            onDragStart={(e) => onDragStart(e)}
+            style={{ backgroundColor: props.color, }}>
+        </div>
     )
 }
 
