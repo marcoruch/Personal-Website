@@ -24,6 +24,9 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
       </li>
     </ul>
   </li>
+    <li>
+    Projekte (Only with Permission)
+  </li>
   <li>
     Beautiful CV (Only with Permission)
   </li>
@@ -36,10 +39,16 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
    <li>
     Kontaktformular
   </li>
+   <li>
+    Admin Erfassungs-Formular für Projekte / CV / Skills
+  </li>
 </ul>
 
 <h2>Lerninhalte React</h2>
 <ul>
+  <li>
+   React Hooks, State
+  </li>
   <li>
     Router
   </li>
@@ -54,6 +63,9 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
   </li>
     <li>
     Functional-/ & Class Components
+  </li>
+      <li>
+    React + Axios
   </li>
 </ul>
 
@@ -75,6 +87,9 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
    <li>
     Firestore Filestorage
   </li>
+      <li>
+    Google Cloud Storage API
+  </li>
 </ul>
 
 <h2>Lerninhalte Node.js</h2>
@@ -85,6 +100,9 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
   
    <li>
     Setup von Node.js Applikation für Firebase Projekt
+  </li>
+      <li>
+    Routes, Secured Routes, Authorization, "require", REST-API Struktur
   </li>
 </ul>
 
