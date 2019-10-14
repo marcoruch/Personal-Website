@@ -19,7 +19,7 @@ function Muehle() {
     const [searchingGame, setSearchingGame] = useState(false)
 
     firebase.auth().onAuthStateChanged((user) => {
-   
+
         if (user) {
             setUser(user.uid);
             if (!user.isAnonymous) {
@@ -33,13 +33,13 @@ function Muehle() {
     })
 
     async function fetchGames() {
-        firebase.firestore().collection('muehleGames').onSnapshot(function(querySnapshot) {
+        firebase.firestore().collection('muehleGames').onSnapshot(function (querySnapshot) {
             const fetchedGames = [];
-                    querySnapshot.forEach(function(doc) {
-                    fetchedGames.push(doc.data());
+            querySnapshot.forEach(function (doc) {
+                fetchedGames.push(doc.data());
             });
             setGames(fetchedGames);
-        }, function(error) {
+        }, function (error) {
             console.log("couldn't fetch games", error);
         });
     }
@@ -48,12 +48,12 @@ function Muehle() {
 
         const refGame = firebase.firestore().collection('muehleGames').doc(gameId);
 
-         refGame.onSnapshot(function(doc) {
+        refGame.onSnapshot(function (doc) {
             setChosenGame(null);
             setChosenGame(doc.data());
         });
-        
-        
+
+
     }
 
     const joinExistingGame = async (gameId) => {
@@ -65,36 +65,36 @@ function Muehle() {
             {
                 id: `${gameId}${user}`,
                 playerTwo: user,
-                playerTwoLeftStones:9,
+                playerTwoLeftStones: 9,
                 playerSearching: false,
                 playerTwoName: userName,
             })
-        .then(async function() {
-            console.log("Game successfully updated!");
-            
-            await oldRefGame.get().then(async function (doc) {
-                currentGame = doc.data();
-                await firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).set(currentGame);
-                oldRefGame.delete();
+            .then(async function () {
+                console.log("Game successfully updated!");
+
+                await oldRefGame.get().then(async function (doc) {
+                    currentGame = doc.data();
+                    await firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).set(currentGame);
+                    oldRefGame.delete();
+                });
+
+
+                firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).onSnapshot(function (doc) {
+                    currentGame = doc.data();
+                    setChosenGame(null);
+                    setChosenGame(currentGame);
+                });
+
+            })
+            .catch(function (error) {
+                // The document probably doesn't exist.
+                console.error("Error updating Game: ", error);
             });
 
 
-            firebase.firestore().collection("muehleGames").doc(`${gameId}${user}`).onSnapshot(function(doc) {
-                currentGame = doc.data();
-                setChosenGame(null);
-                setChosenGame(currentGame);
-            });
-            
-        })
-        .catch(function(error) {
-            // The document probably doesn't exist.
-            console.error("Error updating Game: ", error);
-        });
-
-        
     }
 
-    
+
     const createGameRoom = async () => {
         if (games.filter(game => game.id === `${user}-`).length > 0) {
             console.log("Game already exists...");
@@ -105,43 +105,43 @@ function Muehle() {
         const db = firebase.firestore();
         let CreateMuehleUrl = `${API_HOST}/api/Muehle/Create`;
         axios.post(CreateMuehleUrl)
-        .then((res)=> {
-            console.log("Added new searching Game... wait for Opponent");
-            setSearchingGame(true);
-            // set chosenGame to firstplayer userid
-            db.collection("muehleGames").doc(`${user}-`).onSnapshot((doc) => {
-                // when it updates for a first time, this it means that a user joined
-                // so if it got updated & wasn't deleted, try fetching with the new doc id
-                if (doc.exists) {
-                    setChosenGame(null);
-                    setChosenGame(doc.data())
-                    db.collection("muehleGames").doc(`${doc.data().id}`).onSnapshot((doc) => doc.exists ? (setChosenGame(null),setChosenGame(doc.data())) : console.log("Doesnt exist anymore"));
-                }
-              
-            });
-        }).catch(function () {
-            console.log("Couldnt add Document?");
-            setSearchingGame(false);
-        })
+            .then((res) => {
+                console.log("Added new searching Game... wait for Opponent");
+                setSearchingGame(true);
+                // set chosenGame to firstplayer userid
+                db.collection("muehleGames").doc(`${user}-`).onSnapshot((doc) => {
+                    // when it updates for a first time, this it means that a user joined
+                    // so if it got updated & wasn't deleted, try fetching with the new doc id
+                    if (doc.exists) {
+                        setChosenGame(null);
+                        setChosenGame(doc.data())
+                        db.collection("muehleGames").doc(`${doc.data().id}`).onSnapshot((doc) => doc.exists ? (setChosenGame(null), setChosenGame(doc.data())) : console.log("Doesnt exist anymore"));
+                    }
+
+                });
+            }).catch(function () {
+                console.log("Couldnt add Document?");
+                setSearchingGame(false);
+            })
 
     }
 
     const handleGameStoneRemovedFromField = (item) => {
         if (!item) return;
-        axios.post(`${API_HOST}/api/Muehle/RemoveStone`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
+        axios.post(`${API_HOST}/api/Muehle/RemoveStone`, { chosenGame: chosenGame, item: item }).then(res => { console.log(res); });
     }
 
     const handleGameStoneMovedOnField = (item) => {
         if (!item) return;
-        axios.post(`${API_HOST}/api/Muehle/MoveStoneOnBoard`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
+        axios.post(`${API_HOST}/api/Muehle/MoveStoneOnBoard`, { chosenGame: chosenGame, item: item }).then(res => { console.log(res); });
     }
 
     const handleGameStoneSetOnField = (item) => {
-        axios.post(`${API_HOST}/api/Muehle/SetStone`, { chosenGame: chosenGame, item: item}).then(res => { console.log(res); });
+        axios.post(`${API_HOST}/api/Muehle/SetStone`, { chosenGame: chosenGame, item: item }).then(res => { console.log(res); });
     }
 
     useEffect(() => {
-         fetchGames();
+        fetchGames();
     }, []);
 
     return (
@@ -164,47 +164,49 @@ function Muehle() {
                                 <h1>Meine laufenden Spiele</h1>
 
                                 {games.filter(game => !game.playerSearching && (game.playerOne === user || game.playerTwo === user)).length > 0 ?
-                                <List>
-                                    {games.filter(game => !game.playerSearching && (game.playerOne === user || game.playerTwo === user)).map(game =>
-                                        <List.Item className="game-item" key={game.id}>
-                                            <Icon name='game' size='big' />
-                                            <List.Content>
-                                                <List.Header>Freies Spiel mit {user.uid === game.playerOne ? game.playerTwoName : game.playerOneName}</List.Header>
-                                                <List.Description>
-                                                 Zuletzt gespielt am <b>{game.updateDate.toDate().toLocaleString()}</b>
-                                                </List.Description>
-                                            </List.Content>
-                                            <List.Content floated='right'>
-                                                <Button onClick={() => rejoinGame(game.id)}>Rejoin Game</Button>
-                                            </List.Content>
-                                        </List.Item>)}
-                                </List>
-                                : <div>Momentan sind keine laufenden Spiele von Ihnen vorhanden.</div>
+                                    <List> {games.filter(game => !game.playerSearching && (game.playerOne === user || game.playerTwo === user)).map(game =>
+                                            <List.Item className="game-item" key={game.id}>
+                                                {
+                                                    (user === game.playerOne && game.playerOneWon) || (user === game.playerOne && game.playerOneWon)
+                                                        ? <Icon name='trophy' color='yellow' size='big'></Icon>
+                                                        : game.playerOneWon || game.playerTwoWon
+                                                            ? <Icon name='thumbs down' color='red' size='big'></Icon>
+                                                            : <Icon name='circle notch' size='big' color='blue' />
+                                                }
+                                                <List.Content>
+                                                    <List.Header>Freies Spiel mit {user === game.playerOne ? game.playerTwoName : game.playerOneName}</List.Header>
+                                                    <List.Description> Zuletzt gespielt am <b>{game.updateDate.toDate().toLocaleString()}</b> </List.Description>
+                                                </List.Content>
+                                                <List.Content>
+                                                </List.Content>
+                                                <List.Content floated='right'>
+                                                    <Button onClick={() => rejoinGame(game.id)}>Rejoin Game</Button>
+                                                </List.Content>
+                                            </List.Item>)}
+                                    </List>
+                                    : <div>Momentan sind keine laufenden Spiele von Ihnen vorhanden.</div>
                                 }<br></br>
 
                                 <h1>Wartende Gegner</h1>
-                                {games.filter(game => game.playerSearching &&  game.playerOne !== user).length > 0?
-                                <List>
-                                    {games.filter(game => game.playerSearching &&  game.playerOne !== user).map(game =>
-                                        <List.Item className="game-item" key={game.id}>
-                                            <Icon name='game' size='big' />
-                                            <List.Content>
-                                                <List.Header>Freies Spiel mit {game.playerOneName}</List.Header>
-                                                <List.Description> 
-                                                    Created on <b>{game.createDate.toDate().toLocaleString()}</b>
-                                                </List.Description>
-                                            </List.Content>
-                                            <List.Content floated='right'>
-                                                <Button onClick={() => joinExistingGame(game.id)}>Join Game</Button>
-                                            </List.Content>
-                                        </List.Item>)}
-                                </List>
-                                : <div>Momentan befinden sich keine Gegner in der Warteschleife...</div>}
+                                {games.filter(game => game.playerSearching && game.playerOne !== user).length > 0 ?
+                                    <List> {games.filter(game => game.playerSearching && game.playerOne !== user).map(game =>
+                                            <List.Item className="game-item" key={game.id}>
+                                                <Icon name='play' color='green' size='big' />
+                                                <List.Content>
+                                                    <List.Header>Freies Spiel mit {game.playerOneName}</List.Header>
+                                                    <List.Description> Created on <b>{game.createDate.toDate().toLocaleString()}</b> </List.Description>
+                                                </List.Content>
+                                                <List.Content floated='right'>
+                                                    <Button onClick={() => joinExistingGame(game.id)}>Join Game</Button>
+                                                </List.Content>
+                                            </List.Item>)}
+                                    </List>
+                                    : <div>Momentan befinden sich keine Gegner in der Warteschleife...</div>}
                                 <br></br>
                                 <Form.Button onClick={() => createGameRoom()} >Neuen Spielraum erstellen</Form.Button>
 
                             </div>
-                            : <MuehleGameField handleGameStoneRemovedFromField={handleGameStoneRemovedFromField} handleGameStoneMovedOnField={handleGameStoneMovedOnField} handleGameStoneSetOnField={handleGameStoneSetOnField} user={user} userName={userName} chosenGame={chosenGame}></MuehleGameField>
+                            : <MuehleGameField backToOverview={setChosenGame} handleGameStoneRemovedFromField={handleGameStoneRemovedFromField} handleGameStoneMovedOnField={handleGameStoneMovedOnField} handleGameStoneSetOnField={handleGameStoneSetOnField} user={user} userName={userName} chosenGame={chosenGame}></MuehleGameField>
             }
         </MuehlenProvider>
     )

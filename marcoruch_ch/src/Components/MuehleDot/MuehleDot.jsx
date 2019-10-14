@@ -56,9 +56,16 @@ function MuehleDot(props) {
         }
     }
 
-    const onClickStartAllSet = (e) => {
+    const onClickRemoveAllSet = (e) => {
         if (props.playerHasMuehle) {
             props.handleGameStoneRemovedFromField(props);
+        }
+    }
+
+    const onClickStartAllSet = (e) => {
+        setDraggedInField(props);
+        if (props.playerHasMuehle) {
+            setDraggedOut(props);
         }
     }
     
@@ -81,12 +88,12 @@ function MuehleDot(props) {
 
 
     useEffect(() => {
-        if (SelectedDot === props.id) {
+        if (SelectedDot === props.id || Dragged === props.id || DraggedInField === props) {
             setStyle({
                 position: 'absolute',
                 width: '100%',
                 height: '100%',
-                transform: (props.gameStone.isBlack || props.gameStone.isWhite) ? 'scale(1.75)' : 'scale(1.25)',
+                transform: (props.gameStone.isBlack || props.gameStone.isWhite) ? 'scale(2.5)' : 'scale(1.25)',
                 backgroundColor: props.gameStone.isBlack ? 'black' : props.gameStone.isWhite ? 'white' : 'grey',
                 WebkitFilter: props.gameStone.isBlack ? 'black' : props.gameStone.isWhite ? 'white' : 'blur(20px) saturate(2)',
                 zIndex: 100,
@@ -103,7 +110,7 @@ function MuehleDot(props) {
                 borderRadius:'100%',
             });
         }
-    }, [])
+    }, [DraggedInField, SelectedDot, Dragged])
     
     return (
   
@@ -154,7 +161,7 @@ function MuehleDot(props) {
             className={`dot ${props.id}`} 
             key={props.id}
             draggable
-            onClick={(e) => onClickStartAllSet(e)}
+            onClick={(e) => onClickRemoveAllSet(e)}
             onDragStart={(e) => onDragStartNotAllSet(e)}>
                 <div  id={props.id}  style={{cursor:'pointer', ...style}}>
                 
@@ -167,7 +174,7 @@ function MuehleDot(props) {
             key={props.id}
             draggable
             
-            onClick={(e) => onClickStartAllSet(e)}
+            onClick={(e) => onClickRemoveAllSet(e)}
             onDragStart={(e) => onDragStartAllSet(e)}>
                 <div  id={props.id}  style={{cursor:'pointer', ...style}}>
                 
@@ -178,9 +185,7 @@ function MuehleDot(props) {
             id={props.id} 
             className={`dot ${props.id}`} 
             key={props.id}
-            onClick={(e) => onClickAllSet(e)}
-            onDragOver={(e) => onDragOverAllSet(e)}
-            onDrop={(e) => onDroppedAllSet(e)}>
+            onDragOver={(e) => onDragOverAllSet(e)}>
                 <div  id={props.id}  style={style}>
                 
                 </div>
@@ -197,7 +202,7 @@ function MuehleDot(props) {
             
             onClick={(e) => onClickStartNotAllSet(e)}
             onDragStart={(e) => onDragStartNotAllSet(e)}>
-                <div  id={props.id}  style={style}>
+                <div  id={props.id}  style={{cursor:'pointer',...style}}>
                 
                 </div>
         </div>
@@ -207,8 +212,9 @@ function MuehleDot(props) {
             className={`dot ${props.id}`} 
             key={props.id}
             draggable
+            onClick={(e) => onClickStartNotAllSet(e)}
             onDragStart={(e) => onDragStartNotAllSet(e)}>
-                <div  id={props.id}  style={style}>
+                <div  id={props.id}  style={{cursor:'pointer',...style}}>
                 
                 </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Icon, Button} from 'semantic-ui-react'
 import MuehlePlayerSide from "../MuehlePlayerSide/MuehlePlayerSide";
 import MuehleDot from "../MuehleDot/MuehleDot";
 
@@ -23,19 +24,32 @@ function MuehleGameField(props) {
                              </p>
             </div>
 
-            <MuehlePlayerSide id={1} playerHasMuehle={props.chosenGame.playerHasMuehle} isPlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField}></MuehlePlayerSide>
-            <div className="muehle-game">
-                <div className="outer-field">
-                    {dotsOuter.map(i => <MuehleDot canMove={props.chosenGame.playerOneLeftStones === 0 && props.chosenGame.playerTwoLeftStones === 0} isWhitePlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} isBlackPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneMovedOnField={props.handleGameStoneMovedOnField} handleGameStoneSetOnField={props.handleGameStoneSetOnField} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField} id={i} gameStone={getGameStone(i)}></MuehleDot>)}
-                    <div className="middle-field">
-                        {dotsMiddle.map(i => <MuehleDot canMove={props.chosenGame.playerOneLeftStones === 0 && props.chosenGame.playerTwoLeftStones === 0} isWhitePlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} isBlackPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneMovedOnField={props.handleGameStoneMovedOnField} handleGameStoneSetOnField={props.handleGameStoneSetOnField} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField} id={i} gameStone={getGameStone(i)}></MuehleDot>)}
-                        <div className="center-field">
-                            {dotsCenter.map(i => <MuehleDot canMove={props.chosenGame.playerOneLeftStones === 0 && props.chosenGame.playerTwoLeftStones === 0} isWhitePlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} isBlackPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneMovedOnField={props.handleGameStoneMovedOnField} handleGameStoneSetOnField={props.handleGameStoneSetOnField} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField} id={i} gameStone={getGameStone(i)}></MuehleDot>)}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <MuehlePlayerSide id={2} playerHasMuehle={props.chosenGame.playerHasMuehle} isPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerTwoLeftStones} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField}></MuehlePlayerSide>
+
+            {
+                (props.user === props.chosenGame.playerOne && props.chosenGame.playerOneWon) || (props.user === props.chosenGame.playerOne && props.chosenGame.playerOneWon)
+                    ?  <div className="result-field"><Button onClick={() => props.backToOverview(null)}>Zurück zur Übersicht</Button> <div className={"won-field"}><Icon name='trophy' color='yellow' size='massive'></Icon></div></div>
+                    : props.chosenGame.playerOneWon || props.chosenGame.playerTwoWon
+                        ? <div className="result-field"><Button onClick={() => props.backToOverview(null)}>Zurück zur Übersicht</Button><div className={"loss-field"}> <Icon name='thumbs down' color='red' size='massive'></Icon></div></div>
+                        :
+                        <React.Fragment>
+                            <MuehlePlayerSide id={1} playerHasMuehle={props.chosenGame.playerHasMuehle} isPlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} playerName={props.chosenGame.playerOneName} player={props.chosenGame.playerOne} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerOneLeftStones} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField}></MuehlePlayerSide>
+                            <div className="muehle-game">
+                                <div className="outer-field">
+                                    {dotsOuter.map(i => <MuehleDot canMove={props.chosenGame.playerOneLeftStones === 0 && props.chosenGame.playerTwoLeftStones === 0} isWhitePlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} isBlackPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneMovedOnField={props.handleGameStoneMovedOnField} handleGameStoneSetOnField={props.handleGameStoneSetOnField} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField} id={i} gameStone={getGameStone(i)}></MuehleDot>)}
+                                    <div className="middle-field">
+                                        {dotsMiddle.map(i => <MuehleDot canMove={props.chosenGame.playerOneLeftStones === 0 && props.chosenGame.playerTwoLeftStones === 0} isWhitePlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} isBlackPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneMovedOnField={props.handleGameStoneMovedOnField} handleGameStoneSetOnField={props.handleGameStoneSetOnField} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField} id={i} gameStone={getGameStone(i)}></MuehleDot>)}
+                                        <div className="center-field">
+                                            {dotsCenter.map(i => <MuehleDot canMove={props.chosenGame.playerOneLeftStones === 0 && props.chosenGame.playerTwoLeftStones === 0} isWhitePlaying={props.chosenGame.currentPlayer === 1 && props.user === props.chosenGame.playerOne} isBlackPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} currentPlayer={props.chosenGame.currentPlayer} playerHasMuehle={props.chosenGame.playerHasMuehle} handleGameStoneMovedOnField={props.handleGameStoneMovedOnField} handleGameStoneSetOnField={props.handleGameStoneSetOnField} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField} id={i} gameStone={getGameStone(i)}></MuehleDot>)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <MuehlePlayerSide id={2} playerHasMuehle={props.chosenGame.playerHasMuehle} isPlaying={props.chosenGame.currentPlayer === 2 && props.user === props.chosenGame.playerTwo} playerName={props.chosenGame.playerTwoName} player={props.chosenGame.playerTwo} chosenGameId={props.chosenGame.id} playerLeftStones={props.chosenGame.playerTwoLeftStones} handleGameStoneRemovedFromField={props.handleGameStoneRemovedFromField}></MuehlePlayerSide>
+                        </React.Fragment>
+            }
+
+
+
 
         </div>
     )

@@ -18,7 +18,6 @@ function TopLevelEntryFormular(props) {
     const [ConfigurationKey, setConfigurationKey] = useState(props.EntryKey)
     const [NewObject, SetNewObject] = useState({});
     const [FormConfiguration, setFormConfiguration] = useState(null)
-    const [CantLoad, setCantLoad] = useState(false)
     const [AccordionOpen, SetAccordionOpen] = useState(false);
 
 
@@ -105,6 +104,8 @@ function TopLevelEntryFormular(props) {
         let postTopLevelEntryUrl = `${API_HOST}/api/topLevelEntry`;
         axios.post(postTopLevelEntryUrl, NewObject).then(res => {
             if (res.data) {
+                Swal.fire(`Hochladen von ${ConfigurationKey} erfolgreich.`, `Erfolgreich hochgeladen!`, 'success')
+
                 onObjectPosted(res.data);
             }
         });
@@ -138,9 +139,6 @@ function TopLevelEntryFormular(props) {
     useEffect(() => {
         if (retriedFetching <= maxRetries) {
             fetchConfiguration();
-        }
-        else {
-            setCantLoad(true);
         }
     }, [retriedFetching])
 
