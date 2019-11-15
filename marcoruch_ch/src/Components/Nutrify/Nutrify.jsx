@@ -42,13 +42,13 @@ function Nutrify(props) {
         setDietType(DietTypes.filter(nt => nt.key === x.value)[0])
     }
 
-    const handleNewNutritionalFilter = (newNutritionalFilter) => {
-        if (NutritionalFilters.length > 0 && NutritionalFilters.filter(nf => nf.key === newNutritionalFilter.key).length === 0) {
-            setNutritionalFilters([...NutritionalFilters, newNutritionalFilter])
+    const handleNewNutritionalFilter = (newNutritionalFilter, nutritionalAmount) => {
+        if (NutritionalFilters.length > 0 && NutritionalFilters.filter(nf => nf.type.key === newNutritionalFilter.key).length === 0) {
+            setNutritionalFilters([...NutritionalFilters, { type: newNutritionalFilter, amount: nutritionalAmount}])
         } else if (NutritionalFilters.length === 0) {
-            setNutritionalFilters([newNutritionalFilter])
+            setNutritionalFilters([{ type: newNutritionalFilter, amount: nutritionalAmount}])
         } else {
-            console.warn("Nutritional Filter already added: ", newNutritionalFilter);
+            console.warn("Nutritional Filter already added: ", { type: newNutritionalFilter, amount: nutritionalAmount});
         }
     }
 
@@ -71,7 +71,10 @@ function Nutrify(props) {
                             <NutritionalFilter onClick={handleNewNutritionalFilter} /><br />
                             {
                                 NutritionalFilters && NutritionalFilters.length > 0 
-                                ? NutritionalFilters.map(x => <NutritionalFilterLabel text={x.text} color={"black"}  backgroundColor={"green"}></NutritionalFilterLabel>) 
+                                ? <div>
+                                    <h3 style={{ color: '#ffffff' }}>Nährstoffe: </h3>
+                                    { NutritionalFilters.map(x => <NutritionalFilterLabel text={x.type.text + " ("+x.amount +"g)"} color={"black"}  backgroundColor={"green"}></NutritionalFilterLabel>) }
+                                </div>
                                 : ""
                             }
                         </GridColumn>

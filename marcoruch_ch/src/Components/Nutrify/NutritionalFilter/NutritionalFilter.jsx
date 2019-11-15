@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Grid } from 'semantic-ui-react'
+import NumberInput from 'semantic-ui-react-numberinput';
 import IconButton from '../../GeneralComponents/IconButton/IconButton'
 import PropTypes from 'prop-types'
 
@@ -168,34 +169,87 @@ const nutritionalTypes = [
     },
 ]
 
+const nutritionalGramFactors = [
+    {
+        key: 'Grams',
+        text: 'g',
+        value: 1,
+        image: ''
+    },
+    {
+        key: '100Grams',
+        text: '100 g',
+        value: 100,
+        image: ''
+    },
+    {
+        key: 'Kilograms',
+        text: '1 kg',
+        value: 1000,
+        image: ''
+    },
+]
+
 function NutritionalFilter(props) {
 
     const [NutritionalType, setNutritionalType] = useState(null)
+    const [NutritionalFactorToGrams, setNutritionalFactorToGrams] = useState(100)
+    const [NutritionalAmount, setNutritionalAmount] = useState(1)
 
-    const onClick = (x) => {
-        props.onClick(x);
-    }
+    // Add Type
+    const onClick = (x, y) => props.onClick(x, y);
 
-    const handleNutritionalTypeChanged = (x) => {
-        setNutritionalType(nutritionalTypes.filter(nt => nt.key === x.value)[0])
-    }
+    // Change Type
+    const handleNutritionalTypeChanged = (x) => setNutritionalType(nutritionalTypes.filter(nt => nt.key === x.value)[0])
+
+    // Change Factor
+    const handleNutritionalFactorToGramsChanged = (x) => setNutritionalFactorToGrams(nutritionalGramFactors.filter(nf => nf.value === x.value)[0].value)
+
+    // Amount
+    const handleNutritionalAmountChanged = (x) => setNutritionalAmount(x)
 
     return (
-        <div style={{display:"flex", flexDirection: "row", }}>
-            <Dropdown
-                style={{marginRight: "10px"}}
-                placeholder='Choose Nutritional-Type'
-                search
-                searchInput={{ type: 'text' }}
-                fluid
-                selection
-                options={nutritionalTypes}
-                onChange={(_, data) => handleNutritionalTypeChanged(data)} />
-            {
-                NutritionalType
-                    ? <IconButton icon="plus circle"  color="green" name="" onClick={() => onClick(NutritionalType)} />
-                    : <IconButton disabled icon="plus circle"  color="black" name="" />
-            }
+        <div>
+            <div style={{ display: "flex", flexDirection: "row", }}>
+
+
+                <Dropdown
+                    style={{ marginRight: "10px" }}
+                    placeholder='Choose Nutritional-Type'
+                    search
+                    searchInput={{ type: 'text' }}
+                    fluid
+                    selection
+                    options={nutritionalTypes}
+                    onChange={(_, data) => handleNutritionalTypeChanged(data)} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", }}>
+
+
+                <h3 style={{ color: '#ffffff' }}>Menge</h3>
+                <NumberInput style={{ marginRight: "10px", width: '100px' }} value={NutritionalAmount} onChange={handleNutritionalAmountChanged} placeholder={"Menge"} />
+
+                <br></br>
+                <div className="mengeHolder" style={{ display: 'flex', flexDirection: 'row' }}>
+                    <Dropdown
+                        style={{ marginRight: "10px", width: '150px' }}
+                        placeholder='Choose Amount Type'
+                        search
+                        searchInput={{ type: 'text' }}
+                        fluid
+                        selection
+                        value={NutritionalFactorToGrams}
+                        options={nutritionalGramFactors}
+                        onChange={(_, data) => handleNutritionalFactorToGramsChanged(data)} />
+                    {
+
+                        NutritionalType
+                            ? <IconButton icon="plus circle" color="green" name="" onClick={() => onClick(NutritionalType, NutritionalAmount * NutritionalFactorToGrams)} />
+                            : <IconButton disabled icon="plus circle" color="black" name="" />
+                    }
+                </div>
+            </div>
+
         </div>
     )
 }
