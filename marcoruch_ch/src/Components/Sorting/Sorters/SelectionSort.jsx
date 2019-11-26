@@ -6,33 +6,45 @@ import Sleep from '../General/Sleeper.js'
 import './Sorters.scss'
 import PlaySound from '../General/Sounds';
 
-export default function BubbleSort({ array, maxNumber, timeOut }) {
+export default function SelectionSort({ array, timeOut, maxNumber }) {
     const [CurrentArray, setCurrentArray] = useState(array);
     const [CurrentNumberFrom, setCurrentNumberFrom] = useState(null);
     const [CurrentNumberTo, setCurrentNumberTo] = useState(null);
 
-    const BubbleSort = async () => {
-        let tempArray = Array.from(array);
-        for (let i = 0; i < tempArray.length - 1; i++) {
-            for (let j = 0; j < tempArray.length - i - 1; j++) {
-                if (tempArray[j] > tempArray[j + 1]) {
-                    let temp = tempArray[j];
-                    tempArray[j] = tempArray[j + 1];
-                    tempArray[j + 1] = temp;
-                    setCurrentNumberFrom(temp);
-                    setCurrentNumberTo(tempArray[j]);
-                    setCurrentArray([...tempArray]);
-                    PlaySound(timeOut, tempArray[j] / maxNumber * 100)
-                    await Sleep(timeOut);
-                }
-            }
-        }
+
+    const SelectionSortAlgo = async (arr) => {
+        let tempArray = Array.from(arr);
+        let arrLength = tempArray.length; 
+        
+        for (let i = 0; i < arrLength - 1; i++) 
+        { 
+            let min_idx = i; 
+            for (let j = i + 1; j < arrLength; j++) 
+                if (tempArray[j] < tempArray[min_idx]) 
+                    min_idx = j; 
+  
+            let temp = tempArray[min_idx]; 
+            tempArray[min_idx] = tempArray[i]; 
+            tempArray[i] = temp; 
+
+            setCurrentNumberFrom(temp);
+            setCurrentNumberTo(tempArray[min_idx] );
+            setCurrentArray([...tempArray]);
+            PlaySound(timeOut, tempArray[min_idx]  / maxNumber * 100)
+            await Sleep(timeOut);
+        } 
     }
 
-    useEffect(async () => {
-            await BubbleSort();
+
+
+
+    useEffect(() => {
+        async function runAlgo() {
+            await SelectionSortAlgo(array);
             FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
-        }, [array]);
+        }
+        runAlgo();
+    }, [array, timeOut]);
 
     return (
         <React.Fragment>

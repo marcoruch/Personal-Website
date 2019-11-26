@@ -3,6 +3,7 @@ import { Image, List, Dropdown } from 'semantic-ui-react'
 import BubbleSort from './Sorters/BubbleSort';
 import './Sorting.scss';
 import QuickSort from './Sorters/QuickSort';
+import SelectionSort from './Sorters/SelectionSort';
 
 export default function SortingAlgorithms() {
     const [SortingAmount, setSortingAmount] = useState(20);
@@ -54,6 +55,7 @@ export default function SortingAlgorithms() {
     const sortingAlgorithms = {
         'bubble': { title: "Bubble Sort", Component: <BubbleSort array={CreateSortingArray()} maxNumber={SortingAmount} timeOut={TimeOutVisualisationInMs}></BubbleSort> },
         'quickSort': { title: "Quick Sort", Component: <QuickSort array={CreateSortingArray()} maxNumber={SortingAmount} timeOut={TimeOutVisualisationInMs}></QuickSort> },
+        'selectionSort': {title: "Selection Sort", Component: <SelectionSort array={CreateSortingArray()} maxNumber={SortingAmount} timeOut={TimeOutVisualisationInMs}></SelectionSort>}
     }
 
     return (
