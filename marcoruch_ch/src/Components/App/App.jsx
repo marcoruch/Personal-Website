@@ -18,6 +18,7 @@ import Muehle from "../Muehle/Muehle";
 import Nutrify from "../Nutrify/Nutrify";
 import Games from "../Games/Games";
 import FoodLookup from "../FoodLookup/FoodLookup";
+import Sorting from "../Sorting/Sorting";
 import { MapProvider } from "../MapContainer/MapContext/MapContext"
 import { UserProvider } from "../UserContext/UserContext";
 import axios from 'axios'
@@ -43,11 +44,13 @@ const myRouter = () => {
         <Route path="/contact" component={GetContact} />
         <Route path="/games" component={GetGames} />
         <Route path="/haltestelle" component={GetHaltestelle} />
+        <Route path="/sorting" component={GetSorting} />
         <Route path="/muehle" component={GetMuehle} />
         <Route path="/nutrify" component={GetNutrify} />
         <Route path="/curriculumvitae" component={GetCV} />
         <Route path="/games/foodlookup" component={GetFoodLookup} />
         <Route path="/games/haltestelle" component={GetHaltestelle} />
+        <Route path="/games/sorting" component={GetSorting} />
         <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/foodlookup" component={GetFoodLookup} />
         </UserProvider>
@@ -119,6 +122,15 @@ function GetHaltestelle() {
 
   return <React.Fragment>
     <Haltestelle></Haltestelle>
+    
+  <Footer></Footer>
+  </React.Fragment>;
+}
+
+function GetSorting() {
+
+  return <React.Fragment>
+    <Sorting></Sorting>
     
   <Footer></Footer>
   </React.Fragment>;

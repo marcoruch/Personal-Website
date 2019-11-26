@@ -1,0 +1,33 @@
+.sorting {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    min-height: 60vh;
+
+    .sorting-header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 20px;
+
+        h3 {
+            font-weight: 300;
+            color: white;
+            margin: 0px;
+            margin-right: 10px;
+            margin-left: 20px;
+        }
+    }
+
+    .sorting-algorithm-list {
+        
+        margin-bottom: 20px;
+    }
+}
