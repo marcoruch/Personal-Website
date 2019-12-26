@@ -15,6 +15,7 @@ import EditBlog from "../EditBlog/EditBlog";
 import Haltestelle from "../Haltestelle/Haltestelle";
 import CurriculumVitae from "../CurriculumVitae/CurriculumVitae";
 import Muehle from "../Muehle/Muehle";
+import RocketTracker from "../RocketTracker/RocketTracker";
 import Nutrify from "../Nutrify/Nutrify";
 import Games from "../Games/Games";
 import FoodLookup from "../FoodLookup/FoodLookup";
@@ -47,11 +48,13 @@ const myRouter = () => {
         <Route path="/sorting" component={GetSorting} />
         <Route path="/muehle" component={GetMuehle} />
         <Route path="/nutrify" component={GetNutrify} />
+        <Route path="/rockettracker" component={GetRocketTracker}/>
         <Route path="/curriculumvitae" component={GetCV} />
         <Route path="/games/foodlookup" component={GetFoodLookup} />
         <Route path="/games/haltestelle" component={GetHaltestelle} />
         <Route path="/games/sorting" component={GetSorting} />
         <Route path="/games/muehle" component={GetMuehle} />
+        <Route path="/games/rockettracker" component={GetRocketTracker}/>
         <Route path="/foodlookup" component={GetFoodLookup} />
         </UserProvider>
     </Router>
@@ -142,6 +145,13 @@ function GetMuehle() {
     
   <Footer></Footer>
   </React.Fragment>
+}
+
+function GetRocketTracker(){
+  return <>
+    <RocketTracker />
+    <Footer />
+  </>
 }
 
 

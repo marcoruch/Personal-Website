@@ -14,7 +14,7 @@
     "firebase": "^5.8.4",
     "fstream": "^1.0.12",
     "google-maps-react": "^2.0.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-firebase": "^2.2.8",
