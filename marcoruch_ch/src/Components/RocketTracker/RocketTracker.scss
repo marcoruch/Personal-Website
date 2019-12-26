@@ -1,13 +1,26 @@
-.rocket-tracker-holder{
-    
-        height: 60vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
+.rocket-tracker-holder {
+
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    color: #b4a892 !important;
+
+    a {
+        text-align: center;
+        font-size: 3em;
         margin-bottom: 100px;
-        margin-top: 100px;
-        flex-wrap: wrap;
         color: #b4a892 !important;
+        transition: 0.3s ease-in-out;
+    &:hover {
+        font-size: 3.2em;
+        color: #e7c995 !important;
     }
+    }
+
+}
