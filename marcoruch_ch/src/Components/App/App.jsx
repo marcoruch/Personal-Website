@@ -24,7 +24,7 @@ import { MapProvider } from "../MapContainer/MapContext/MapContext"
 import { UserProvider } from "../UserContext/UserContext";
 import axios from 'axios'
 import Footer from "../Footer/Footer";
-import Sitemap from 'react-router-sitemap';
+import GyroFun from "../GyroFun/GyroFun";
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
@@ -56,6 +56,7 @@ const myRouter = () => {
         <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/games/rockettracker" component={GetRocketTracker}/>
         <Route path="/foodlookup" component={GetFoodLookup} />
+        <Route path="/experimental/gyro" component={GetGyro} />
         </UserProvider>
     </Router>
 }
@@ -65,6 +66,12 @@ function App() {
   return (
     myRouter()
   );
+}
+
+function GetGyro() {
+  return <>
+    <GyroFun></GyroFun>
+  </>
 }
 
 function GetHome() {
