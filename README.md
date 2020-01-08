@@ -108,3 +108,7 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
 
 <h5>To use API use:</h5>
 <code>import API_HOST from '../../environment';</code>
+
+<h5> Todo </h5>
+- Implement Multilanguage with Firebase as Dictionary and Context as Language-State
+  - https://dev.to/halilcanozcelik/create-a-multi-language-website-with-react-context-api-4i27
