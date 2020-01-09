@@ -8,7 +8,7 @@ function Footer() {
         <footer className="App-footer">
 
             <div className="footer-top">
-                <p >Meine Projekte, Erfahrungen & Tasks</p>
+                <p >Marco Ruch - Persönliche Website</p>
             </div>
             <div className="footer-mid">
                 <p class="login-info">Einige Inhalte sind nur für Authorisierte Logins verfügbar - bitte für Informationen per <Link to="/contact">Kontaktformular</Link> oder <a href="mailto:marco_ruch@gmx.ch">E-Mail</a> melden.</p>
@@ -16,6 +16,7 @@ function Footer() {
             <div className="footer-bottom">
                 <div className="contact">
                     <h5>Kontaktinformationen</h5>
+                    <Link to="/contact">Kontaktformular</Link>
                     <a href="tel:+41765850641">Tel.: 076 585 06 41</a>
                     <a href="mailto:marco_ruch@gmx.ch">E-Mail: marco_ruch@gmx.ch</a>
                 </div>

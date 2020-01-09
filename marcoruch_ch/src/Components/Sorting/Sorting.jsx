@@ -49,6 +49,7 @@ export default function SortingAlgorithms() {
         return array;
     }
 
+    
     const CreateSortingArray = () => {
         return ShuffleArray(CreateNNumberArray(SortingAmount));
     }
