@@ -114,3 +114,4 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
   - https://dev.to/halilcanozcelik/create-a-multi-language-website-with-react-context-api-4i27
 - Implement SEO
  - https://dev.to/getd/a-one-minute-fix-to-make-your-react-site-just-a-bit-more-google-friendly-3g4d
+ - Partially Done: Site is ranked on Google but needs to be pushed higher
