@@ -171,7 +171,7 @@ function GetGames() {
   </React.Fragment>;
 }
 
-
+/*
 function GetCreateBlog() {
   return <React.Fragment>
     <CreateBlog></CreateBlog>
@@ -227,6 +227,6 @@ function GetBlog({ match }) {
     </div>
   );
 }
-
+*/
 
 export default App;
