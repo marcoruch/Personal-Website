@@ -115,3 +115,5 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
 - Implement SEO
  - https://dev.to/getd/a-one-minute-fix-to-make-your-react-site-just-a-bit-more-google-friendly-3g4d
  - Partially Done: Site is ranked on Google but needs to be pushed higher
+ - CV Interaction for Admins
+ - Project uneven numbers displays wrong size
