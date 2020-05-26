@@ -117,3 +117,6 @@ Ein <a href="https://firebase.google.com/docs/functions">Firebase-Functions-Back
  - Partially Done: Site is ranked on Google but needs to be pushed higher
  - CV Interaction for Admins
  - Project uneven numbers displays wrong size
+- HistoryParts
+ - Add Company highlight to HistoryParts
+ - Add possibility to uppload Companies Logo
