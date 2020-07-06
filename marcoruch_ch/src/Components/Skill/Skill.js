@@ -9,7 +9,7 @@ class Skill extends Component {
             return (
                 <div className="skill-panel" data={this.props.skill}>
                         <h2 className="skill-title">{this.props.skill.lang}</h2>
-                        <div className="skill-bar"><ProgressBar  percentage={this.props.skill.val}></ProgressBar></div>
+                        <div className="skill-bar"><ProgressBar percentage={this.props.skill.val}></ProgressBar></div>
                         <p className="skill-info">{this.props.skill.summary}</p>
                 </div>
         );

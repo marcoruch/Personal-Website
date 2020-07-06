@@ -9,11 +9,9 @@ const flex = {
 }
 
 function BlogPost({blog}) {
-    const [blogTitle, setBlogTitle] = useState(blog.title);
-    const [blogTags, setBlogTags] = useState(blog.tags);
-    const [blogContent, setBlogContent] = useState(blog.content);
-    const [blogCreateDate, setBlogCreateDate] = useState(blog.createDate);
-    const [blogUpdateDate, setBlogUpdateDate] = useState(blog.updateDate);
+    const [blogTitle] = useState(blog.title);
+    const [blogTags] = useState(blog.tags);
+    const [blogContent] = useState(blog.content);
     return (
         <React.Fragment>
             <div className="blog-entry">

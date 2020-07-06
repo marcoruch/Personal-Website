@@ -9,13 +9,13 @@ import NumberInput from 'semantic-ui-react-numberinput';
 
 
 
-import PropTypes, { array } from 'prop-types'
+import PropTypes from 'prop-types'
 
 import "./TopLevelEntryFormular.scss";
 
 function TopLevelEntryFormular(props) {
 
-    const [ConfigurationKey, setConfigurationKey] = useState(props.EntryKey)
+    const [ConfigurationKey] = useState(props.EntryKey)
     const [NewObject, SetNewObject] = useState({});
     const [FormConfiguration, setFormConfiguration] = useState(null)
     const [AccordionOpen, SetAccordionOpen] = useState(false);

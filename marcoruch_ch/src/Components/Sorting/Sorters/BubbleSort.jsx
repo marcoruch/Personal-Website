@@ -30,8 +30,11 @@ export default function BubbleSort({ array, maxNumber, timeOut }) {
     }
 
     useEffect(async () => {
+        async function RunData() {
             await BubbleSort();
             FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
+        }
+        RunData();
         }, [array]);
 
     return (

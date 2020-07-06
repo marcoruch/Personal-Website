@@ -45,13 +45,13 @@ function Skills() {
             <div className="skills-header">
 
             {skills.map((skill) =>
-                <div className={currentSkill && currentSkill.lang === skill.lang ? "skill-small active" : "skill-small"  } onClick={() => handleSkillChosen(skill.lang)}>{skill.lang}</div>
+                <div key={skill.lang} className={currentSkill && currentSkill.lang === skill.lang ? "skill-small active" : "skill-small"  } onClick={() => handleSkillChosen(skill.lang)}>{skill.lang}</div>
             )}
              <div className={currentSkill && currentSkill === "All" ? "skill-small active" : "skill-small"  } onClick={() => handleSkillChosen("All")}>Alle anzeigen</div>
             </div>
             {currentSkill === null || currentSkill === "All" ? <div className="ui  grid">
                 {skills.map((skill) =>
-                    <div class="eight wide column">
+                    <div className="eight wide column" key={skill.lang}>
                         <Skill key={skill.lang} skill={skill}></Skill>
                     </div>
                 )}</div>

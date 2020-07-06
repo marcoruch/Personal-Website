@@ -1,18 +1,12 @@
-import React, { useEffect, useContext } from "react";
-import { Button } from 'semantic-ui-react'
+import React, {  useContext } from "react";
 import { MuehlenContext } from '../MuehleContext/MuehleContext'
 import MuehleStone from '../MuehleStone/MuehleStone'
-import Swal from 'sweetalert2'
-import firebase from './../Firebase/Firebase';
 import "./MuehlePlayerSide.scss"
 function MuehlePlayerSide(props) {
 
-    const [PlayerOneStones, setPlayerOneStones,
-        PlayerTwoStones, setPlayerTwoStones,
-        MuehleGameField, setMuehleGameField,
-        SelectedDot, setSelectedDot,
-        Dragged, setDragged,
-        DraggedOut, setDraggedOut] = useContext(MuehlenContext);
+    const [PlayerOneStones,
+        PlayerTwoStones, 
+        DraggedOut] = useContext(MuehlenContext);
 
 
     const normal = {

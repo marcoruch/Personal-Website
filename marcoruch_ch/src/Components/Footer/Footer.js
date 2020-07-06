@@ -11,7 +11,7 @@ function Footer() {
                 <p >Marco Ruch - Persönliche Website</p>
             </div>
             <div className="footer-mid">
-                <p class="login-info">Einige Inhalte sind nur für Authorisierte Logins verfügbar - bitte für Informationen per <Link to="/contact">Kontaktformular</Link> oder <a href="mailto:marco_ruch@gmx.ch">E-Mail</a> melden.</p>
+                <p className="login-info">Einige Inhalte sind nur für Authorisierte Logins verfügbar - bitte für Informationen per <Link to="/contact">Kontaktformular</Link> oder <a href="mailto:marco_ruch@gmx.ch">E-Mail</a> melden.</p>
             </div>
             <div className="footer-bottom">
                 <div className="contact">

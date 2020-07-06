@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import { Icon, Button} from 'semantic-ui-react'
 import MuehlePlayerSide from "../MuehlePlayerSide/MuehlePlayerSide";
 import MuehleDot from "../MuehleDot/MuehleDot";

@@ -1,14 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { MuehlenContext } from '../MuehleContext/MuehleContext'
 import "./MuehleStone.scss"
 function MuehleStone(props) {
 
-    const [PlayerOneStones, setPlayerOneStones,
-        PlayerTwoStones, setPlayerTwoStones,
-        MuehleGameField, setMuehleGameField,
-        SelectedDot, setSelectedDot,
-        Dragged, setDragged,
-        DraggedOut, setDraggedOut] = useContext(MuehlenContext);
+    const [setDragged] = useContext(MuehlenContext);
 
 
     const onDragStart = (e) => {

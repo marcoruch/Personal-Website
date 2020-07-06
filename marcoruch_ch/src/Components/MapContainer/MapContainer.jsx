@@ -9,7 +9,7 @@ import './MapContainer.scss';
 
 function MapContainer(props) {
 
-    const [positions, setPositions, myLocation, setMyLocation] = useContext(MapContext)
+    const [positions, myLocation, setMyLocation] = useContext(MapContext)
     const [centerLocation, setCenterLocation] = useState(null);
     const [currentClickedMarker, setCurrentClickedMarker] = useState(null)
 

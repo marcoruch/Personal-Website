@@ -2,16 +2,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from '../Header/Header';
-import BlogPost from '../BlogPost/BlogPost';
-import CreateBlog from '../CreateBlog/CreateBlog';
-import SubHeader from '../SubHeader/SubHeader.jsx';
 import AboutMe from '../AboutMe/AboutMe';
 import Projects from '../Projects/Projects';
 import Skills from '../Skills/Skills';
 import Contact from '../Contact/Contact';
-import BlogCardHolder from "../BlogCardHolder/BlogCardHolder";
-import OverviewBlog from "../OverviewBlog/OverviewBlog";
-import EditBlog from "../EditBlog/EditBlog";
 import Haltestelle from "../Haltestelle/Haltestelle";
 import CurriculumVitae from "../CurriculumVitae/CurriculumVitae";
 import Muehle from "../Muehle/Muehle";

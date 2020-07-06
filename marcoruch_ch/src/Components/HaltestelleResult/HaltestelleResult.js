@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Form, Loader } from 'semantic-ui-react'
+import React, { useState, useContext } from "react";
+import { Form } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 import "./HaltestelleResult.scss"
 
@@ -9,10 +9,10 @@ import { HaltestellenContext } from "../HaltestellenContext/HaltestellenContext"
 function HaltestelleResult() {
 
 
-    const [haltestellen, setHaltestellen] = useContext(HaltestellenContext);
+    const [haltestellen] = useContext(HaltestellenContext);
 
     const [nearestHaltestelle, setNearestHaltestelle] = useState(null);
-    const [nearestDistance, setNearestDistance] = useState(null);
+    const [setNearestDistance] = useState(null);
 
     const  getDistance = (coord_one, coord_two) => {
         let X_one = coord_one.x;

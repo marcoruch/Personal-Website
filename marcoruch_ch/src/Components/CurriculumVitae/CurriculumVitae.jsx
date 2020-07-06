@@ -153,7 +153,7 @@ function CurriculumVitae() {
         }
     </div>
     
-    <TopLevelEntryFormular EntryKey={"skills"}></TopLevelEntryFormular></React.Fragment>
+    <TopLevelEntryFormular EntryKey={"historyParts"}></TopLevelEntryFormular></React.Fragment>
 };
 
 

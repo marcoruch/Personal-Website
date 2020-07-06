@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Image, List, Dropdown } from 'semantic-ui-react'
 import BubbleSort from './Sorters/BubbleSort';
 import './Sorting.scss';

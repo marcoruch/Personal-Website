@@ -41,7 +41,7 @@ function Games() {
             <div className="games-holder">
             {games.map((game, index) =>
 
-                <div className="card">
+                <div className="card" key={game.gameId}>
                     <header className="card-header" style={{ backgroundImage: `url(${game.gameImgUrl})` }}>
                         <h4 className="card-header--title">{game.gameNameShort}</h4>
                     </header>

@@ -7,7 +7,7 @@ import './UserControlPanelModal.scss';
 
 function UserControlPanelModal() {
 
-    const [User, SetUser, UserLoggedOut] = useContext(UserContext)
+    const [User, UserLoggedOut] = useContext(UserContext)
     const [shouldHide, setShouldHide] = useState(false);
 
     function handleBackDropClicked() {
@@ -26,11 +26,11 @@ function UserControlPanelModal() {
             : <React.Fragment>
                 <Backdrop click={handleBackDropClicked}></Backdrop>
                 <div className="usercontrolpanel-modal">
-                    <div class="ui inverted segment">
-                        <div class="ui inverted relaxed divided list">
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">{User.email}</div>
+                    <div className="ui inverted segment">
+                        <div className="ui inverted relaxed divided list">
+                            <div className="item">
+                                <div className="content">
+                                    <div className="header">{User.email}</div>
                                     <div>Profil</div>
                                     <div onClick={handleLogOut}>Ausloggen</div>
                                 </div>

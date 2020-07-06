@@ -16,16 +16,14 @@ function FoodLookup() {
     const [local, setLocal] = useState(true);
     const [geometryLocation, setGeometryLocation] = useState(null);
     const [searchPlaceOptions, setSearchPlaceOptions] = useState([{}]);
-    const [radius, setRadius] = useState(1500);
-    const [positions, setPositions, myLocation, setMyLocation] = useContext(MapContext)
+    const [radius] = useState(1500);
+    const [setPositions, myLocation] = useContext(MapContext)
     const [openFrom, setOpenFrom] = useState(0);
     const [openTo, setOpenTo] = useState(2400);
     const [pricing, setPricing] = useState(null);
     const [searching, setSearching] = useState(false);
     const [resultAmount, setResultAmount] = useState(20);
-    const [resultType, setResultType] = useState('restaurant');
-
-    const typeOptions =[ { key: "restaurant", value: "restaurant",  text: "restaurant"} ]
+    const [resultType] = useState('restaurant');
 
     const amountOptions = [
         {key: 5, value: 5, text: 5 },

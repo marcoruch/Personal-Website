@@ -12,8 +12,8 @@ import "./Projects.scss";
 
 function Projects(props) {
     const [Projects, setProjects] = useState(null)
-    const [LoadAll, setLoadAll] = useState(props.loadAll)
-    const [LoadAmount, setLoadAmount] = useState(props.loadAmount)
+    const [LoadAll] = useState(props.loadAll)
+    const [LoadAmount] = useState(props.loadAmount)
     const [IsUnauthorized, SetIsUnauthorized] = useState(false);
 
     /* Fetch Projects Max Retries */

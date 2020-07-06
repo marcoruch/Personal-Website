@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import HaltestelleMap from "../HaltestelleMap/HaltestelleMap"
 import HaltestelleResult from "../HaltestelleResult/HaltestelleResult"
 import { HaltestellenProvider } from "../HaltestellenContext/HaltestellenContext"
