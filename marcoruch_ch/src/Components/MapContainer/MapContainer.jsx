@@ -9,15 +9,18 @@ import './MapContainer.scss';
 
 function MapContainer(props) {
 
-    const [positions, myLocation, setMyLocation] = useContext(MapContext)
+    const [positions, setPositions, myLocation, setMyLocation] = useContext(MapContext)
     const [centerLocation, setCenterLocation] = useState(null);
     const [currentClickedMarker, setCurrentClickedMarker] = useState(null)
 
     useEffect(() => {
-        if (myLocation === null) {
             const location = window.navigator && window.navigator.geolocation
             if (location) {
                 location.getCurrentPosition((position) => {
+                    console.log({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    });
                     setMyLocation({
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
@@ -28,7 +31,6 @@ function MapContainer(props) {
                     console("error finding current position", error)
                 })
             }
-        }
         if (positions.length > 0) {
 
             setCurrentAverageGeolocation(positions.map(item => item.geometry.location));

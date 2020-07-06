@@ -17,7 +17,7 @@ function FoodLookup() {
     const [geometryLocation, setGeometryLocation] = useState(null);
     const [searchPlaceOptions, setSearchPlaceOptions] = useState([{}]);
     const [radius] = useState(1500);
-    const [setPositions, myLocation] = useContext(MapContext)
+    const [positions, setPositions, myLocation, setMyLocation] = useContext(MapContext)
     const [openFrom, setOpenFrom] = useState(0);
     const [openTo, setOpenTo] = useState(2400);
     const [pricing, setPricing] = useState(null);

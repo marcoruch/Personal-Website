@@ -18,7 +18,10 @@ function Games() {
         await firebase.firestore().collection('games').orderBy("gameName", "desc").get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                    fetchedGames.push(doc.data());
+                    if(doc.data().active){
+
+                        fetchedGames.push(doc.data());
+                    }
                 });
             })
         setGames(fetchedGames);
