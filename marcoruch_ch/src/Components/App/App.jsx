@@ -16,8 +16,14 @@ import FoodLookup from "../FoodLookup/FoodLookup";
 import Sorting from "../Sorting/Sorting";
 import { MapProvider } from "../MapContainer/MapContext/MapContext"
 import { UserProvider } from "../UserContext/UserContext";
+import BlogCardHolder from "../BlogCardHolder/BlogCardHolder";
+import OverviewBlog from "../OverviewBlog/OverviewBlog";
+import EditBlog from "../EditBlog/EditBlog";
 import axios from 'axios'
 import Footer from "../Footer/Footer";
+import SubHeader from '../SubHeader/SubHeader';
+import CreateBlog from '../CreateBlog/CreateBlog';
+import BlogPost from '../BlogPost/BlogPost';
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
@@ -32,9 +38,9 @@ const myRouter = () => {
         <Route path="/aboutme" component={GetAboutMe} />
         <Route path="/projects" component={GetProjects} />
         <Route path="/skills" component={GetSkills} />
-       { /* <Route path="/blog" component={GetBlog} />
+        <Route path="/blogs" component={GetBlog} />
+        <Route path="/blogs/:blogId" component={GetBlogPost} />
         <Route path="/createBlog" component={GetCreateBlog} />
-  <Route path="/overviewBlog" component={GetOverviewBlog} />*/}
         <Route path="/contact" component={GetContact} />
         <Route path="/games" component={GetGames} />
         <Route path="/haltestelle" component={GetHaltestelle} />
@@ -165,7 +171,6 @@ function GetGames() {
   </React.Fragment>;
 }
 
-/*
 function GetCreateBlog() {
   return <React.Fragment>
     <CreateBlog></CreateBlog>
@@ -181,27 +186,11 @@ function GetEditBlog({ match }) {
   <Footer></Footer>
   </React.Fragment>;
 }
-function GetOverviewBlog({ match }) {
-  return (
-    <div>
-      <Route path={`${match.path}/:id`} component={GetEditBlog} />
-      <Route exact path={match.path} render={() =>
-        <React.Fragment>
-          <SubHeader PageTitle="Meine Blogs"></SubHeader>
-          <OverviewBlog></OverviewBlog>
-          
-  <Footer></Footer>
-        </React.Fragment>
-
-      } />
-    </div>
-  );
-}
 
 function GetBlogPost({ match }) {
   return <React.Fragment>
 
-    <BlogPost id={match.params.id}></BlogPost>
+    <BlogPost routingParams={match.params}></BlogPost>
     
   <Footer></Footer>
   </React.Fragment>;
@@ -209,18 +198,19 @@ function GetBlogPost({ match }) {
 
 
 function GetBlog({ match }) {
-  return (
-    <div>
-      <Route path={`${match.path}/:id`} component={GetBlogPost} />
-      <Route exact path={match.path} render={() =>
-      
-          <BlogCardHolder amount={5} match={match}></BlogCardHolder>
-      } />
-      
-  <Footer></Footer>
-    </div>
-  );
+  if (match.isExact){
+    return (
+      <div>
+        <Route exact path={match.path} render={() =>
+          
+            <BlogCardHolder amount={5} match={match}></BlogCardHolder>
+        } />
+        
+      <Footer></Footer>
+      </div>
+    );
+  }
+  return (<React.Fragment></React.Fragment>)
 }
-*/
 
 export default App;

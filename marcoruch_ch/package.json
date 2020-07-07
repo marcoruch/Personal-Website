@@ -47,6 +47,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.5",
     "react-alice-carousel": "^1.15.2"
   }
 }

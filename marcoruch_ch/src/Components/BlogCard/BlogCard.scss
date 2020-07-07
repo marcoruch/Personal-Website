@@ -2,28 +2,23 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
     align-items: center;
-    color: black;
-    background-color: #fff;
-    height: 250px;
-    max-width: 500px;
+    background-color: #2f2f2f;
+    max-height: 300px;
+    overflow-y: auto;
+    max-width: 20%;
+    min-width: 350px;
     margin: 2.5%;
-    margin-bottom: 100px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
-    flex: 1 0 25%;
-
     .header {
-        position: absolute;
-        text-align: center;
         padding: 10px 0px;
-        top: 0;
         width: 100%;
-        color: white;
-        border-bottom: 1px solid grey;
-        background-color: #406577;
+        color: #b4a892 !important;
+        border-bottom: 1px solid white;
+        background-color: #2f2f2f;
     }
 
     .content {
@@ -33,6 +28,8 @@
         align-content: center;
         align-items: center;
         width: 100%;
+        padding: 10px 20px;
+        color: #fffaf2 !important;
 
         .summary {
             width: 100%;
@@ -41,41 +38,26 @@
             justify-content: center;
             align-content: center;
             align-items: center;
-
-            >.blog-small {
-                background-color: rgba(255, 255, 255, .9);
-                border: 2px solid rgba(139, 139, 139, .3);
-                color: rgba(0, 0, 0, 0.8);
-                margin: 10px 10px;
-                transition: all .2s;
-                padding: 10px;
-
-            }
         }
 
     }
 
+    .actions {
+        padding: 20px;
 
-    .user-profile {
-        position: relative;
-        bottom: 0;
+        width: 100%;
+        display: flex !important;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+        align-content: flex-end;
+
+        a {
+            color: #b4929e !important;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
     }
 
-}
-
-
-.blogLoader {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    height: 100px;
-    max-width: 500px;
-    margin: 2.5%;
-    margin-bottom: 100px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    flex: 1 0 25%;
-    /* explanation below */
 }

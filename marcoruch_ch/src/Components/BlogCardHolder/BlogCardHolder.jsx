@@ -10,22 +10,18 @@ function BlogCardHolder(props) {
 
 
 
-    const [blogs, setBlogs] = useState(null);
+    const [blogOverviews, setBlogOverviews] = useState(null);
 
     async function fetchBlogs() {
-        let fetchedBlogs = [];
+        let fetchedBlogOverviewData = [];
 
-        await firebase.firestore().collection('blogUsers').doc('userUids').get().then(function(doc) {
-
-            if (doc.exists) {
-                doc.data().uids.forEach(uid => {
-                    fetchedBlogs.push(uid);
-                });
-            }
-
+        await firebase.firestore().collection('blogOverviewData').get().then((snapshot) => {
+            snapshot.docs.forEach(doc => {
+                fetchedBlogOverviewData.push(doc.data());
+            });
         });
 
-        setBlogs(fetchedBlogs);
+        setBlogOverviews(fetchedBlogOverviewData);
     }
 
     useEffect(() => {
@@ -33,16 +29,17 @@ function BlogCardHolder(props) {
     }, []);
 
 
-    return !blogs ?
-        < div className = "skillsloader" > < Loader active inline = 'centered' /> </div> :
-        ( <div className = "blog-card-holder" >
-            <div className = "header" > Blogs </div>
+    return !blogOverviews ?
+        < div className="skillsloader" > < Loader active inline='centered' /> </div> :
+        (<div className="blog-card-holder" >
+            <div className="header"> Blogs </div>
 
-            <div className = "blogs-holder" > {
-                blogs.map((uid) => < BlogCard uid = { uid }
-                    />)} </div> </div>
-                );
-            }
+            <div className="blogs-holder" > {
+                blogOverviews.map((blogOverview) => <BlogCard key={blogOverview.blogId} props={blogOverview} />)}
+            </div>
+        </div>
+        );
+}
 
 
-            export default BlogCardHolder;
+export default BlogCardHolder;
