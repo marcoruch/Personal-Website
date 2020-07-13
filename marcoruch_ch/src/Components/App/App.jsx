@@ -69,9 +69,8 @@ function App() {
 function GetHome() {
   return <React.Fragment>
     <AboutMe></AboutMe>
-    <Projects loadAll={false} loadAmount={5}></Projects>
     <Skills></Skills>
-    <Games></Games>
+    <Games loadAll={false} loadAmount={4}></Games>
     <Contact></Contact>
     <Footer></Footer>
   </React.Fragment>;

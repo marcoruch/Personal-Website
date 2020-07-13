@@ -21,13 +21,10 @@ function BlogPost({ routingParams }) {
 
         await firebase.firestore().collection('blogOverviewData').where("blogId", "==", blogId).get().then((snapshot) => {
             setBlogOverviewData(snapshot.docs[0].data());
-            console.log(snapshot.docs[0].data());
         });
     }
 
     useEffect(() => {
-
-        console.log(routingParams);
         fetchBlog();
     }, []);
 
@@ -38,7 +35,7 @@ function BlogPost({ routingParams }) {
             : <React.Fragment>
                 <div className="blog-header">
                     <div className="blog-title">
-                        <h1>{blogOverviewData.blogTitle}</h1>
+                        <h1>{blogOverviewData.blogTitle} -  {blogOverviewData.editedDate.toDate().toLocaleDateString()}</h1>
                     </div>
                     <div className="blog-me">
                         <div className="picture-holder">

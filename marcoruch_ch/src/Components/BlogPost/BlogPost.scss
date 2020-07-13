@@ -1,11 +1,12 @@
 .blog-header {
-	padding: 30px;
-	padding-bottom: 0px;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 	align-content: center;
-	align-items: center;
+	color: #fff;
+	padding-left: 60px;
+	padding-top: 0px;
+	max-width: 80vw;
 
 	.blog-title {
 		height: 180px;
@@ -14,9 +15,11 @@
 		flex-direction: column;
 		justify-content: center;
 		h1 {
+			max-width: 55vw;
 			vertical-align: middle;
 			color: whitesmoke !important;
-			max-width: 350px;
+			text-transform: uppercase;
+			font-size: 3rem;
 		}
 	}
 
@@ -27,6 +30,7 @@
 		transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
 		animation: fadeFromLeftIn 2s forwards;
 		position: relative;
+		float: right;
 
 		.picture-holder {
 			position: relative;
@@ -69,7 +73,6 @@
 			margin-top: 50px;
 			h1 {
 				font-size: 20px;
-				color: rgb(183, 130, 253) !important;
 				margin-top: 0px;
 				padding: 0px;
 				padding-left: 0px;
@@ -82,13 +85,13 @@
 				margin-bottom: 5px;
 				padding: 0px;
 				padding-left: 10px;
-				color: #9ed1ca;
-			}
+				color: #b4a892 !important;
+						}
 
 			h3 {
 				margin-top: 0px;
 				padding: 0px;
-				color: #ecf387;
+				color: #b4a892 !important;
 			}
 		}
 	}
@@ -105,11 +108,15 @@
 
 	.blog-content {
 		padding: 30px;
-		max-width: 800px;
+		max-width: 80vw;
 		background-color: rgba(0, 0, 0, 0.05);
 		box-shadow: 0 5px #b4a892, 0px -5px #b4a892;
 
 		letter-spacing: 1.5px;
+
+		p {
+			padding: 20px 0px;
+		}
 		blockquote {
 			margin: 10px 0px;
 			background-color: #2f2f2f;

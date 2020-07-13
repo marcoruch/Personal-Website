@@ -8,18 +8,23 @@ import "./Games.scss"
 
 
 
-function Games() {
+function Games(props) {
 
 
     const [games, setGames] = useState(null);
+    const [LoadAll] = useState(props.loadAll)
+    const [LoadAmount] = useState(props.loadAmount)
 
     async function fetchGames() {
         const fetchedGames = [];
+
         await firebase.firestore().collection('games').orderBy("gameName", "desc").get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
+                    if (!LoadAll && fetchedGames.length == LoadAmount) {
+                        return;
+                    }
                     if(doc.data().active){
-
                         fetchedGames.push(doc.data());
                     }
                 });
