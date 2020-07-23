@@ -6,7 +6,7 @@ import Sleep from '../General/Sleeper.js'
 import './Sorters.scss'
 import PlaySound from '../General/Sounds';
 
-export default function QuickSort({ array, timeOut, maxNumber }) {
+export default function QuickSort({ array, timeOut, maxNumber, setSortingActive }) {
     const [CurrentArray, setCurrentArray] = useState(array);
     const [CurrentNumberFrom, setCurrentNumberFrom] = useState(null);
     const [CurrentNumberTo, setCurrentNumberTo] = useState(null);
@@ -30,8 +30,7 @@ export default function QuickSort({ array, timeOut, maxNumber }) {
                 setCurrentNumberFrom(temp);
                 setCurrentNumberTo(tempArray[j]);
                 setCurrentArray([...tempArray]);
-                PlaySound(timeOut, tempArray[j] / maxNumber * 100)
-                await Sleep(timeOut);
+                await PlaySound(timeOut, tempArray[j] / maxNumber * 100)
             }
         }
 
@@ -44,8 +43,7 @@ export default function QuickSort({ array, timeOut, maxNumber }) {
         setCurrentNumberTo(tempArray[i + 1]);
         setCurrentArray([...tempArray]);
 
-        PlaySound(timeOut, tempArray[i + 1] / maxNumber * 100)
-        await Sleep(timeOut);
+        await PlaySound(timeOut, tempArray[i + 1] / maxNumber * 100)
 
         return {pi: i + 1, arr: tempArray};
     }
@@ -72,12 +70,14 @@ export default function QuickSort({ array, timeOut, maxNumber }) {
 
 
     useEffect(() => {
-        async function runAlgo() {
+        async function RunData() {
+            setSortingActive(true);
             await QuickSortAlgo(array, 0, array.length - 1);
-            FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
+            await FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
+            setSortingActive(false);
         }
-        runAlgo();
-    }, [array, timeOut]);
+        RunData();
+    }, []);
 
     return (
         <React.Fragment>

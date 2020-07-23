@@ -8,8 +8,7 @@ const FinalSwoosh = async (funcFrom, funcTo, array, timeOut) => {
    
     for (let index = 0; index < array.length; index++) {
         funcTo(index);
-        PlaySound(timeOut,  index / array.length * 100);
-        await Sleep(timeOut);
+        await PlaySound(timeOut,  index / array.length * 100);
     }
     funcTo(-1);
 }

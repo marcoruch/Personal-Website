@@ -7,6 +7,7 @@ import TopLevelEntryFormular from '../TopLevelEntryFormular/TopLevelEntryFormula
 
 
 import './Skills.scss';
+import { isDeepStrictEqual } from 'util';
 
 function Skills() {
 
@@ -15,7 +16,7 @@ function Skills() {
 
     async function fetchSkills() {
         const fetchedSkills = [];
-        await firebase.firestore().collection('skills').orderBy("val", "desc").get()
+        await firebase.firestore().collection('skills').where('val', ">", 40).orderBy("val", "desc").get()
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 fetchedSkills.push(doc.data());

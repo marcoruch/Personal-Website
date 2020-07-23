@@ -6,7 +6,7 @@ import Sleep from '../General/Sleeper.js'
 import './Sorters.scss'
 import PlaySound from '../General/Sounds';
 
-export default function BubbleSort({ array, maxNumber, timeOut }) {
+export default function BubbleSort({ array, maxNumber, timeOut, setSortingActive }) {
     const [CurrentArray, setCurrentArray] = useState(array);
     const [CurrentNumberFrom, setCurrentNumberFrom] = useState(null);
     const [CurrentNumberTo, setCurrentNumberTo] = useState(null);
@@ -22,26 +22,28 @@ export default function BubbleSort({ array, maxNumber, timeOut }) {
                     setCurrentNumberFrom(temp);
                     setCurrentNumberTo(tempArray[j]);
                     setCurrentArray([...tempArray]);
-                    PlaySound(timeOut, tempArray[j] / maxNumber * 100)
-                    await Sleep(timeOut);
+                    await PlaySound(timeOut, tempArray[j] / maxNumber * 100)
                 }
             }
         }
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         async function RunData() {
+            setSortingActive(true);
             await BubbleSort();
-            FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
+            await FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
+            setSortingActive(false);
         }
         RunData();
-        }, [array]);
+    }, []);
 
     return (
         <React.Fragment>
             <div className="sorters">
                 {CurrentArray.map(number =>
                     <SorterElement
+                        key={number}
                         number={number}
                         maxNumber={maxNumber}
                         width={(window.innerWidth - ((array.length - 1) * 20)) / array.length}

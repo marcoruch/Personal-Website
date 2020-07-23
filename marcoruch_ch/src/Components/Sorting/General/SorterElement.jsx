@@ -16,6 +16,6 @@ export default function SorterElement({ number, maxNumber, state, width }) {
 
 
     return (
-        <div className='sorterElement' style={{ ...GetStyleByState(state), width: width, height: (window.innerHeight * 0.6 * number / maxNumber + 20) }}> { number }</div >
+        <div className='sorterElement' style={{ ...GetStyleByState(state), width: width, height: (window.innerHeight * 0.6 * number / maxNumber + 20) }}> { maxNumber > 50 ? '' : number }</div >
     );
 }

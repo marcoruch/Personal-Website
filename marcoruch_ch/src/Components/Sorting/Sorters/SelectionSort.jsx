@@ -6,7 +6,7 @@ import Sleep from '../General/Sleeper.js'
 import './Sorters.scss'
 import PlaySound from '../General/Sounds';
 
-export default function SelectionSort({ array, timeOut, maxNumber }) {
+export default function SelectionSort({ array, timeOut, maxNumber, setSortingActive }) {
     const [CurrentArray, setCurrentArray] = useState(array);
     const [CurrentNumberFrom, setCurrentNumberFrom] = useState(null);
     const [CurrentNumberTo, setCurrentNumberTo] = useState(null);
@@ -30,8 +30,7 @@ export default function SelectionSort({ array, timeOut, maxNumber }) {
             setCurrentNumberFrom(temp);
             setCurrentNumberTo(tempArray[min_idx] );
             setCurrentArray([...tempArray]);
-            PlaySound(timeOut, tempArray[min_idx]  / maxNumber * 100)
-            await Sleep(timeOut);
+            await PlaySound(timeOut, tempArray[min_idx]  / maxNumber * 100)
         } 
     }
 
@@ -39,12 +38,14 @@ export default function SelectionSort({ array, timeOut, maxNumber }) {
 
 
     useEffect(() => {
-        async function runAlgo() {
+        async function RunData() {
+            setSortingActive(true);
             await SelectionSortAlgo(array);
-            FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
+            await FinalSwoosh(setCurrentNumberFrom, setCurrentNumberTo, array, timeOut);
+            setSortingActive(false);
         }
-        runAlgo();
-    }, [array, timeOut]);
+        RunData();
+    }, []);
 
     return (
         <React.Fragment>

@@ -142,11 +142,11 @@ function TopLevelEntryFormular(props) {
         }
     }, [retriedFetching])
 
-    return (
-        <div className="toplevel-form">
+    return (<div>
             {FormConfiguration != null
                 ? <React.Fragment>
 
+                <div className="toplevel-form">
 <Accordion styled className={"accordion"}>
         <Accordion.Title
           active={AccordionOpen}
@@ -162,8 +162,10 @@ function TopLevelEntryFormular(props) {
         </Accordion.Content>
 
         </Accordion>
-                </React.Fragment> : ""}
         </div>
+                </React.Fragment> : ""
+            }
+            </div>
     )
 }
 

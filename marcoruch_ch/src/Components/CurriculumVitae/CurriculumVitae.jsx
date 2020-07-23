@@ -9,8 +9,6 @@ import axios from 'axios';
 import API_HOST from '../../environment'
 
 
-
-
 import './CurriculumVitae.scss';
 
 function CurriculumVitae() {
@@ -34,7 +32,6 @@ function CurriculumVitae() {
                 /* AXIOS ONLY POSSIBLE WITH BLAZE */
         await axios.get(curriculumUrl)
             .then(res => {
-                console.log(res.data);
                 fetchedHistoryParts = res.data;
             }).catch((error => {
                 console.log(`Error when fetching ${curriculumUrl}...`)
