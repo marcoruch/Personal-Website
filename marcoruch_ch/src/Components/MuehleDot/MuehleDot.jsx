@@ -8,9 +8,13 @@ import WhiteStone from './../../Content/img/white_stone.png'
 function MuehleDot(props) {
 
     const [
-        SelectedDot,
-        Dragged, setDraggedOut,
-        DraggedInField, setDraggedInField] = useContext(MuehlenContext);
+        PlayerOneStones, setPlayerOneStones,
+                PlayerTwoStones, setPlayerTwoStones,
+                MuehleGameField, setMuehleGameField,
+                SelectedDot, setSelectedDot,
+                Dragged, setDragged,
+                DraggedOut, setDraggedOut,
+                DraggedInField, setDraggedInField] = useContext(MuehlenContext);
 
     const [style, setStyle] = useState(null);
 

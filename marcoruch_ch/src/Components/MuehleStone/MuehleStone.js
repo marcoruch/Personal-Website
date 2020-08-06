@@ -3,7 +3,13 @@ import { MuehlenContext } from '../MuehleContext/MuehleContext'
 import "./MuehleStone.scss"
 function MuehleStone(props) {
 
-    const [setDragged] = useContext(MuehlenContext);
+    const [PlayerOneStones, setPlayerOneStones,
+        PlayerTwoStones, setPlayerTwoStones,
+        MuehleGameField, setMuehleGameField,
+        SelectedDot, setSelectedDot,
+        Dragged, setDragged,
+        DraggedOut, setDraggedOut,
+        DraggedInField, setDraggedInField] = useContext(MuehlenContext);
 
 
     const onDragStart = (e) => {

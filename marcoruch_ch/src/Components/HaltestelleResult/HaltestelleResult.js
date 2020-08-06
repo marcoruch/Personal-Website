@@ -9,7 +9,7 @@ import { HaltestellenContext } from "../HaltestellenContext/HaltestellenContext"
 function HaltestelleResult() {
 
 
-    const [haltestellen] = useContext(HaltestellenContext);
+    const [haltestellen, setHaltestellen, winnerCoords, setWinnerCoords] = useContext(HaltestellenContext);
 
     const [nearestHaltestelle, setNearestHaltestelle] = useState(null);
     const [setNearestDistance] = useState(null);
@@ -29,8 +29,6 @@ function HaltestelleResult() {
     }
 
     const handleCalculateHaltestelle = () => {
-
-        console.log(haltestellen);
         if (haltestellen.length <=2 ) {
             Swal.fire('Ups...', `Geben Sie mindestens zwei Haltestellen an.`, 'error')
             setNearestHaltestelle(null);
@@ -54,6 +52,8 @@ function HaltestelleResult() {
     
             }
             nearest_geo_point.winner = true;
+            console.log(nearest_geo_point);
+            setWinnerCoords(nearest_geo_point);
             setNearestHaltestelle(nearest_geo_point);
         }
         

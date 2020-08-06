@@ -4,9 +4,13 @@ import MuehleStone from '../MuehleStone/MuehleStone'
 import "./MuehlePlayerSide.scss"
 function MuehlePlayerSide(props) {
 
-    const [PlayerOneStones,
-        PlayerTwoStones, 
-        DraggedOut] = useContext(MuehlenContext);
+    const [PlayerOneStones, setPlayerOneStones,
+        PlayerTwoStones, setPlayerTwoStones,
+        MuehleGameField, setMuehleGameField,
+        SelectedDot, setSelectedDot,
+        Dragged, setDragged,
+        DraggedOut, setDraggedOut,
+        DraggedInField, setDraggedInField] = useContext(MuehlenContext);
 
 
     const normal = {
