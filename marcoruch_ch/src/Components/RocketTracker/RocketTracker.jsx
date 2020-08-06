@@ -8,7 +8,6 @@ function RocketTracker() {
         <div className="rocket-tracker-holder">
             <a href="https://its-noon-somewhere.firebaseapp.com">Rocket-Tracker öffnen</a>
         </div>
-
     )
 }
 

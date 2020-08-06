@@ -69,9 +69,6 @@ function Header() {
                     <Link to="/games">Spiele & Aufgaben</Link>
                 </li>
                 <li>
-                    <Link to="/blogs">Blog</Link>
-                </li>
-                <li>
                     <Link to="/curriculumvitae">CV</Link>
                 </li>
                 <li>
