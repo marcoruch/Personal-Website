@@ -33,6 +33,9 @@ function Projects(props) {
             .then(res => {
                 fetchedProjects = res.data;
             }).catch((error => {
+                if (error.status === 401){
+                    SetIsUnauthorized(true);
+                }
                 console.error(`Error when fetching ${projectsUrl}...`);
                 console.log(error.response);
                 return;
@@ -46,7 +49,7 @@ function Projects(props) {
 
     }
     useEffect(() => {
-        if (retriedFetching <= maxRetries) {
+        if (retriedFetching <= maxRetries && !IsUnauthorized) {
             fetchProjects();
         }
         else {

@@ -19,6 +19,7 @@ function TopLevelEntryFormular(props) {
     const [NewObject, SetNewObject] = useState({});
     const [FormConfiguration, setFormConfiguration] = useState(null)
     const [AccordionOpen, SetAccordionOpen] = useState(false);
+    const [IsUnauthorized, SetIsUnauthorized] = useState(false);
 
 
     /* Fetch Projects Max Retries */
@@ -122,6 +123,9 @@ function TopLevelEntryFormular(props) {
             .then(res => {
                 fetchedConfiguration = res.data;
             }).catch((error => {
+                if (error.status === 401){
+                    SetIsUnauthorized(true);
+                }
                 console.error(`Error when fetching ${configurationUrl}...`);
                 console.log(error.response);
                 return;
@@ -137,7 +141,7 @@ function TopLevelEntryFormular(props) {
     }
 
     useEffect(() => {
-        if (retriedFetching <= maxRetries) {
+        if (retriedFetching <= maxRetries && !IsUnauthorized) {
             fetchConfiguration();
         }
     }, [retriedFetching])

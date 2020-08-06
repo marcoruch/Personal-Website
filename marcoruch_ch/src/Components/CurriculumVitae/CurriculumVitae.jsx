@@ -34,6 +34,9 @@ function CurriculumVitae() {
             .then(res => {
                 fetchedHistoryParts = res.data;
             }).catch((error => {
+                if (error.status === 401){
+                    setIsUnauthorized(true);
+                }
                 console.log(`Error when fetching ${curriculumUrl}...`)
                 console.log(error.response);
                 return;
@@ -64,7 +67,7 @@ function CurriculumVitae() {
 
     
     useEffect(() => {
-        if (retriedFetching <= maxRetries)
+        if (retriedFetching <= maxRetries && !IsUnauthorized)
         { 
             fetchHistoryParts();
         } 
