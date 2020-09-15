@@ -28,7 +28,7 @@ function MapContainer(props) {
                     // on error
                 }, (error) => {
                     setMyLocation(null);
-                    console("error finding current position", error)
+                    console.log("error finding current position", error)
                 })
             }
         if (positions.length > 0) {
