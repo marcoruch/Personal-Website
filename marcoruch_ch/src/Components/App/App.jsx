@@ -49,13 +49,14 @@ const myRouter = () => {
         <Route path="/muehle" component={GetMuehle} />
         <Route path="/nutrify" component={GetNutrify} />
         <Route path="/rockettracker" component={GetRocketTracker}/>
+        <Route path="/officetetris" component={GetOfficeTetris}/>
         <Route path="/curriculumvitae" component={GetCV} />
         <Route path="/games/foodlookup" component={GetFoodLookup} />
         <Route path="/games/haltestelle" component={GetHaltestelle} />
         <Route path="/games/sorting" component={GetSorting} />
         <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/games/rockettracker" component={GetRocketTracker}/>
-        <Route path="/games/officeTetris" component={GetOfficeTetris}/>
+        <Route path="/games/officetetris" component={GetOfficeTetris}/>
         <Route path="/foodlookup" component={GetFoodLookup} />
         </UserProvider>
     </Router>

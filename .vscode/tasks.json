@@ -8,6 +8,13 @@
             "script": "start",
             "path": "marcoruch_ch/",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "start",
+            "problemMatcher": [],
+            "label": "npm: start",
+            "detail": "concurrently \"cd marcoruch_ch && npm start \"  \"cd  ../Firebase-Express-Backend && firebase use default && firebase serve --port=9000\" \"start http://localhost:9000/ \""
         }
     ]
 }

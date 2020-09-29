@@ -50,9 +50,10 @@ function Games(props) {
             {games.map((game, index) =>
 
                 <div className="card" key={game.gameId}>
+                    <Link className="btn" to={`/${game.gameId}`}>
                     <header className="card-header" style={{ backgroundImage: `url(${game.gameImgUrl})` }}>
                         <h4 className="card-header--title">{game.gameNameShort}</h4>
-                    </header>
+                    </header></Link>
 
                     <div className="card-body">
                         <p className="date">{game.gameUpdated.toDate().toLocaleDateString()}</p>
