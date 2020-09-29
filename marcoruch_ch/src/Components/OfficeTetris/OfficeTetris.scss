@@ -11,8 +11,18 @@
     flex-wrap: wrap;
     color: #b4a892 !important;
 
-    p {
+    pre {
         margin-bottom: 30px;
+
+    }
+
+    .highlight-1 {
+        border-bottom: 1px solid salmon;
+        margin-bottom: 5px;
+    }
+
+    .highlight-2 {
+        border-bottom: 1px solid salmon;
     }
     
     a {
