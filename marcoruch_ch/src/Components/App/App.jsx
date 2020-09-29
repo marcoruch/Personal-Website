@@ -10,6 +10,7 @@ import Haltestelle from "../Haltestelle/Haltestelle";
 import CurriculumVitae from "../CurriculumVitae/CurriculumVitae";
 import Muehle from "../Muehle/Muehle";
 import RocketTracker from "../RocketTracker/RocketTracker";
+import OfficeTetris from "../OfficeTetris/OfficeTetris";
 import Nutrify from "../Nutrify/Nutrify";
 import Games from "../Games/Games";
 import FoodLookup from "../FoodLookup/FoodLookup";
@@ -54,6 +55,7 @@ const myRouter = () => {
         <Route path="/games/sorting" component={GetSorting} />
         <Route path="/games/muehle" component={GetMuehle} />
         <Route path="/games/rockettracker" component={GetRocketTracker}/>
+        <Route path="/games/officeTetris" component={GetOfficeTetris}/>
         <Route path="/foodlookup" component={GetFoodLookup} />
         </UserProvider>
     </Router>
@@ -149,6 +151,13 @@ function GetRocketTracker(){
   return <>
     <RocketTracker />
     <Footer />
+  </>
+}
+
+function GetOfficeTetris(){
+  return <>
+  <OfficeTetris/>
+  <Footer/>
   </>
 }
 

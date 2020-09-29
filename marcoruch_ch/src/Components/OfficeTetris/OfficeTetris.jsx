@@ -1,13 +1,13 @@
 import React from "react";
 
 
-import "./RocketTracker.scss";
+import "./OfficeTetris.scss";
 
 function RocketTracker() {
     return (
-        <div className="rocket-tracker-holder">
+        <div className="office-tetris-holder">
             <p>This page is in work, so please visit the Application via the Link provided</p>
-            <a href="https://its-noon-somewhere.firebaseapp.com">Rocket-Tracker öffnen</a>
+            <a href="https://office-tetris.web.app/">Office-Tetris öffnen</a>
         </div>
     )
 }
