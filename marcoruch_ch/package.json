@@ -27,7 +27,7 @@
     "semantic-ui-react-numberinput": "^1.3.4",
     "source-map-explorer": "^2.0.1",
     "sweetalert2": "^8.8.5",
-    "tar": "^2.2.2",
+    "tar": "^4.4.15",
     "typescript": "^3.5.2"
   },
   "scripts": {
